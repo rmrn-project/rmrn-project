@@ -114,3 +114,38 @@ footer {
     .section-title { font-size: 2.3rem; }
     .section-padding { padding: 80px 0; }
 }
+
+
+
+/* Swiper Custom */
+.swiper {
+    padding: 20px 0 50px 0 !important;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+
+.undanganSwiper .swiper-button-next,
+.undanganSwiper .swiper-button-prev {
+    color: var(--biru);
+    background: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.undanganSwiper .swiper-button-next:after,
+.undanganSwiper .swiper-button-prev:after {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.undanganSwiper .swiper-pagination-bullet {
+    background: #ccc;
+    opacity: 1;
+}
+.undanganSwiper .swiper-pagination-bullet-active {
+    background: var(--biru);
+}
