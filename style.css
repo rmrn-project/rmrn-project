@@ -214,3 +214,21 @@ footer h3 {
     .card-marketplace .card-title { font-size: 0.9rem; height: 44px; }
     .card-marketplace .price { font-size: 1.05rem; }
 }
+
+
+
+/* Khusus undangan */
+@media (max-width: 768px) {
+    .undanganSwiper .swiper-button-next,
+    .undanganSwiper .swiper-button-prev {
+        display: none !important;
+    }
+}
+
+/* Khusus souvenir */
+@media (max-width: 768px) {
+    .souvenirSwiper .swiper-button-next,
+    .souvenirSwiper .swiper-button-prev {
+        display: none !important;
+    }
+}
