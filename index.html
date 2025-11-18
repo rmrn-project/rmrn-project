@@ -11,6 +11,15 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<!-- Swiper JS (taruh sebelum </body> atau di main.js nanti) -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -49,46 +58,81 @@
         </div>
     </section>
 
-    <!-- Undangan Online -->
-    <section id="undangan" class="section-padding bg-light-blue">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Undangan Online</h2>
-            <div class="row g-4">
-                <!-- Tambah card sesuka hati -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card">
+
+
+
+   <!-- Undangan Online - Carousel -->
+<section id="undangan" class="section-padding bg-light-blue">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Undangan Online</h2>
+
+        <!-- Swiper Carousel -->
+        <div class="swiper undanganSwiper">
+            <div class="swiper-wrapper">
+                <!-- Card 1 -->
+                <div class="swiper-slide" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
                         <img src="https://via.placeholder.com/400x500/0d6efd/ffffff?text=Undangan+Floral" class="card-img-top" alt="Undangan Floral">
-                        <div class="card-body text-center">
-                            <h5>Template Floral Elegan</h5>
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="mt-auto">Template Floral Elegan</h5>
                             <p class="text-muted">Rp 150.000</p>
-                            <a href="#" class="btn btn-biru">Pesan Sekarang</a>
+                            <a href="#" class="btn btn-biru mt-2">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card">
+
+                <!-- Card 2 -->
+                <div class="swiper-slide" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
                         <img src="https://via.placeholder.com/400x500/0a58ca/ffffff?text=Undangan+Minimalist" class="card-img-top" alt="Undangan Minimalist">
-                        <div class="card-body text-center">
-                            <h5>Template Minimalist</h5>
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="mt-auto">Template Minimalist</h5>
                             <p class="text-muted">Rp 120.000</p>
-                            <a href="#" class="btn btn-biru">Pesan Sekarang</a>
+                            <a href="#" class="btn btn-biru mt-2">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card">
+
+                <!-- Card 3 -->
+                <div class="swiper-slide" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100">
                         <img src="https://via.placeholder.com/400x500/1e3a8a/ffffff?text=Undangan+Rustic" class="card-img-top" alt="Undangan Rustic">
-                        <div class="card-body text-center">
-                            <h5>Template Rustic Wood</h5>
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="mt-auto">Template Rustic Wood</h5>
                             <p class="text-muted">Rp 180.000</p>
-                            <a href="#" class="btn btn-biru">Pesan Sekarang</a>
+                            <a href="#" class="btn btn-biru mt-2">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
-                <!-- Copy-paste card di atas buat nambah katalog -->
+
+                <!-- Tambah card baru tinggal copy-paste slide di atas -->
+                <!-- Contoh card ke-4,5,6... -->
+                <div class="swiper-slide" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x500/2563eb/ffffff?text=Undangan+Gold" class="card-img-top" alt="Gold">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="mt-auto">Template Gold Luxury</h5>
+                            <p class="text-muted">Rp 200.000</p>
+                            <a href="#" class="btn btn-biru mt-2">Pesan Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mau 10–20 template juga bisa, tinggal tambah slide -->
             </div>
+
+            <!-- Navigation arrows (optional, muncul di desktop) -->
+            <div class="swiper-button-next text-primary"></div>
+            <div class="swiper-button-prev text-primary"></div>
+
+            <!-- Pagination dots -->
+            <div class="swiper-pagination"></div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+
 
     <!-- Souvenir Korek Custom -->
     <section id="souvenir" class="section-padding">
