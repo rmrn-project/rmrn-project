@@ -1,20 +1,20 @@
-// professional-share.js
+// share-horizontal.js
 
 // 1. Buat container tombol share
 const shareContainer = document.createElement('div');
 shareContainer.className = 'floating-share';
 shareContainer.innerHTML = `
-  <img src="/image/share.png" alt="Share" width="30">
+  <img src="image/share-icon.png" alt="Share" width="30">
   <div class="share-popup">
-    <a href="#" class="share-wa">WhatsApp</a>
-    <a href="#" class="share-fb">Facebook</a>
-    <a href="#" class="share-tg">Telegram</a>
-    <button class="share-copy">Salin Link</button>
+    <a href="#" class="share-wa" title="WhatsApp"><img src="image/wa.png" alt="WA" width="30"></a>
+    <a href="#" class="share-fb" title="Facebook"><img src="image/fb.png" alt="FB" width="30"></a>
+    <a href="#" class="share-tg" title="Telegram"><img src="image/tg.png" alt="TG" width="30"></a>
+    <button class="share-copy" title="Salin Link"><img src="image/copy.png" alt="Copy" width="30"></button>
   </div>
 `;
 document.body.appendChild(shareContainer);
 
-// 2. Tambahkan CSS profesional
+// 2. Tambahkan CSS
 const style = document.createElement('style');
 style.textContent = `
 .floating-share {
@@ -22,7 +22,6 @@ style.textContent = `
   top: 20px;
   left: 20px;
   z-index: 999999;
-  font-family: sans-serif;
 }
 .floating-share img {
   cursor: pointer;
@@ -32,36 +31,31 @@ style.textContent = `
   transform: scale(1.2);
 }
 
-/* Popup */
+/* Popup horizontal */
 .share-popup {
   display: none;
-  flex-direction: column;
+  flex-direction: row;
   background: var(--popup-bg, #fff);
-  color: var(--popup-text, #111);
-  border-radius: 12px;
-  padding: 12px;
-  margin-top: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  min-width: 160px;
-  animation: fadeIn 0.3s ease forwards;
-}
-.share-popup a,
-.share-popup button {
-  display: block;
   padding: 8px 12px;
-  margin: 4px 0;
-  text-decoration: none;
-  color: inherit;
-  border-radius: 8px;
-  transition: background 0.2s;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  gap: 8px;
+  margin-left: 10px;
+  align-items: center;
+  animation: slideIn 0.3s ease forwards;
+}
+.share-popup a, .share-popup button {
   background: transparent;
   border: none;
   cursor: pointer;
-  text-align: left;
+  padding: 0;
 }
-.share-popup a:hover,
-.share-popup button:hover {
-  background: rgba(0,0,0,0.05);
+.share-popup a img, .share-popup button img {
+  width: 30px;
+  transition: transform 0.2s;
+}
+.share-popup a img:hover, .share-popup button img:hover {
+  transform: scale(1.2);
 }
 
 /* Show popup */
@@ -69,15 +63,15 @@ style.textContent = `
   display: flex;
 }
 
-/* Animasi */
-@keyframes fadeIn {
-  from {opacity:0; transform: translateY(-10px);}
-  to {opacity:1; transform: translateY(0);}
+/* Animasi slide in */
+@keyframes slideIn {
+  from {opacity:0; transform: translateX(-10px);}
+  to {opacity:1; transform: translateX(0);}
 }
 `;
 document.head.appendChild(style);
 
-// 3. Toggle popup saat tombol diklik
+// 3. Toggle popup saat tombol utama diklik
 const shareBtn = shareContainer.querySelector('img');
 shareBtn.addEventListener('click', () => {
   shareContainer.classList.toggle('show');
