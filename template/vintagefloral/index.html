@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Andi & Sari • 25 Desember 2025</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Background Floral Vintage -->
+  <div class="bg-floral"></div>
+  <div class="overlay"></div>
+
+  <!-- Cover -->
+  <section id="cover" class="cover active">
+    <div class="cover-content">
+      <p class="intro">Kepada Yth.</p>
+      <h2 class="guest-name">Bapak/Ibu/Saudara/i</h2>
+      <h1 class="title">Sandi <span>&</span> Ertia</h1>
+      <p class="date-cover">25 Desember 2025</p>
+      <button id="openBtn" class="btn-open">Buka Undangan</button>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section id="main" class="main hidden">
+    <div class="wrapper">
+
+      <!-- Ayat -->
+      <div class="section">
+        <p class="ayat">
+          “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang...”<br>
+          <small>(Ar-Rum: 21)</small>
+        </p>
+      </div>
+
+      <!-- Foto Couple -->
+      <div class="section couple-photo">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Andi & Sari" class="photo-couple" />
+      </div>
+
+      <!-- Mempelai -->
+      <div class="section mempelai-section">
+        <div class="mempelai-grid">
+          <div class="bride">
+            <h3 class="nama">Sari Putri Lestari</h3>
+            <p>Putri dari Bapak Ahmad & Ibu Siti Rahayu</p>
+          </div>
+          <div class="ampersand">&amp;</div>
+          <div class="groom">
+            <h3 class="nama">Andi Pratama Wijaya</h3>
+            <p>Putra dari Bapak Joko Susilo & Ibu Nur Hidayati</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Galeri 4 Foto -->
+      <div class="section gallery-section">
+        <div class="gallery">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="Gallery 1">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Gallery 2">
+          <img src="https://images.unsplash.com/photo-1523438885200-b3a87b8164a4?w=600&q=80" alt="Gallery 3">
+          <img src="https://images.unsplash.com/photo-1606216794074-735e8d6e9c2e?w=600&q=80" alt="Gallery 4">
+        </div>
+      </div>
+
+      <!-- Acara -->
+      <div class="section event-section">
+        <div class="card">
+          <h3>Akad Nikah</h3>
+          <p>Minggu, 25 Desember 2025<br>09.00 WIB</p>
+          <p class="lokasi">Kediaman Mempelai Wanita<br>Jl. Melati No. 25, Bandung</p>
+        </div>
+        <div class="card">
+          <h3>Resepsi</h3>
+          <p>Minggu, 25 Desember 2025<br>11.00 – 15.00 WIB</p>
+          <p class="lokasi">Gedung Serba Guna Dahlia<br>Jl. Cempaka No. 88, Bandung</p>
+        </div>
+      </div>
+
+      <!-- Maps -->
+      <div class="section">
+        <a href="https://maps.app.goo.gl/contohlink" target="_blank" class="btn-maps">
+          Buka Lokasi di Google Maps
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <div class="section footer-section">
+        <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+        <p class="signature">Wassalamualaikum Wr. Wb.<br>Andi & Sari</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Music Button (ikon only) -->
+  <div class="music-btn" id="musicBtn">
+    <svg class="play" viewBox="0 0 24 24"><path fill="white" d="M8 5v14l11-7z"/></svg>
+    <svg class="pause" viewBox="0 0 24 24"><path fill="white" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+  </div>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://undangan-digital.github.io/music/slow-wedding.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+  <script src="/share/templatebersama/popup.js"></script>
+</body>
+</html>
