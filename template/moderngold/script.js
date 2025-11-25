@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
     // === 3. BACKGROUND MUSIC + TOMBOL PLAY/PAUSE ===
-    
+
 const bgm = document.getElementById("bgm");
 const musicBtn = document.getElementById("musicBtn");
 const playIcon = document.getElementById("playIcon");
