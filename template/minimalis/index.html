@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pernikahan • Budi & Sinta</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/ios-filled/50/ffffff/rings.png" type="image/png">
+</head>
+<body>
+    <!-- Opening -->
+    <section class="opening" id="opening">
+        <div class="opening-content">
+            <p class="small-text">Kepada Yth.</p>
+            <h2 class="guest-name" id="guestName">Bapak/Ibu/Saudara/i</h2>
+            <p class="small-text">Kami mengundang Anda untuk merayakan momen bahagia kami</p>
+            <button class="btn-open" id="btnOpen">Buka Undangan</button>
+        </div>
+    </section>
+
+    <!-- Main Content (hidden awalnya) -->
+    <div class="main-content" id="mainContent">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="flower-top">✽ ✽ ✽</div>
+            <h1>Sandi <span>&</span> Ertia</h1>
+            <p class="date">Sabtu, 28 Februari 2026</p>
+            <div class="flower-bottom">✽ ✽ ✽</div>
+        </section>
+
+        <!-- Ayat -->
+        <section class="quote">
+            <p class="ayat">
+                “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.”
+            </p>
+            <p class="sura">QS. Ar-Rum: 21</p>
+        </section>
+
+        <!-- Mempelai -->
+        <section class="mempelai">
+            <div class="bride">
+                <h3>Sinta Wulandari</h3>
+                <p>Putri dari Bapak Joko & Ibu Sari</p>
+            </div>
+            <div class="and">✽</div>
+            <div class="groom">
+                <h3>Budi Santoso</h3>
+                <p>Putra dari Bapak Ahmad & Ibu Nur</p>
+            </div>
+        </section>
+
+        <!-- Acara -->
+        <section class="acara">
+            <h2>Akad Nikah</h2>
+            <p class="time">Sabtu, 28 Februari 2026<br>08.00 - 10.00 WIB</p>
+            <p class="location">Kediaman Mempelai Wanita<br>Jl. Melati No. 25, Yogyakarta</p>
+
+            <h2>Resepsi</h2>
+            <p class="time">Sabtu, 28 Februari 2026<br>11.00 - 15.00 WIB</p>
+            <p class="location">Aula Serbaguna Harmoni<br>Jl. Sudirman No. 100, Yogyakarta</p>
+
+            <a href="https://maps.google.com/?q=Aula+Serbaguna+Harmoni+Yogyakarta" target="_blank" class="btn-map">Buka di Google Maps</a>
+        </section>
+
+        <!-- Countdown -->
+        <section class="countdown">
+            <h3>Menghitung Hari</h3>
+            <div id="timer">
+                <div><span id="days">00</span><small>Hari</small></div>
+                <div><span id="hours">00</span><small>Jam</small></div>
+                <div><span id="minutes">00</span><small>Menit</small></div>
+                <div><span id="seconds">00</span><small>Detik</small></div>
+            </div>
+        </section>
+
+        <!-- Konfirmasi Kehadiran -->
+        <section class="rsvp">
+            <h3>Konfirmasi Kehadiran</h3>
+            <form id="rsvpForm">
+                <input type="text" placeholder="Nama Lengkap" required />
+                <select required>
+                    <option value="" disabled selected>Jumlah yang hadir</option>
+                    <option value="1">1 Orang</option>
+                    <option value="2">2 Orang</option>
+                    <option value="3+">3 Orang atau lebih</option>
+                </select>
+                <button type="submit">Kirim Konfirmasi</button>
+            </form>
+            <p class="ucapan">Kirimkan ucapan terbaikmu di bawah ini</p>
+            <form id="ucapanForm">
+                <textarea placeholder="Tulis ucapan & doa..." required></textarea>
+                <button type="submit">Kirim Ucapan</button>
+            </form>
+        </section>
+
+        <!-- Musik -->
+        <div class="music-control">
+            <button id="toggleMusic">♪ Musik OFF</button>
+        </div>
+        <audio id="bgMusic" loop>
+            <source src="https://assets.mixkit.co/sfx/preview/mixkit-solemn-bridal-wedding-557.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://rmrn-project.github.io/web-template/popup.js"></script>
+</body>
+</html>
