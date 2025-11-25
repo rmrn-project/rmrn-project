@@ -6,7 +6,7 @@ const footerHTML = `
   <div class="container text-center">
     <!-- Logo -->
     <a href="/" class="footer-logo">
-      <img src="image/rmrn.png" alt="RMRN Logo" width="75">
+      <img src="/image/rmrn.png" alt="RMRN Logo" width="75">
     </a>
 
     <p>Undangan Digital & Souvenir Korek Custom<br>
