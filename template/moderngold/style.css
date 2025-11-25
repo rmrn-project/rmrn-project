@@ -1,0 +1,388 @@
+/* PREMIUM GOLD FULL STYLE — bersih, tanpa konflik */
+
+/* ===== GLOBAL ===== */ 
+
+
+* { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            min-height: 100dvh;
+            background: black;/*#3c2f2f*/
+            font-family: 'Lora', serif;
+            color: #fff;
+            overflow-x: hidden;
+            padding-bottom: 90px;
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 1;
+            display: none !important;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 60px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+.fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+        }
+        .fade.show { opacity: 1; transform: translateY(0); 
+}
+
+
+/* ===== PHOTO WRAPPER ===== */ .photo-wrapper { position: relative; margin-top: 20px; }
+
+.couple-photo { width: 100%; border-radius: 20px; box-shadow: 0 0 25px rgba(0, 0, 0, 0.6); }
+
+.couple-initials { position: absolute; bottom: 20px; right: 20px; font-family: 'Great Vibes', cursive; font-size: 2.4em; color: #d4af37; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+
+/* ===== HEADER ===== */ .header-section { margin: 60px 0 80px; }
+
+.header-symbol { font-size: 1.4em; color: #d4af37; opacity: 0.7; letter-spacing: 8px; margin-bottom: 20px; }
+
+.header-title { font-family: 'Playfair Display', serif; font-size: 3.2em; color: #d4af37; margin-bottom: 20px; letter-spacing: 2px; }
+
+.header-quote { font-size: 1.35em; color: #f0e6d2; font-style: italic; max-width: 90%; margin: auto; line-height: 1.7; }
+
+.header-decor { margin-top: 30px; color: #d4af37; opacity: 0.5; font-size: 1.1em; }
+
+/* ===== COUPLE SECTION ===== */ .couple-names { margin: 70px auto; max-width: 560px; }
+
+.couple-box { margin-bottom: 30px; }
+
+.couple-name { font-family: 'Great Vibes', cursive; font-size: 2.6em; background: linear-gradient(45deg, #f4e4bc, #d4af37, #b8973a); -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; text-shadow: 0 2px 6px rgba(0,0,0,0.3), 0 0 10px rgba(212,175,55,0.4); margin: 0; }
+
+.couple-info { font-size: 1.1em; color: #e8e0d0; margin-top: 12px; line-height: 1.6; }
+
+.couple-separator { position: relative; margin: 40px 0; font-size: 4.5em; color: #d4af37; font-family: 'Playfair Display', serif; }
+
+.sep-top, .sep-bottom { position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.35em; color: #d4af37; opacity: 0.6; }
+
+.sep-top { top: -25px; } .sep-bottom { bottom: -25px; }
+
+/* ===== GALLERY — FIX AGAR MUNCUL DI HP ===== */ /* ===== GALLERY — FIX AGAR MUNCUL DI HP ===== */
+.gallery {
+            width: 90%;
+            max-width: 400px;
+            margin: 70px auto;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.6),
+                0 0 20px rgba(212,175,55,0.6),
+                0 0 40px rgba(212,175,55,0.4),
+                0 0 70px rgba(212,175,55,0.2);
+            animation: goldPulse 6s infinite ease-in-out;
+        }
+        @keyframes goldPulse {
+            0% { box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 18px rgba(212,175,55,0.5), 0 0 35px rgba(212,175,55,0.3), 0 0 60px rgba(212,175,55,0.15); }
+            50% { box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 25px rgba(212,175,55,0.7), 0 0 55px rgba(212,175,55,0.45), 0 0 90px rgba(212,175,55,0.25); }
+            100% { box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 18px rgba(212,175,55,0.5), 0 0 35px rgba(212,175,55,0.3), 0 0 60px rgba(212,175,55,0.15); }
+        }
+        .slides {
+            display: flex;
+            width: 500%;
+            animation: slide 20s infinite;
+            transition: transform 0.5s ease;
+        }
+        .slides img {
+            width: 20%;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        @keyframes slide {
+            0%, 16%   { transform: translateX(0%); }
+            20%, 36%  { transform: translateX(-20%); }
+            40%, 56%  { transform: translateX(-40%); }
+            60%, 76%  { transform: translateX(-60%); }
+            80%, 96%  { transform: translateX(-80%); }
+            100%      { transform: translateX(0%); }
+        }
+
+
+
+/* ===== UCAPAN MARQUEE ===== */ 
+
+.ucapan-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    overflow: hidden !important;
+    margin: 35px 0;
+}
+
+/* Mask — pembatas viewport */
+.ucapan-mask {
+    width: 100%;
+    overflow: hidden;     /* FIX utama */
+    position: relative;
+}
+
+/* Marquee asli */
+.ucapan-marquee {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: max-content;
+    animation: slideKiri 35s linear infinite;
+    white-space: nowrap;
+    font-size : 16px;
+    font-style: italic;
+    font-family: "Cormorant Garamont", serif;
+}
+
+/* List ucapan kiri & clone */
+#listUcapan,
+#listUcapanClone {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+/* Card */
+.ucapan-item {
+    flex: 0 0 300px;
+    background: rgba(255,255,255,0.14);
+    padding: 20px;
+    border-radius: 18px;
+}
+
+/* Animasi */
+@keyframes slideKiri {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+
+/* PETIK OTOMATIS UNTUK UCAPAN */
+.ucapan-item p {
+    font-style: italic;
+    position: relative;
+    padding: 0 10px;
+}
+
+.ucapan-item p::before {
+    content: "“";
+    font-size: 22px;
+    margin-right: 3px;
+}
+
+.ucapan-item p::after {
+    content: "”";
+    font-size: 22px;
+    margin-left: 3px;
+}
+
+
+
+
+/* ===== DETAILS SECTION ===== */ 
+
+.details-acara {
+            text-align: center;
+            margin: 40px auto;
+            max-width: 500px;
+        }
+        .details-acara img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .details {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+            padding: 38px 30px;
+            border-radius: 20px;
+            width: 92%;
+            max-width: 520px;
+            margin: 50px auto;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .details h3 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 1.9em;
+            margin-bottom: 20px;
+        }
+
+
+.norek { font-size: 1.8em; font-weight: bold; letter-spacing: 2px; margin: 15px 0; }
+        .btn-salin {
+            padding: 8px 18px; background: transparent; color: #d4af37;
+            border: 1.5px solid #d4af37; border-radius: 30px; font-size: 0.9em;
+            cursor: pointer; transition: 0.3s;
+        }
+        .btn-salin:hover { background: #d4af37; color: #000; }
+        .notif { margin-top: 10px; color: #90ee90; font-size: 0.95em; display: none; }
+
+
+.notif { opacity: 0; transition: 0.3s; color: #d4af37; margin-top: 5px; }
+
+
+
+/* ===== FORM UCAPAN ===== */ #nama, #doa { width: 100%; padding: 12px; border-radius: 10px; border: none; margin: 10px 0; background: #1a1a1a; color: #f5f0e6; font-size: 1em; }
+
+.btn-kirim { margin-top: 10px; padding: 12px 30px; border: none; border-radius: 12px; background: #d4af37; color: #000; font-size: 1.1em; font-weight: bold; }
+
+/* ===== CLOSING ===== */ .closing { margin: 60px 0; }
+
+.closing-names { font-size: 1.5em; color: #d4af37; }
+
+
+
+
+/* ===== MUSIC BUTTON ===== */ 
+
+#musicBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999999;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+
+    transform: translateZ(0);
+    will-change: transform, left, top;
+}
+        
+
+/* ===== AUTO SCROLL BUTTON ===== */
+#btnAutoScroll {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    z-index: 999999;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+#btnAutoScroll img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+
+
+.bank-box {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.bank-box img {
+    width: 80px !important;
+    max-width: 80px !important;
+    height: auto !important;
+    margin-bottom: 6px;
+}
+
+.bank-box .norek {
+    margin-top: 5px;
+}
+
+.bank-box .nama-rek {
+    margin-top: 4px;
+}
+
+.bank-box .btn-salin {
+    margin-top: 10px;
+}
+
+.bank-box .notif {
+    opacity: 0;
+    margin-top: 5px;
+    transition: .3s;
+}
+
+
+
+
+
+#rmrnBox {
+    width: 150px;
+    height: 150px;
+    margin: 40px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#rmrnBox a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#rmrnBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+#rmrnFooter a {
+    color: #d4af37 !important;
+    text-decoration: none !important;
+}
+
+
+/* ==== FIX: Prevent images keluar viewport ==== / .details img { max-width: 260px; / kecil biar tidak gede */ width: 80%; height: auto; display: block; margin: 20px auto; }
+
+
+/* ===== FOOTER ==== */ 
+.details img { max-width: 120px; height: auto; display: block; margin: 20px auto; }
+
+
+/* ===== FOOTER ===== */ #rmrnFooter { margin: 40px 0; opacity: 0.6; font-size: 0.9em; }
+
+
+.bank-box img {
+    width: 70px !important;
+    max-width: 70px !important;
+    height: auto !important;
+}
+
+
+.bank img {
+    width: 90px;
+    max-width: 90px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+
+
+
