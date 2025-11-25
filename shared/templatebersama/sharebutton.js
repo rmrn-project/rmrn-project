@@ -41,20 +41,29 @@ style.textContent = `
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   gap: 8px;
   margin-left: 10px;
-  align-items: center;
+  align-items: center;        /* vertikal rata tengah */
+  justify-content: center;    /* horizontal rata tengah */
   animation: slideIn 0.3s ease forwards;
 }
+
 .share-popup a, .share-popup button {
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
+  display: flex;             /* buat rata vertikal */
+  align-items: center;
+  justify-content: center;
 }
+
 .share-popup a img, .share-popup button img {
   width: 30px;
+  height: 30px;             /* pastikan square */
   transition: transform 0.2s;
 }
-.share-popup a img:hover, .share-popup button img:hover {
+
+.share-popup a img:hover,
+.share-popup button img:hover {
   transform: scale(1.2);
 }
 
