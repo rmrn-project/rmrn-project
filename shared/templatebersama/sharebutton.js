@@ -4,7 +4,7 @@
 const shareContainer = document.createElement('div');
 shareContainer.className = 'floating-share';
 shareContainer.innerHTML = `
-  <img src="/image/share.png" alt="Share" width="50">
+  <img src="/image/share.png" alt="Share" width="30">
   <div class="share-popup">
     <a href="#" class="share-wa">WhatsApp</a>
     <a href="#" class="share-fb">Facebook</a>
