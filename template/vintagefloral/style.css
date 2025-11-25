@@ -1,0 +1,79 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:auto; min-height:100vh; font-family:'Poppins',sans-serif; color:#543A2D; overflow-x:hidden; }
+body { background:#FAF7F2; }
+
+/* Background */
+.bg-floral {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background: url('https://images.unsplash.com/photo-1585312263331-22775d03db62?auto=format&fit=crop&q=80') center/cover no-repeat fixed;
+  z-index:-2;
+}
+.overlay {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background: linear-gradient(to bottom, rgba(255,248,235,0.93), rgba(250,247,242,0.89));
+  z-index:-1;
+}
+
+/* Cover */
+.cover { position:fixed; inset:0; background:rgba(250,247,242,0.98); display:flex; align-items:center; justify-content:center; transition:all 1.2s ease; z-index:999; }
+.cover.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+
+.wrapper { max-width:820px; margin:0 auto; padding:2rem 1.5rem; text-align:center; }
+.section { margin:4rem 0; }
+
+/* Foto Couple */
+.couple-photo img {
+  width:100%; max-width:500px; border-radius:20px; border:8px solid #FFF8E7;
+  box-shadow:0 20px 50px rgba(139,90,43,0.2); margin:0 auto; display:block;
+}
+
+/* Galeri */
+.gallery {
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:600px; margin:0 auto;
+}
+.gallery img {
+  width:100%; border-radius:16px; border:6px solid #FFF8E7;
+  box-shadow:0 12px 30px rgba(139,90,43,0.15); transition:0.4s;
+}
+.gallery img:hover { transform:scale(1.04); }
+
+/* Typography & Cards */
+.title { font-family:'Great Vibes',cursive; font-size:5.5rem; color:#8B5A2B; }
+.title span { font-size:6.5rem; color:#A67C52; }
+.date-cover { font-family:'Playfair Display',serif; font-size:2rem; color:#8B5A2B; letter-spacing:3px; }
+.btn-open { padding:16px 50px; background:#8B5A2B; color:#FFF8E7; border:none; border-radius:60px; font-size:1.2rem; cursor:pointer; box-shadow:0 12px 35px rgba(139,90,43,0.35); }
+.btn-open:hover { background:#6B4423; transform:translateY(-5px); }
+
+.ayat { font-style:italic; font-size:1.2rem; line-height:1.9; color:#6B4423; }
+.nama { font-family:'Cormorant Garamond',serif; font-size:2.5rem; color:#8B5A2B; margin-bottom:0.5rem; }
+.ampersand { font-family:'Great Vibes',cursive; font-size:6rem; color:#A67C52; margin:1.5rem 0; }
+
+.card {
+  background:rgba(255,255,255,0.94); padding:2.2rem 2rem; border-radius:22px;
+  max-width:460px; margin:2rem auto; box-shadow:0 18px 45px rgba(139,90,43,0.14);
+  border:1px solid rgba(200,170,140,0.18);
+}
+.event-section h3 { font-family:'Playfair Display',serif; font-size:2rem; color:#8B5A2B; margin-bottom:0.8rem; }
+.lokasi { margin-top:1rem; font-weight:500; color:#6B4423; }
+
+.btn-maps { display:inline-block; padding:15px 42px; background:#8B5A2B; color:#FFF8E7; border-radius:60px; font-size:1.15rem; box-shadow:0 10px 30px rgba(139,90,43,0.3); }
+.signature { font-family:'Great Vibes',cursive; font-size:2.6rem; color:#8B5A2B; margin-top:2.5rem; }
+
+/* Music Button */
+.music-btn {
+  position:fixed; bottom:28px; right:28px; width:70px; height:70px;
+  background:#8B5A2B; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; box-shadow:0 12px 40px rgba(139,90,43,0.45); z-index:9999;
+}
+.music-btn svg { width:32px; height:32px; position:absolute; transition:opacity 0.3s; }
+.music-btn .pause { opacity:0; }
+.music-btn.playing .play { opacity:0; }
+.music-btn.playing .pause { opacity:1; }
+
+/* Responsive */
+@media (max-width:480px) {
+  .title { font-size:4.2rem; }
+  .title span { font-size:5.2rem; }
+  .gallery { grid-template-columns:1fr; }
+  .wrapper { padding:1.5rem 1rem; }
+}
