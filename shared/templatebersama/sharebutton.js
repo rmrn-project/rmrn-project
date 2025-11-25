@@ -9,7 +9,7 @@ shareContainer.innerHTML = `
     <a href="#" class="share-wa" title="WhatsApp"><img src="/image/wa.png" alt="WA" width="30"></a>
     <a href="#" class="share-fb" title="Facebook"><img src="/image/fb.png" alt="FB" width="30"></a>
     <a href="#" class="share-tg" title="Telegram"><img src="/image/tg.png" alt="TG" width="30"></a>
-    <button class="share-copy" title="Salin Link"><img src="/image/copy.png" alt="Copy" width="30"></button>
+    <button class="share-copy" title="Salin Link"><img src="/image/link.png" alt="Copy" width="30"></button>
   </div>
 `;
 document.body.appendChild(shareContainer);
