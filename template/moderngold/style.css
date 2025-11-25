@@ -269,7 +269,7 @@
     transform: translateZ(0);
     will-change: transform, left, top;
 }
-        
+
 
 /* ===== AUTO SCROLL BUTTON ===== */
 #btnAutoScroll {
@@ -382,7 +382,6 @@
     display: block;
     margin: 0 auto 10px;
 }
-
 
 
 
