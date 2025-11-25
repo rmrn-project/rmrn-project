@@ -1,0 +1,90 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:auto; min-height:100vh; font-family:'Poppins',sans-serif; overflow-x:hidden; color:#5D6D5A; }
+body { background:#F9F5F0; }
+
+:root {
+  --sage: #9CAF88;
+  --sage-dark: #7A8B69;
+  --terra: #E07A5F;
+  --terra-dark: #D15A3F;
+  --cream: #FDFAF6;
+}
+
+/* Background + Daun */
+.bg-sage {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:linear-gradient(135deg, #F5F0E9 0%, #E8E5DE 100%);
+  z-index:-3;
+}
+.overlay-sage {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(253,250,246,0.96); z-index:-2;
+}
+.leaf-left, .leaf-right {
+  position:fixed; width:280px; height:380px; background:url('https://i.imgur.com/2s7kD1F.png') center/contain no-repeat;
+  opacity:0.07; z-index:-1;
+}
+.leaf-left { bottom:10%; left:0; transform:scaleX(-1); }
+.leaf-right { top:15%; right:0; }
+
+/* Cover */
+.cover { position:fixed; inset:0; background:var(--cream); display:flex; align-items:center; justify-content:center; transition:0.8s; z-index:999; }
+.cover.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+.cover-box { text-align:center; padding:2rem; }
+.title-main { font-family:'Libre Baskerville',serif; font-size:5.5rem; color:var(--terra); line-height:1.1; }
+.title-main amp { font-size:4rem; color:var(--sage-dark); }
+.date-main { font-size:1.8rem; letter-spacing:6px; color:var(--sage-dark); margin:2rem 0; }
+.btn-open { padding:16px 50px; background:var(--terra); color:white; border:none; border-radius:50px; font-size:1.2rem; cursor:pointer; box-shadow:0 15px 40px rgba(224,122,95,0.35); transition:0.3s; }
+.btn-open:hover { background:var(--terra-dark); transform:translateY(-4px); }
+
+/* Main */
+.container { max-width:900px; margin:0 auto; padding:3rem 1.5rem; text-align:center; }
+
+/* Arched Photo */
+.couple-arch {
+  margin:4rem 0;
+  padding:2rem 0;
+}
+.couple-arch img {
+  width:100%; max-width:560px; border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  object-fit:cover; border:12px solid white;
+  box-shadow:0 30px 70px rgba(156,175,136,0.3);
+}
+
+/* Galeri 3+1 */
+.gallery-asym {
+  display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:800px; margin:5rem auto;
+}
+.big img { width:100%; border-radius:20px; box-shadow:0 20px 50px rgba(156,175,136,0.25); }
+.small-grid { display:grid; gap:1rem; }
+.small-grid img { width:100%; border-radius:18px; box-shadow:0 15px 35px rgba(156,175,136,0.2); }
+
+/* Acara */
+.event-box { display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; margin:4rem 0; }
+.event-card {
+  background:white; padding:2.5rem 2rem; border-radius:24px; width:320px;
+  box-shadow:0 20px 50px rgba(156,175,136,0.18); border:1px solid rgba(156,175,136,0.15);
+}
+.event-card h4 { font-family:'Playfair Display',serif; font-size:1.9rem; color:var(--terra); margin-bottom:1rem; }
+
+/* Button & Closing */
+.btn-maps { display:inline-block; padding:16px 48px; background:var(--terra); color:white; border-radius:50px; margin:3rem 0; box-shadow:0 15px 40px rgba(224,122,95,0.3); }
+.signature { font-family:'Libre Baskerville',serif; font-size:2.8rem; color:var(--terra); margin-top:3rem; }
+
+/* Music */
+.music-btn {
+  position:fixed; bottom:30px; right:30px; width:70px; height:70px;
+  background:var(--terra); border-radius:50%; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; box-shadow:0 15px 45px rgba(224,122,95,0.45); z-index:9999;
+}
+.music-btn svg { width:32px; height:32px; position:absolute; transition:0.3s; }
+.music-btn .pause { opacity:0; }
+.music-btn.playing .play { opacity:0; }
+.music-btn.playing .pause { opacity:1; }
+
+/* Responsive */
+@media (max-width:640px) {
+  .title-main { font-size:4rem; }
+  .gallery-asym { grid-template-columns:1fr; }
+  .event-box { flex-direction:column; align-items:center; }
+}
