@@ -15,10 +15,10 @@
                 <li>Ganti musik</li>
             </ul>
 
-            <p style="margin-top: 15px; font-weight:600;">Mau tambah fitur data ucapan?</p>
+            <p style="margin-top: 15px; font-weight:600;">Mau tambah fitur lain?</p>
 
             <ul>
-<li>fitur autoscroll: <b>+50K</b></li>
+<li>fitur autoscroll: <b>+25K</b></li>
                 <li>Standar service setting database Google pribadi: <b>+50K</b></li>
                 <li>Standar database RMRN <b>100K / tahun</b></li>
             </ul>
