@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Undangan Pernikahan - Sandi & Ertia</title>  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@300;400&family=Great+Vibes&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">  <!-- CSS Eksternal -->  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="photo-wrapper">
+      <img src="gambar_2.jpg" alt="Sandi & Ertia" class="couple-photo fade" />
+      <div class="couple-initials">S & E</div>
+    </div><!-- HEADER MEWAH -->
+<div class="header-section fade">
+  <div class="header-symbol">⋆ ˖⁺‧₊ ☽ ◯ ☾ ₊‧⁺˖ ⋆</div>
+  <h1 class="header-title">Dengan Izin Allah</h1>
+  <p class="header-quote">"Kami menikah —<br />satu cerita, dua hati, satu tujuan"</p>
+  <div class="header-decor">✻ ┈┈┈┈ ✻ ┈┈┈┈ ✻</div>
+</div>
+
+<!-- MEMPELAI -->
+<div class="couple-names fade">
+  <div class="couple-box">
+    <h2 class="couple-name">Sandi Maulana S.Pd</h2>
+    <p class="couple-info">Putra bungsu dari<br />Bapak Udis Subandi & Ibu Dede Jualiah</p>
+  </div>
+
+  <div class="couple-separator">&
+    <span class="sep-top">✻ ✻ ✻</span>
+    <span class="sep-bottom">✻ ✻ ✻</span>
+  </div>
+
+  <div class="couple-box">
+    <h2 class="couple-name">Ertia Agustina S.Kom</h2>
+    <p class="couple-info">Putri Tunggal dari<br />Bapak Gustana & Alm. Ibu Ernawati</p>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery fade">
+  <div class="slides">
+    <img src="foto1.jpg" alt="Foto 1" />
+    <img src="foto2.jpg" alt="Foto 2" />
+    <img src="foto3.jpg" alt="Foto 3" />
+    <img src="foto4.jpg" alt="Foto 4" />
+    <img src="foto5.jpg" alt="Foto 5" />
+  </div>
+</div>
+
+<!-- UCAPAN BERJALAN -->
+<div class="ucapan-wrapper">
+  <div class="ucapan-mask">
+    <div class="ucapan-marquee">
+      <div id="listUcapan"></div>
+      <div id="listUcapanClone"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL ACARA -->
+<div class="details-acara fade">
+  <img src="acara.png" alt="Acara Pernikahan" />
+</div>
+
+<!-- MAP -->
+<div class="details fade">
+  <h3>Lokasi Acara</h3>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.123456789!2d106.933333!3d-6.917222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68377ff30ddc8f%3A0x633c7404f5213063!2sPabrik%20Kerupuk%20Do'a%20Ibu!5e0!3m2!1sid!2sid!4v1699999999999" width="100%" height="260" style="border:0;border-radius:15px;margin:15px 0;" allowfullscreen="" loading="lazy" width="100%" height="260" allowfullscreen loading="lazy"></iframe>
+  <a href="https://share.google/oLH85yXLvunhHbqrn" target="_blank" style="display:inline-block;padding:14px 30px;background:#d4af37;color:#000;border-radius:50px;text-decoration:none;font-weight:bold;" target="_blank" class="btn-maps">Buka di Google Maps</a>
+</div>
+
+<!-- AMBLOP DIGITAL -->
+<div class="details fade">
+  <h3>Amplop Digital</h3>
+  <div class="bank">
+    <img src="mandiri.png" alt="MANDIRI" />
+    <div class="norek" id="norek2">1820017189663</div>
+    <div>a.n Ertia Agustina</div>
+    <button class="btn-salin" onclick="copyRek('norek2')">Salin Nomor</button>
+    <p class="notif" id="notif2">Disalin!</p>
+  </div>
+</div>
+
+<!-- FORM UCAPAN -->
+<div class="details fade">
+  <h3>Doa & Ucapan</h3>
+  <input type="text" id="nama" placeholder="Nama kamu" />
+  <textarea id="doa" placeholder="Tulis doa & ucapan terbaik..."></textarea>
+  <button type="button" class="btn-kirim" id="kirimUcapan">Kirim Ucapan</button>
+</div>
+
+<!-- CLOSING -->
+<div class="closing fade">
+  <p>Terima kasih atas doa restu dan kehadirannya</p>
+  <p>Dengan cinta,</p>
+  <p class="closing-names"><strong>Sandi & Ertia</strong></p>
+</div>
+
+<div id="rmrnBox">
+  <a href="https://wa.me/6281255721597" target="_blank">
+    <img src="rmrn.png" alt="rmrn-project" />
+  </a>
+</div>
+
+<footer id="rmrnFooter">
+  © <span id="year"></span> Dibuat oleh —
+  <a href="https://rmrn-project.github.io/rmrn-project/" target="_blank">rmrn-project</a>
+</footer>
+
+<!-- AUDIO -->
+
+<audio id="bgm" loop playsinline preload="none">
+        <source src="thousandyears.mp3" type="audio/mpeg">
+    </audio>
+    <div id="musicBtn">
+        <svg id="playIcon" viewBox="0 0 24 24" width="30" height="30" fill="#d4af37"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" width="26" height="26" fill="#d4af37" style="display:none;"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+    </div>
+
+
+<!-- AUTOSTART-->
+
+
+  </div>  <button id="btnAutoScroll">
+    <img src="autosroll.png" alt="Auto Scroll" />
+  </button>  
+
+
+
+<!-- JS -->
+<script src="script.js"></script>  <script type="module" src="firebase.js"></script>
+<script src="popup.js"></script>
+
+
+</body>
+</html>
