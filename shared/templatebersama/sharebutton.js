@@ -80,7 +80,12 @@ shareBtn.addEventListener('click', () => {
 // 4. Set link share otomatis
 const pageUrl = encodeURIComponent(window.location.href);
 shareContainer.querySelector('.share-wa').href = `https://wa.me/?text=${pageUrl}`;
-shareContainer.querySelector('.share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+
+// Tombol FB: buka popup share biasa
+shareContainer.querySelector('.share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+shareContainer.querySelector('.share-fb').target = "_blank"; // buka di tab baru
+shareContainer.querySelector('.share-fb').title = "Share ke Facebook (pilih sendiri)";
+
 shareContainer.querySelector('.share-tg').href = `https://t.me/share/url?url=${pageUrl}&text=Check+this+out`;
 
 // 5. Salin link
