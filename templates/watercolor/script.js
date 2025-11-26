@@ -5,7 +5,6 @@ const openBtn = document.getElementById('openBtn');
 const cover = document.getElementById('cover');
 const main = document.getElementById('main-content');
 
-
 // ===========================
 // FUNGSI LOAD SCRIPT TEMPLATE
 // ===========================
@@ -23,25 +22,28 @@ function loadTemplateScripts() {
     const s = document.createElement("script");
     s.src = src;
     s.defer = true;
-    s.onload = () => {
-      // Override style popup setelah popup.js selesai load
-      if (src.includes("popup.js")) {
-        const popup = document.getElementById("rmrnPopup");
-        if (popup) {
-          popup.style.display = "flex";
-          popup.style.justifyContent = "center";
-          popup.style.alignItems = "center";
-          popup.style.position = "fixed";
-          popup.style.top = "0";
-          popup.style.left = "0";
-          popup.style.width = "100vw";
-          popup.style.height = "100vh";
-          popup.style.zIndex = "99999";
-        }
-      }
-    };
     document.body.appendChild(s);
   });
+}
+
+// ===========================
+// PREPARE POPUP SEBELUM MAIN MUNCUL
+// ===========================
+function preparePopup() {
+  const popup = document.getElementById("rmrnPopup");
+  if (popup) {
+    popup.style.display = "flex";
+    popup.style.justifyContent = "center";
+    popup.style.alignItems = "center";
+    popup.style.position = "fixed";
+    popup.style.top = "0";
+    popup.style.left = "0";
+    popup.style.width = "100vw";
+    popup.style.height = "100vh";
+    popup.style.zIndex = "99999";
+    popup.style.opacity = "0"; // animasi show nanti di popup.js
+    popup.style.pointerEvents = "none";
+  }
 }
 
 // ===========================
@@ -49,7 +51,7 @@ function loadTemplateScripts() {
 // ===========================
 openBtn.addEventListener('click', () => {
 
-  // Animasi fade-out
+  // Fade-out animasi
   cover.classList.add('fade-out');
 
   // Setelah animasi selesai
@@ -62,8 +64,16 @@ openBtn.addEventListener('click', () => {
     // 🔥 Load script template setelah landing hilang
     loadTemplateScripts();
 
-  }, 1000); // waktu fade-out
+    // 🔥 Prepare popup supaya selalu di tengah
+    preparePopup();
+
+  }, 1000); // durasi fade-out CSS
 });
+
+
+
+
+
 
 // ===========================
 // COUNTDOWN
