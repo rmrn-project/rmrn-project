@@ -1,50 +1,51 @@
-// Ambil elemen
-const openBtn = document.getElementById('openBtn'); 
+// ===========================
+// ELEMENT DASAR
+// ===========================
+const openBtn = document.getElementById('openBtn');
 const cover = document.getElementById('cover');
 const main = document.getElementById('main-content');
 const bgMusic = document.getElementById('bgMusic');
 
-// Buka Undangan
+// ===========================
+// BUKA LANDING PAGE
+// ===========================
 openBtn.addEventListener('click', () => {
 
-  // fade out
+  // Fade-out animasi
   cover.classList.add('fade-out');
 
-  // play music
-  bgMusic.play().catch(()=>{});
+  // Musik play setelah user aksi (aman di mobile)
+  bgMusic.play().catch(() => {});
 
-  // tampilkan main-content setelah fade
+  // Setelah fade-out selesai
   setTimeout(() => {
-    cover.style.display = 'none';
-    main.classList.add('show');
+    cover.style.display = 'none';     // sembunyikan landing
+    main.classList.remove('hidden');  // pastikan tampil
+    main.classList.add('show');       // animasi muncul
     window.scrollTo({ top: 0 });
-  }, 1000);
+  }, 1000); // harus sama dengan durasi fade-out CSS
+
 });
 
-  // Play music
-  bgMusic.play().catch(()=>{});
 
-  // Delay fade-out
-  setTimeout(() => {
-    cover.classList.add('hidden');
-    main.classList.remove('hidden');
-
-    // animasi muncul
-    main.classList.add('show');
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  }, 1000);
-});
-
-// Toggle Musik
+// ===========================
+// TOGGLE MUSIK
+// ===========================
 document.getElementById('musicToggle').addEventListener('click', function() {
   const m = document.getElementById('bgMusic');
-  if (m.paused) { m.play(); this.textContent = "Musik On"; }
-  else { m.pause(); this.textContent = "Musik Off"; }
+  if (m.paused) { 
+    m.play(); 
+    this.textContent = "Musik On"; 
+  } else { 
+    m.pause(); 
+    this.textContent = "Musik Off"; 
+  }
 });
 
-// Countdown
+
+// ===========================
+// COUNTDOWN
+// ===========================
 const weddingDate = new Date("2026-03-14T00:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
@@ -61,11 +62,15 @@ setInterval(() => {
   document.getElementById("seconds").textContent = seconds.toString().padStart(2,"0");
 
   if (distance < 0) {
-    document.getElementById("timer").innerHTML = "<h2 style='color:#d47a6a;'>Hari Ini Hari Bahagia Kami! ♡</h2>";
+    document.getElementById("timer").innerHTML =
+      "<h2 style='color:#d47a6a;'>Hari Ini Hari Bahagia Kami! ♡</h2>";
   }
 }, 1000);
 
-// RSVP
+
+// ===========================
+// RSVP FORM
+// ===========================
 document.getElementById('rsvpForm').addEventListener('submit', function(e) {
   e.preventDefault();
   document.getElementById('thanksMsg').style.display = 'block';
@@ -75,7 +80,10 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e) {
   }, 7000);
 });
 
-// Particle Animation
+
+// ===========================
+// PARTICLE ANIMATION
+// ===========================
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -101,7 +109,10 @@ class Particle {
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
-    if (this.y > canvas.height) { this.y = -20; this.x = Math.random() * canvas.width; }
+    if (this.y > canvas.height) {
+      this.y = -20;
+      this.x = Math.random() * canvas.width;
+    }
     if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
   }
   draw() {
@@ -112,7 +123,7 @@ class Particle {
   }
 }
 
-for(let i = 0; i < 90; i++) particles.push(new Particle());
+for (let i = 0; i < 90; i++) particles.push(new Particle());
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
