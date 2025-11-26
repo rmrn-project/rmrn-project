@@ -188,6 +188,7 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
 /* MAIN CONTENT */
 #main-content { position:relative; z-index:2; background:rgba(255,255,255,0.96); min-height:100vh; padding-bottom:6rem; }
 .hidden { display:none !important; }
+.show { display: block !important; }
 
 /* SECTION UMUM */
 .section, .hero { max-width:1200px; margin:0 auto; padding:6rem 2rem; text-align:center; }
