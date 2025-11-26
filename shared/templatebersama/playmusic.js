@@ -5,61 +5,49 @@
     ============================== */
 
     const config = {
-        position: "bottom-right",
+        position: "bottom-right",   // top-left, top-right, bottom-left, bottom-right
         imgPlay: "icons/play.png",
         imgPause: "icons/pause.png",
-        size: 55,
-        musicSrc: "music/thousandyears.mp3",
-        fallbackOpacity: 0.85,
-        padding: 14
+        size: 60,
+        padding: 25,
+        musicSrc: "/music/thousandyears.mp3"
     };
 
 
     /* =============================
-       CONTRAST AUTO DETECT
+       AUDIO ELEMENT
     ============================== */
-
-    function getBodyBg() {
-        const bg = window.getComputedStyle(document.body).backgroundColor;
-        return bg || "rgb(255,255,255)";
-    }
-
-    function getContrast(color) {
-        const rgb = color.match(/\d+/g).map(Number);
-        const [r, g, b] = rgb;
-        const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
-        return luminance > 0.5 ? "#000000" : "#ffffff";
-    }
-
-
-    /* =============================
-       AUDIO ELEMENT (AUTO)
-    ============================== */
-
     const audio = new Audio(config.musicSrc);
     audio.loop = true;
 
 
     /* =============================
-       BUTTON CONTAINER
+       CREATE BUTTON
     ============================== */
 
-    const btn = document.createElement("button");
-    btn.style.position = "fixed";
-    btn.style.width = config.size + "px";
-    btn.style.height = config.size + "px";
-    btn.style.border = "none";
-    btn.style.borderRadius = "50%";
-    btn.style.display = "flex";
-    btn.style.alignItems = "center";
-    btn.style.justifyContent = "center";
-    btn.style.background = "transparent";
-    btn.style.cursor = "pointer";
-    btn.style.zIndex = "999999";
-    btn.style.padding = "0";
+    const btn = document.createElement("div");
+    btn.id = "musicBtn-auto";
+
+    // Default button style (will also be fallback if images fail)
+    Object.assign(btn.style, {
+        position: "fixed",
+        width: config.size + "px",
+        height: config.size + "px",
+        background: "rgba(255,255,255,0.2)",
+        backdropFilter: "blur(15px)",
+        borderRadius: "50%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: "9999999",
+        cursor: "grab",
+        userSelect: "none",
+        touchAction: "none",
+        transform: "translateZ(0)",
+        willChange: "transform, left, top",
+    });
 
     const pad = config.padding + "px";
-
     switch (config.position) {
         case "top-left": btn.style.top = pad; btn.style.left = pad; break;
         case "top-right": btn.style.top = pad; btn.style.right = pad; break;
@@ -72,79 +60,86 @@
 
 
     /* =============================
-       IMAGE ICON
+       ICON (IMAGE OR FALLBACK)
     ============================== */
 
     const icon = new Image();
-    icon.style.width = "80%";
-    icon.style.height = "80%";
+    icon.style.width = "60%";
+    icon.style.height = "60%";
     icon.style.objectFit = "contain";
 
-    let iconLoaded = false;
+    let useImageIcons = false;
+    let isPlaying = false;
 
-    function checkImage(url, callback) {
-        const imgTest = new Image();
-        imgTest.onload = () => callback(true);
-        imgTest.onerror = () => callback(false);
-        imgTest.src = url;
-    }
-
-    function useFallbackStyle() {
-        const bg = getBodyBg();
-        const contrast = getContrast(bg);
-
-        btn.textContent = "▶";      // fallback icon
-        btn.style.background = contrast;
-        btn.style.opacity = config.fallbackOpacity;
-        btn.style.color = bg;
-        iconLoaded = false;
-    }
-
-    function useImagePlay() {
+    function switchToPlayImg() {
         icon.src = config.imgPlay;
         btn.textContent = "";
-        btn.appendChild(icon);
-        iconLoaded = true;
+        if (!btn.contains(icon)) btn.appendChild(icon);
     }
 
-    function useImagePause() {
+    function switchToPauseImg() {
         icon.src = config.imgPause;
+        if (!btn.contains(icon)) btn.appendChild(icon);
+    }
+
+    function switchToPlayFallback() {
+        btn.textContent = "▶";
+        btn.style.fontSize = "26px";
+        icon.remove();
+    }
+
+    function switchToPauseFallback() {
+        btn.textContent = "⏸";
+        btn.style.fontSize = "26px";
+        icon.remove();
     }
 
 
     /* =============================
-       INITIAL CHECK (PLAY ICON)
+       CHECK IMAGE EXISTENCE
     ============================== */
 
-    checkImage(config.imgPlay, (exists) => {
-        if (exists) {
-            useImagePlay();
+    function checkImage(url) {
+        return new Promise(resolve => {
+            const test = new Image();
+            test.onload = () => resolve(true);
+            test.onerror = () => resolve(false);
+            test.src = url;
+        });
+    }
+
+    Promise.all([
+        checkImage(config.imgPlay),
+        checkImage(config.imgPause)
+    ]).then(([playOK, pauseOK]) => {
+        if (playOK && pauseOK) {
+            useImageIcons = true;
+            switchToPlayImg();
         } else {
-            useFallbackStyle();
+            useImageIcons = false;
+            switchToPlayFallback();
         }
     });
 
 
     /* =============================
-       CLICK LOGIC
+       CLICK TOGGLE
     ============================== */
-
-    let isPlaying = false;
 
     btn.addEventListener("click", () => {
         if (!isPlaying) {
             audio.play();
             isPlaying = true;
 
-            if (iconLoaded) useImagePause();
-            else btn.textContent = "⏸";  // fallback pause
+            if (useImageIcons) switchToPauseImg();
+            else switchToPauseFallback();
 
         } else {
             audio.pause();
             isPlaying = false;
 
-            if (iconLoaded) useImagePlay();
-            else btn.textContent = "▶"; // fallback play
+            if (useImageIcons) switchToPlayImg();
+            else switchToPlayFallback();
         }
     });
 
