@@ -18,17 +18,31 @@ function loadTemplateScripts() {
   ];
 
   scripts.forEach(src => {
-
-    // Cegah duplikat script
     if (document.querySelector(`script[src="${src}"]`)) return;
 
     const s = document.createElement("script");
     s.src = src;
-    s.defer = true;               // tambahan aman
+    s.defer = true;
+    s.onload = () => {
+      // Override style popup setelah popup.js selesai load
+      if (src.includes("popup.js")) {
+        const popup = document.getElementById("rmrnPopup");
+        if (popup) {
+          popup.style.display = "flex";
+          popup.style.justifyContent = "center";
+          popup.style.alignItems = "center";
+          popup.style.position = "fixed";
+          popup.style.top = "0";
+          popup.style.left = "0";
+          popup.style.width = "100vw";
+          popup.style.height = "100vh";
+          popup.style.zIndex = "99999";
+        }
+      }
+    };
     document.body.appendChild(s);
   });
 }
-
 
 // ===========================
 // BUKA LANDING PAGE
