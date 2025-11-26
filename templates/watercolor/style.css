@@ -41,7 +41,9 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
 .cover-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(59,130,166,0.95), rgba(255,182,157,0.95));
+  background: 
+    linear-gradient(135deg, rgba(59,130,166,0.3), rgba(255,182,157,0.3)),
+    url('/background/watercolor.png') center/cover;
   z-index: 1;
 }
 
@@ -58,11 +60,6 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
   gap: 1rem;
   animation: fadeIn 2s ease-out;
   box-sizing: border-box;
-}
-
-#cover {
-  background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35)), 
-              url('/background/watercolor.png') center/cover no-repeat;
 }
 
 
