@@ -27,26 +27,6 @@ function loadTemplateScripts() {
 }
 
 // ===========================
-// PREPARE POPUP SEBELUM MAIN MUNCUL
-// ===========================
-function preparePopup() {
-  const popup = document.getElementById("rmrnPopup");
-  if (popup) {
-    popup.style.display = "flex";
-    popup.style.justifyContent = "center";
-    popup.style.alignItems = "center";
-    popup.style.position = "fixed";
-    popup.style.top = "0";
-    popup.style.left = "0";
-    popup.style.width = "100vw";
-    popup.style.height = "100vh";
-    popup.style.zIndex = "99999";
-    popup.style.opacity = "0"; // animasi show nanti di popup.js
-    popup.style.pointerEvents = "none";
-  }
-}
-
-// ===========================
 // BUKA LANDING PAGE
 // ===========================
 openBtn.addEventListener('click', () => {
@@ -64,12 +44,8 @@ openBtn.addEventListener('click', () => {
     // 🔥 Load script template setelah landing hilang
     loadTemplateScripts();
 
-    // 🔥 Prepare popup supaya selalu di tengah
-    preparePopup();
-
   }, 1000); // durasi fade-out CSS
 });
-
 
 
 
