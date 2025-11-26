@@ -36,16 +36,14 @@ html,body{
 }
 
 /* LANDING PAGE */
-#landing{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:#fdfbfb;
-  transition:opacity 1s ease;
+#landing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/background/cherry.png') bottom center / cover no-repeat;
+  opacity: 0.28;        /* atur transparansi */
+  z-index: 1;           
+  pointer-events: none;
 }
 .overlay{
   position:absolute;
