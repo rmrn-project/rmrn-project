@@ -8,46 +8,52 @@
         position: "bottom-right", 
         // pilihan: top-left, top-right, bottom-left, bottom-right
 
-        imgSrc: "icons/play.png",     // gambar tombol
-        size: 50,                     // ukuran px
-        fallbackColor: "#ffffff",     // warna fallback kalau img gagal
-        fallbackOpacity: 0.85,        // transparansi fallback
-        borderRadius: "50%",          // bentuk bulat
-        padding: 10                   // jarak dari tepi
+        imgPlay: "icons/play.png",
+        imgPause: "icons/pause.png",
+
+        size: 55,
+        musicSrc: "music/thousandyears.mp3",
+
+        fallbackColor: "#ffffff",
+        fallbackOpacity: 0.85,
+        borderRadius: "50%",
+        padding: 14
     };
 
 
     /* =============================
-       AUTO DETECT BACKGROUND COLOR
+       DETEKSI KONTRAS WARNA
     ============================== */
+
     function getPageBg() {
         const bg = window.getComputedStyle(document.body).backgroundColor;
-
-        if (!bg || bg === "rgba(0, 0, 0, 0)") {
-            return "#ffffff"; // fallback kalau background body transparan
-        }
+        if (!bg || bg === "rgba(0, 0, 0, 0)") return "#ffffff";
         return bg;
     }
 
     function getContrastedColor(color) {
-        // convert rgb(x,x,x) → angka
         const rgb = color.match(/\d+/g);
         const r = parseInt(rgb[0]), g = parseInt(rgb[1]), b = parseInt(rgb[2]);
-
-        // luminance
         const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
-
         return luminance > 0.5 ? "#000000" : "#ffffff";
     }
 
 
     /* =============================
+       BUAT AUDIO ELEMENT
+    ============================== */
+
+    const audio = new Audio(config.musicSrc);
+    audio.loop = true;
+
+
+    /* =============================
        RENDER TOMBOL PLAY
     ============================== */
+
     const btn = document.createElement("button");
     btn.id = "floatingPlayButton";
 
-    // style dasar
     btn.style.position = "fixed";
     btn.style.width = config.size + "px";
     btn.style.height = config.size + "px";
@@ -61,37 +67,28 @@
     btn.style.background = "transparent";
     btn.style.padding = "0";
 
-    // posisi
     const pad = config.padding + "px";
 
     switch(config.position) {
-        case "top-left":
-            btn.style.top = pad;
-            btn.style.left = pad;
-            break;
-        case "top-right":
-            btn.style.top = pad;
-            btn.style.right = pad;
-            break;
-        case "bottom-left":
-            btn.style.bottom = pad;
-            btn.style.left = pad;
-            break;
-        case "bottom-right":
+        case "top-left": btn.style.top = pad; btn.style.left = pad; break;
+        case "top-right": btn.style.top = pad; btn.style.right = pad; break;
+        case "bottom-left": btn.style.bottom = pad; btn.style.left = pad; break;
         default:
-            btn.style.bottom = pad;
-            btn.style.right = pad;
-            break;
+        case "bottom-right": btn.style.bottom = pad; btn.style.right = pad; break;
     }
 
-    // BIKIN GAMBAR
+
+    /* =============================
+       GAMBAR IKON
+    ============================== */
+    let currentState = "pause"; // default: sebelum play = tombol play
+
     const img = new Image();
-    img.src = config.imgSrc;
+    img.src = config.imgPlay;  
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "contain";
 
-    // fallback kalau gambar gagal
     img.onerror = function() {
         const bg = getPageBg();
         const contrast = getContrastedColor(bg);
@@ -99,7 +96,7 @@
         btn.style.background = contrast;
         btn.style.opacity = config.fallbackOpacity;
         btn.textContent = "▶";
-        btn.style.color = bg; // warna teks berkebalikan
+        btn.style.color = bg;
     };
 
     btn.appendChild(img);
@@ -107,12 +104,30 @@
 
 
     /* =============================
-       EVENT KLIK
+       FUNGSI GANTI IKON
     ============================== */
+    function updateIcon() {
+        if (currentState === "play") {
+            img.src = config.imgPause;
+        } else {
+            img.src = config.imgPlay;
+        }
+    }
+
+
+    /* =============================
+       EVENT KLIK (PLAY/PAUSE)
+    ============================== */
+
     btn.addEventListener("click", function() {
-        console.log("Play clicked!");
-        // taruh fungsi play music di sini
-        // audio.play();
+        if (audio.paused) {
+            audio.play();
+            currentState = "play";
+        } else {
+            audio.pause();
+            currentState = "pause";
+        }
+        updateIcon();
     });
 
 })();
