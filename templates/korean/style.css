@@ -101,20 +101,14 @@ html,body{
 
 
 /* Gambar PNG paling atas di landing page */
+/* Gambar PNG fullscreen di landing page */
 #landing::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 600px; /* ukuran maksimal desktop */
-  height: auto;
-  aspect-ratio: 3/1; /* sesuaikan proporsi gambar */
-  background: url('/background/cherry.png') no-repeat top center;
-  background-size: contain;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background: url('/background/landing-top.png') center/cover no-repeat;
   z-index: 1; /* di bawah .landing-content */
-  pointer-events: none; /* supaya tombol tetap bisa diklik */
+  pointer-events: none; /* biar tombol tetap bisa diklik */
 }
 
 /* Responsive: tablet */
