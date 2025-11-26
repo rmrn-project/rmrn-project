@@ -99,6 +99,45 @@ html,body{
   transform:scale(1.05);
 }
 
+
+/* Gambar PNG paling atas di landing page */
+#landing::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px; /* ukuran maksimal desktop */
+  height: auto;
+  aspect-ratio: 3/1; /* sesuaikan proporsi gambar */
+  background: url('/background/cherry.png') no-repeat top center;
+  background-size: contain;
+  z-index: 1; /* di bawah .landing-content */
+  pointer-events: none; /* supaya tombol tetap bisa diklik */
+}
+
+/* Responsive: tablet */
+@media screen and (max-width: 1024px) {
+  #landing::before {
+    max-width: 450px;
+    aspect-ratio: 3/1;
+  }
+}
+
+/* Responsive: HP */
+@media screen and (max-width: 480px) {
+  #landing::before {
+    max-width: 300px;
+    aspect-ratio: 3/1;
+  }
+}
+
+
+
+
+
+
 /* MAIN CONTENT */
 #main{
   position:relative;
