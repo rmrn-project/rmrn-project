@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arya & Marina • 14 Maret 2026</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+
+  <!-- Watercolor Background + Particle -->
+  <div class="watercolor-bg"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Cover -->
+  <section id="cover">
+    <div class="cover-overlay"></div>
+    <div class="cover-content">
+      <p class="subtitle">The Wedding Celebration of</p>
+      <h1 class="title">Arya <span>&</span> Marina</h1>
+      <p class="date">14 • 03 • 2026</p>
+      <p class="open-invite">Dengan rahmat Tuhan yang Maha Esa<br>kami memohon kehadiran dan doa restu</p>
+      <button id="openBtn" class="btn-open">Buka Undangan</button>
+    </div>
+    <div class="wave-decoration"></div>
+  </section>
+
+  <!-- Main Content -->
+  <section id="main-content" class="hidden">
+    <audio id="bgMusic" loop preload="auto">
+      <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-ocean-wave-1182.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicToggle" class="music-btn">Musik Off</button>
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1 class="hero-title">Arya & Marina</h1>
+      <p class="hero-subtitle">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+      <p class="hero-text">Dengan memohon rahmat dan ridho Allah SWT,<br>kami bermaksud mengundang Bapak/Ibu/Saudara/i<br>untuk hadir di acara pernikahan kami</p>
+      <p class="hero-date">Sabtu, 14 Maret 2026</p>
+    </div>
+
+    <!-- Couple -->
+    <div class="section couple">
+      <div class="bride-groom">
+        <div class="person bride">
+          <h3>Marina Putri</h3>
+          <p>Putri pertama<br>Bapak Santoso & Ibu Ratna</p>
+        </div>
+        <div class="ampersand">&</div>
+        <div class="person groom">
+          <h3>Arya Wijaya</h3>
+          <p>Putra kedua<br>Bapak Hartono & Ibu Siti</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="section countdown">
+      <h2>Menghitung Hari Bahagia Kami</h2>
+      <div id="timer">
+        <div><span id="days">00</span><br>Hari</div>
+        <div><span id="hours">00</span><br>Jam</div>
+        <div><span id="minutes">00</span><br>Menit</div>
+        <div><span id="seconds">00</span><br>Detik</div>
+      </div>
+    </div>
+
+    <!-- Event -->
+    <div class="section event">
+      <div class="event-card">
+        <h2>Akad Nikah</h2>
+        <p>Sabtu, 14 Maret 2026<br>08.00 - 10.00 WIB</p>
+        <p class="location">Rumah Mempelai Wanita<br>Jl. Pantai Indah No. 88, Kuta, Bali</p>
+      </div>
+      <div class="event-card">
+        <h2>Resepsi</h2>
+        <p>Sabtu, 14 Maret 2026<br>11.00 - 15.00 WIB</p>
+        <p class="location">Ayodya Resort Ballroom<br>Nusa Dua, Bali</p>
+        <a href="https://maps.app.goo.gl/example" target="_blank" class="btn-location">Buka Lokasi di Google Maps</a>
+      </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="section gallery">
+      <h2>Our Beautiful Moments</h2>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800" alt="Prewedding">
+        <img src="https://images.unsplash.com/photo-1606216793596-5d9f7c2e50ea?w=800" alt="Prewedding">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800" alt="Prewedding">
+        <img src="https://images.unsplash.com/photo-1606800057589-07d52e2c1a4d?w=800" alt="Prewedding">
+      </div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="section rsvp">
+      <h2>Konfirmasi Kehadiran</h2>
+      <p>Kehadiran dan doa restu Anda sangat berarti bagi kami</p>
+      <form id="rsvpForm">
+        <input type="text" placeholder="Nama Lengkap" required>
+        <select required>
+          <option value="" disabled selected>Pilih Kehadiran</option>
+          <option value="hadir">Hadir</option>
+          <option value="tidakhadir">Tidak Hadir</option>
+          <option value="belum pasti">Belum Pasti</option>
+        </select>
+        <input type="number" placeholder="Jumlah Orang (misal: 2)" min="1">
+        <textarea rows="3" placeholder="Ucapan & doa restu (opsional)"></textarea>
+        <button type="submit">Kirim Konfirmasi</button>
+      </form>
+      <p id="thanksMsg" class="thanks" style="display:none;">Terima kasih atas doa dan konfirmasinya ♡</p>
+    </div>
+
+    <!-- Closing -->
+    <div class="section closing">
+      <p class="quote">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.”</p>
+      <p class="verse">— Ar-Rum ayat 21 —</p>
+      <h3>Merupakan suatu kehormatan dan kebahagiaan bagi kami<br>apabila Bapak/Ibu/Saudara/i berkenan hadir<br>memberikan doa restu kepada kedua mempelai.</h3>
+      <p class="sign">Wassalamualaikum Warahmatullahi Wabarakatuh<br><br>Yang berbahagia,<br>Keluarga Arya & Marina</p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

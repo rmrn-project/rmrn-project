@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arya & Marina • 14 Maret 2026</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- BACKGROUND 3D PARALLAX (PAKAI CSS SAJA - 100% JALAN) -->
+  <div class="parallax-bg">
+    <div class="layer sky"></div>
+    <div class="layer stars"></div>
+    <div class="layer clouds"></div>
+    <div class="layer moon"></div>
+    <div class="layer waves"></div>
+  </div>
+
+  <!-- GOLDEN PARTICLES (CSS ANIMATION) -->
+  <div class="particles">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- LANDING PAGE -->
+  <section id="landing">
+    <div class="overlay"></div>
+    <div class="landing-content">
+      <h2>The Eternal Love</h2>
+      <h1>Arya <span>&</span> Marina</h1>
+      <p>14 Maret 2026</p>
+      <button id="openBtn">Buka Undangan</button>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section id="main">
+    <audio id="bgmusic" loop autoplay>
+      <source src="https://assets.mixkit.co/sfx/preview/mixkit-ethereal-fairy-voices-946.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicBtn">Music Off</button>
+
+    <div class="container">
+      <h1 class="title">Arya & Marina</h1>
+      <p class="text">Dengan memohon rahmat Allah SWT,<br>kami mengundang Anda menjadi saksi ikatan suci kami</p>
+      <p class="date">Sabtu, 14 Maret 2026</p>
+
+      <div class="couple">
+        <div class="card"><h3>Marina Putri</h3><p>Putri pertama<br>Bapak Santoso & Ibu Ratna</p></div>
+        <div class="and">∞</div>
+        <div class="card"><h3>Arya Wijaya</h3><p>Putra kedua<br>Bapak Hartono & Ibu Siti</p></div>
+      </div>
+
+      <div class="countdown">
+        <h2>Menuju Hari Bahagia</h2>
+        <div id="timer">
+          <div><span id="days">00</span><small>Hari</small></div>
+          <div><span id="hours">00</span><small>Jam</small></div>
+          <div><span id="minutes">00</span><small>Menit</small></div>
+          <div><span id="seconds">00</span><small>Detik</small></div>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <h2>Our Moments</h2>
+        <div class="grid">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="">
+          <img src="https://images.unsplash.com/photo-1606216793596-5d9f7c2e50ea?w=800&q=80" alt="">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80" alt="">
+          <img src="https://images.unsplash.com/photo-1606800057589-07d52e2c1a4d?w=800&q=80" alt="">
+        </div>
+      </div>
+
+      <div class="rsvp">
+        <h2>Konfirmasi Kehadiran</h2>
+        <form id="form">
+          <input type="text" placeholder="Nama Lengkap" required>
+          <select required><option value="" disabled selected>Kehadiran</option><option>Hadir</option><option>Tidak Hadir</option></select>
+          <input type="number" placeholder="Jumlah Orang" min="1">
+          <textarea placeholder="Ucapan & doa" rows="3"></textarea>
+          <button type="submit">Kirim</button>
+        </form>
+        <p id="thanks" style="display:none">Terima kasih atas doa restunya ♡</p>
+      </div>
+
+      <div class="closing">
+        <p class="quote">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri…”</p>
+        <p class="verse">— Ar-Rum: 21 —</p>
+        <p class="sign">Arya & Marina</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
