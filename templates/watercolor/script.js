@@ -10,8 +10,7 @@ const main = document.getElementById('main-content');
 // ===========================
 function loadTemplateScripts() {
   const scripts = [
-    "/shared/templatebersama/footer.js",
-    "/shared/templatebersama/sharebutton.js",
+    "/shared/templatebersama/footer.js",    
     "/shared/templatebersama/playmusic.js"
   ];
 
