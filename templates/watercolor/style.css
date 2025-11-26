@@ -6,8 +6,8 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
 .watercolor-bg {
   position: fixed;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1558592359-9b7c1d367b98?auto=format&fit=crop&w=2400&q=80') center/cover;
-  opacity: 0.13;
+  background: url('/background/watercolor.png') center/cover;
+  opacity: 0.3;
   z-index: -2;
 }
 .watercolor-bg::after {
@@ -192,9 +192,13 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); c
 
 /* HERO */
 .hero {
-  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1506953823971-64d41b295a33?w=2000') center/cover;
-  color:white; padding:10rem 2rem; text-shadow:0 3px 20px rgba(0,0,0,0.7);
+  background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), 
+              url('/background/watercolor.png') center/cover;
+  color: white;
+  padding: 10rem 2rem;
+  text-shadow: 0 3px 20px rgba(0,0,0,0.7);
 }
+
 .hero-title { font-family:'Dancing Script',cursive; font-size:clamp(5rem,12vw,9rem); margin-bottom:1rem; }
 .hero-subtitle { font-size:clamp(1.4rem,4vw,2rem); margin:1.5rem 0; }
 .hero-text { font-size:clamp(1.1rem,3vw,1.6rem); margin:2rem 0; }
