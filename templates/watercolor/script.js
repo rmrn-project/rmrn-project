@@ -15,7 +15,11 @@ openBtn.addEventListener('click', () => {
   setTimeout(() => {
     cover.classList.add('hidden'); // sembunyikan sepenuhnya
     main.classList.remove('hidden'); // tampilkan main content
-    main.classList.add('show');      // animasi muncul
+    main.classList.add('show');      //
+ animasi muncul
+
+window.scrollTo({ top: 0, behavior: 'smooth' });
+
   }, 1000); // 1 detik sesuai durasi fade-out
 });
 
