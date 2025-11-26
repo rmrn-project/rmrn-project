@@ -208,27 +208,31 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); c
 .ampersand { font-family:'Dancing Script',cursive; font-size:clamp(4rem,10vw,8rem); color:#7ab8d4; }
 
 /* COUNTDOWN */
+/* COUNTDOWN - HORIZONTAL FIXED, RESPONSIVE UNTUK DESKTOP & HP */
 #timer {
   display: flex;
   justify-content: center;
-  gap: 2.5rem;
-  flex-wrap: wrap; /* biar bisa turun ke baris baru di HP */
+  gap: clamp(0.5rem, 2vw, 1.5rem); /* jarak antar box */
+  flex-wrap: nowrap;   /* jangan turun ke baris baru */
   align-items: center;
+  overflow-x: auto;    /* scroll horizontal jika viewport sempit */
+  padding: 0 1rem;     /* padding kiri-kanan di HP */
+  box-sizing: border-box;
 }
 
 #timer div {
-  background: rgba(255,255,255,0.9);
-  padding: 1.8rem 2.2rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: clamp(1rem, 2vw, 1.8rem);
   border-radius: 25px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-  min-width: 120px;
-  text-align: center; /* penting biar konten center */
-  flex: 1 1 120px;   /* responsive: bisa shrink & grow */
-  max-width: 150px;  /* batasi di desktop */
+  min-width: 90px;      /* minimal box */
+  max-width: 130px;     /* maksimal box desktop */
+  text-align: center;
+  flex: 0 0 auto;       /* fixed box size, jangan shrink */
 }
 
 #timer span {
-  font-size: clamp(2rem, 6vw, 4.5rem); /* responsive font */
+  font-size: clamp(1.5rem, 6vw, 3.5rem);
   font-weight: bold;
   color: #2c5f7e;
   display: block;
@@ -238,30 +242,36 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); c
   color: #d47a6a;
 }
 
-/* MEDIA QUERY: Tablet & Mobile */
+/* Scrollbar mini & halus untuk HP */
+#timer::-webkit-scrollbar {
+  height: 5px;
+}
+#timer::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+/* MEDIA QUERIES - tetap horizontal tapi responsive */
 @media screen and (max-width: 768px) {
-  #timer {
-    gap: 1.5rem;
-  }
   #timer div {
-    flex: 1 1 45%; /* 2 per row di HP landscape / tablet */
-    max-width: none;
-    padding: 1.5rem;
+    min-width: 70px;
+    padding: 1rem;
   }
   #timer span {
-    font-size: clamp(1.8rem, 8vw, 3rem);
+    font-size: clamp(1.2rem, 8vw, 2.5rem);
   }
 }
 
 @media screen and (max-width: 480px) {
   #timer div {
-    flex: 1 1 100%; /* 1 per row di HP portrait */
-    padding: 1.2rem;
+    min-width: 60px;
+    padding: 0.8rem 1rem;
   }
   #timer span {
-    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    font-size: clamp(1rem, 10vw, 2rem);
   }
 }
+
 
 
 /* EVENT */
