@@ -4,13 +4,21 @@ const cover = document.getElementById('cover');
 const main = document.getElementById('main-content');
 const bgMusic = document.getElementById('bgMusic');
 
+// Buka Undangan
 openBtn.addEventListener('click', () => {
+
+  // fade out
   cover.classList.add('fade-out');
 
+  // play music
+  bgMusic.play().catch(()=>{});
+
+  // tampilkan main-content setelah fade
   setTimeout(() => {
-    cover.style.display = 'none';     // tutup landing page
-    main.classList.add('show');       // munculin main content
-  }, 1000); // waktu fade-out (harus sama dgn CSS)
+    cover.style.display = 'none';
+    main.classList.add('show');
+    window.scrollTo({ top: 0 });
+  }, 1000);
 });
 
   // Play music
