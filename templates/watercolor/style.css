@@ -374,4 +374,14 @@ body, html {
 
 
 
+#rmrnPopup {
+    display: none;        /* jangan aktif di awal */
+    pointer-events: none; /* jangan menahan klik */
+}
+#rmrnPopup.show {
+    display: flex;        /* muncul saat script menambahkan class show */
+    pointer-events: auto;
+}
+
+
 
