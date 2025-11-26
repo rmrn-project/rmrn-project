@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arya & Marina • 14 Maret 2026</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Korea tipis + elegan -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Cherry blossom falling (CSS only) -->
+  <div class="sakura"></div>
+
+  <!-- Landing Page Korean Style -->
+  <section id="landing">
+    <div class="overlay"></div>
+    <div class="landing-content">
+      <p class="subtitle">The Wedding of</p>
+      <h1 class="title">Arya<br>&<br>Marina</h1>
+      <p class="date">14 • 03 • 2026</p>
+      <button id="openBtn">Buka Undangan</button>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section id="main" class="hidden">
+    <audio id="music" loop preload="auto">
+      <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-piano-wedding-108.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicBtn">Music Off</button>
+
+    <div class="container">
+
+      <!-- Hero -->
+      <div class="section hero">
+        <h1 class="main-title">Arya & Marina</h1>
+        <p class="desc">Dengan memohon rahmat Allah SWT,<br>kami mengundang Anda untuk merayakan<br>momen bahagia kami</p>
+        <p class="wedding-date">Sabtu, 14 Maret 2026</p>
+      </div>
+
+      <!-- Couple -->
+      <div class="section couple">
+        <div class="card">
+          <h3>Marina Putri</h3>
+          <p>Putri pertama dari<br>Bapak Santoso & Ibu Ratna</p>
+        </div>
+        <div class="ampersand">&</div>
+        <div class="card">
+          <h3>Arya Wijaya</h3>
+          <p>Putra kedua dari<br>Bapak Hartono & Ibu Siti</p>
+        </div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="section">
+        <h2 class="section-title">We're Getting Married In</h2>
+        <div id="timer"></div>
+      </div>
+
+      <!-- Gallery - Baby Breath Style -->
+      <div class="section gallery">
+        <h2 class="section-title">Our Moments</h2>
+        <div class="grid">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80" alt="">
+          <img src="https://images.unsplash.com/photo-1606216793596-5d9f7c2e50ea?w=800&q=80" alt="">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="">
+          <img src="https://images.unsplash.com/photo-1606800057589-07d52e2c1a4d?w=800&q=80" alt="">
+        </div>
+      </div>
+
+      <!-- RSVP -->
+      <div class="section rsvp">
+        <h2 class="section-title">Konfirmasi Kehadiran</h2>
+        <form id="rsvpForm">
+          <input type="text" placeholder="Nama Lengkap" required>
+          <select required><option value="" disabled selected>Kehadiran</option><option>Hadir</option><option>Tidak Hadir</option><option>Belum Pasti</option></select>
+          <input type="number" placeholder="Jumlah Tamu" min="1">
+          <textarea placeholder="Ucapan & doa restu" rows="3"></textarea>
+          <button type="submit">Kirim</button>
+        </form>
+        <p id="thanks" style="display:none">Terima kasih atas doa restunya ♡</p>
+      </div>
+
+      <!-- Closing Quote -->
+      <div class="section closing">
+        <p class="quote">“Cinta bukan saling menatap satu sama lain,<br>melainkan bersama-sama menatap ke arah yang sama.”</p>
+        <p class="author">— Antoine de Saint-Exupéry —</p>
+        <p class="sign">Arya & Marina</p>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
