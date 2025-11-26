@@ -82,42 +82,58 @@ body{position:relative;perspective:1000px}
 .particles span:nth-child(8){left:80%;animation-duration:13s;animation-delay:7s}
 .particles span:nth-child(9){left:90%;animation-duration:17s;animation-delay:8s}
 
-/* LANDING */
+/* LANDING PAGE FULLSCREEN RESPONSIVE FIXED */
 #landing {
   position: fixed;
   inset: 0;
   z-index: 100;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #000; /* full hitam */
+  background: #000;
+  height: min(100dvh, 100vh); /* paling aman untuk semua browser */
+  width: 100vw;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at center, #000 0%, #000 100%);
+  z-index: 1;
 }
 
 .landing-content {
   position: relative;
   z-index: 2;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
+/* Teks Landing */
 .landing-content h2 {
   font-family: 'Cinzel', serif;
   font-size: clamp(2rem, 6vw, 4rem);
   color: #d4af37;
   letter-spacing: 10px;
+  margin: 0;
 }
 
 .landing-content h1 {
   font-family: 'Cinzel', serif;
-  font-size: clamp(6rem, 15vw, 12rem);
+  font-size: clamp(5rem, 10vw, 10rem);
   color: #fff;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .landing-content h1 span {
@@ -125,21 +141,22 @@ body{position:relative;perspective:1000px}
 }
 
 .landing-content p {
-  font-size: clamp(2rem, 6vw, 4rem);
-  margin: 2rem 0;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  margin: 1rem 0 2rem;
   letter-spacing: 8px;
 }
 
+/* Tombol Buka Undangan */
 #openBtn {
-  padding: 20px 90px;
-  font-size: 2rem;
+  padding: clamp(12px, 2vw, 25px) clamp(50px, 8vw, 120px);
+  font-size: clamp(1.4rem, 2vw, 2rem);
   background: transparent;
   border: 3px solid #d4af37;
   color: #d4af37;
   border-radius: 60px;
   cursor: pointer;
   font-family: 'Cinzel', serif;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 #openBtn:hover {
@@ -147,6 +164,30 @@ body{position:relative;perspective:1000px}
   color: #000;
   transform: scale(1.1);
 }
+
+/* RESPONSIVE LAPTOP / TABLET */
+@media screen and (max-width: 1024px) {
+  .landing-content h1 { font-size: clamp(4rem, 12vw, 8rem); }
+  .landing-content h2 { font-size: clamp(1.8rem, 6vw, 3rem); }
+  .landing-content p { font-size: clamp(1.2rem, 4vw, 2.5rem); }
+  #openBtn { padding: clamp(10px, 3vw, 18px) clamp(30px, 8vw, 80px); font-size: clamp(1.2rem, 4vw, 1.6rem); }
+}
+
+/* RESPONSIVE MOBILE */
+@media screen and (max-width: 768px) {
+  .landing-content h1 { font-size: clamp(3rem, 12vw, 6rem); }
+  .landing-content h2 { font-size: clamp(1.5rem, 6vw, 3rem); }
+  .landing-content p { font-size: clamp(1.2rem, 4vw, 2rem); }
+  #openBtn { padding: clamp(10px, 3vw, 16px) clamp(25px, 8vw, 70px); font-size: clamp(1rem, 4vw, 1.5rem); }
+}
+
+/* RESPONSIVE HEIGHT VERY SMALL SCREEN */
+@media screen and (max-height: 600px) {
+  .landing-content { max-height: 85%; justify-content: flex-start; }
+}
+
+
+
 
 
 /* MAIN CONTENT */

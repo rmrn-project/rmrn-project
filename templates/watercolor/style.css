@@ -1,13 +1,8 @@
+/* RESET */
 * { margin:0; padding:0; box-sizing:border-box; }
-html, body { height:100%; overflow-x:hidden; }
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: #faf9f7;
-  color: #3c2f2f;
-  line-height: 1.8;
-}
+html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-serif; background: #faf9f7; color: #3c2f2f; line-height:1.8; }
 
-/* Watercolor Background */
+/* BACKGROUND */
 .watercolor-bg {
   position: fixed;
   inset: 0;
@@ -16,52 +11,90 @@ body {
   z-index: -2;
 }
 .watercolor-bg::after {
-  content:''; position:absolute; inset:0;
+  content: '';
+  position: absolute;
+  inset: 0;
   background: linear-gradient(to bottom, rgba(240,248,255,0.5), rgba(255,248,240,0.7));
 }
 
-/* Particle */
+/* PARTICLE CANVAS */
 #particle-canvas { position:fixed; inset:0; z-index:-1; pointer-events:none; }
 
-/* Cover */
+/* LANDING PAGE */
 #cover {
-  height:100vh; display:flex; align-items:center; justify-content:center;
-  text-align:center; color:white; position:relative; overflow:hidden;
+  position: fixed; inset:0; z-index:1000;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  background: #000; /* full black overlay */
+  overflow:hidden;
 }
 .cover-overlay {
   position:absolute; inset:0;
-  background: linear-gradient(135deg, rgba(59,130,166,0.88), rgba(255,182,157,0.82));
+  background: linear-gradient(135deg, rgba(59,130,166,0.95), rgba(255,182,157,0.95));
+  z-index:1;
 }
-.cover-content { z-index:2; padding:2rem; animation:fadeIn 2s ease-out; }
-.subtitle { font-family:'Dancing Script',cursive; font-size:clamp(1.8rem,5vw,3.5rem); opacity:0.9; }
-.title { font-family:'Playfair Display',serif; font-size:clamp(4.5rem,12vw,10rem); margin:1rem 0; }
+.cover-content {
+  position:relative; z-index:2; padding:2rem;
+  animation:fadeIn 2s ease-out;
+  max-width:90vw; /* responsive */
+}
+
+/* Subtitle & Title */
+.subtitle {
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(1.8rem,4vw,3.5rem);
+  opacity:0.9;
+}
+.title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(4rem,8vw,8rem); /* responsive */
+  margin:1rem 0;
+}
 .title span { font-size:70%; }
-.date { font-size:clamp(2rem,6vw,4.5rem); letter-spacing:12px; margin:2.5rem 0; font-weight:300; }
-.open-invite { font-size:clamp(1.1rem,4vw,1.8rem); margin:2.5rem 0 3.5rem; }
+
+.date {
+  font-size:clamp(1.8rem,4vw,3.5rem);
+  letter-spacing:8px; margin:2rem 0; font-weight:300;
+}
+
+/* Tombol Buka Undangan */
 .btn-open {
-  padding:18px 70px; font-size:1.4rem; font-weight:600;
-  background:rgba(255,255,255,0.3); border:3px solid white; border-radius:60px;
-  backdrop-filter:blur(10px); cursor:pointer; transition:0.4s;
+  padding:1rem 3rem;
+  font-size:clamp(1.2rem,2vw,1.6rem); /* responsive */
+  font-weight:600;
+  background:rgba(255,255,255,0.3);
+  border:3px solid white;
+  border-radius:60px;
+  backdrop-filter:blur(10px);
+  cursor:pointer;
+  transition:0.4s;
 }
-.btn-open:hover { background:white; color:#2c5f7e; transform:scale(1.08); }
-
-/* Wave */
-.wave-decoration {
-  position:absolute; bottom:0; left:0; right:0; height:220px;
-  background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L0,320Z"></path></svg>') bottom/cover no-repeat;
+.btn-open:hover {
+  background:white;
+  color:#2c5f7e;
+  transform:scale(1.08);
 }
 
-/* Main Content */
+/* FADE OUT ANIMATION */
+.fade-out { opacity:0; transition: opacity 1.2s ease-out; pointer-events:none; }
+
+/* Animasi masuk */
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(40px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* FADE OUT ANIMATION */
+.fade-out { opacity:0; transition: opacity 1.2s ease-out; pointer-events:none; }
+
+/* MAIN CONTENT */
 #main-content { position:relative; z-index:2; background:rgba(255,255,255,0.96); min-height:100vh; padding-bottom:6rem; }
 .hidden { display:none !important; }
 
-/* Section umum */
-.section, .hero {
-  max-width:1200px; margin:0 auto; padding:6rem 2rem; text-align:center;
-}
+/* SECTION UMUM */
+.section, .hero { max-width:1200px; margin:0 auto; padding:6rem 2rem; text-align:center; }
 h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); color:#2c5f7e; margin-bottom:2.5rem; }
 
-/* Hero */
+/* HERO */
 .hero {
   background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1506953823971-64d41b295a33?w=2000') center/cover;
   color:white; padding:10rem 2rem; text-shadow:0 3px 20px rgba(0,0,0,0.7);
@@ -71,53 +104,46 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); c
 .hero-text { font-size:clamp(1.1rem,3vw,1.6rem); margin:2rem 0; }
 .hero-date { font-size:clamp(1.6rem,5vw,2.8rem); letter-spacing:8px; }
 
-/* Couple */
+/* COUPLE */
 .couple { background:rgba(255,248,243,0.97); }
 .bride-groom { display:flex; align-items:center; justify-content:center; gap:5rem; flex-wrap:wrap; max-width:1000px; margin:0 auto; }
 .person h3 { font-family:'Dancing Script',cursive; font-size:clamp(3rem,8vw,5.5rem); color:#d47a6a; margin-bottom:1rem; }
 .person p { font-size:1.1rem; color:#555; }
 .ampersand { font-family:'Dancing Script',cursive; font-size:clamp(4rem,10vw,8rem); color:#7ab8d4; }
 
-/* Countdown */
+/* COUNTDOWN */
 #timer { display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; }
 #timer div { background:rgba(255,255,255,0.9); padding:1.8rem 2.2rem; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.12); min-width:130px; }
 #timer span { font-size:clamp(3.5rem,8vw,6rem); font-weight:bold; color:#2c5f7e; display:block; }
 #timer div:nth-child(4) { color:#d47a6a; }
 
-/* Event */
+/* EVENT */
 .event-card { background:white; padding:3rem 2rem; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.1); margin:2rem auto; max-width:600px; }
 .btn-location { display:inline-block; margin-top:2rem; padding:16px 50px; background:#7ab8d4; color:white; text-decoration:none; border-radius:50px; font-weight:600; transition:0.3s; }
 .btn-location:hover { background:#d47a6a; transform:scale(1.05); }
 
-/* Gallery */
+/* GALLERY */
 .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; max-width:1200px; margin:2rem auto; }
 .gallery-grid img { width:100%; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.15); transition:0.5s; }
 .gallery-grid img:hover { transform:translateY(-15px) scale(1.02); }
 
 /* RSVP */
 .rsvp form { max-width:600px; margin:3rem auto; display:flex; flex-direction:column; gap:1.2rem; }
-.rsvp input, .rsvp select, .rsvp textarea {
-  padding:18px; border-radius:15px; border:1px solid #ddd; font-family:inherit; font-size:1rem;
-}
-.rsvp button {
-  padding:18px; background:#7ab8d4; color:white; border:none; border-radius:15px; font-size:1.2rem; font-weight:600; cursor:pointer; transition:0.3s;
-}
+.rsvp input, .rsvp select, .rsvp textarea { padding:18px; border-radius:15px; border:1px solid #ddd; font-family:inherit; font-size:1rem; }
+.rsvp button { padding:18px; background:#7ab8d4; color:white; border:none; border-radius:15px; font-size:1.2rem; font-weight:600; cursor:pointer; transition:0.3s; }
 .rsvp button:hover { background:#d47a6a; }
 
-/* Closing */
+/* CLOSING */
 .quote { font-style:italic; font-size:1.3rem; color:#555; margin:2rem 0; }
 .verse { font-weight:bold; color:#2c5f7e; margin:1.5rem 0; }
 .sign { margin-top:3rem; font-size:1.2rem; }
 
-/* Music Button */
+/* MUSIC BUTTON */
 .music-btn {
   position:fixed; top:20px; right:20px; z-index:9999;
   background:rgba(255,255,255,0.95); padding:14px 20px; border-radius:50px;
   font-size:1.8rem; box-shadow:0 8px 30px rgba(0,0,0,0.2); cursor:pointer;
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(40px); }
-  to { opacity:1; transform:translateY(0); }
-}
+/* ANIMATION */
+@keyframes fadeIn { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
