@@ -14,6 +14,20 @@
 
 
     /* =============================
+       DETECT PAGE THEME (for fallback color)
+    ============================== */
+    function detectTheme() {
+        const bg = window.getComputedStyle(document.body).backgroundColor;
+        const rgb = bg.match(/\d+/g).map(Number);
+        const brightness = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+        return brightness > 150 ? "light" : "dark";
+    }
+
+    const pageTheme = detectTheme();
+    const fallbackColor = pageTheme === "light" ? "#000000" : "#ffffff";
+
+
+    /* =============================
        AUDIO SETUP
     ============================== */
     const audio = new Audio(config.musicSrc);
@@ -27,7 +41,7 @@
 
     const btn = document.createElement("div");
 
-    // Fallback style FIX 100% sesuai request
+    // Fallback style FIX sesuai request
     Object.assign(btn.style, {
         position: "fixed",
         width: config.size + "px",
@@ -44,8 +58,6 @@
         touchAction: "none",
         transform: "translateZ(0)",
         willChange: "transform, left, top",
-        fontSize: "28px",
-        color: "#d4af37",   // biar mirip gold wedding
     });
 
     const pad = config.padding + "px";
@@ -74,17 +86,54 @@
 
 
     /* =============================
-       FALLBACK ICON
+       FALLBACK ICONS (centered perfectly)
     ============================== */
 
     function showPlayFallback() {
-        btn.textContent = "▶";
-        icon.remove();
+        btn.innerHTML = `
+            <div style="
+                width:100%;
+                height:100%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+            ">
+                <div style="
+                    width:0;
+                    height:0;
+                    border-left:20px solid ${fallbackColor};
+                    border-top:14px solid transparent;
+                    border-bottom:14px solid transparent;
+                    transform:translateX(3px);
+                "></div>
+            </div>
+        `;
     }
 
     function showPauseFallback() {
-        btn.textContent = "⏸";
-        icon.remove();
+        btn.innerHTML = `
+            <div style="
+                width:100%;
+                height:100%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                gap:8px;
+            ">
+                <div style="
+                    width:8px;
+                    height:26px;
+                    background:${fallbackColor};
+                    border-radius:2px;
+                "></div>
+                <div style="
+                    width:8px;
+                    height:26px;
+                    background:${fallbackColor};
+                    border-radius:2px;
+                "></div>
+            </div>
+        `;
     }
 
 
@@ -109,8 +158,9 @@
         if (playOK && pauseOK) {
             useImageIcons = true;
             icon.src = config.imgPlay;
-            btn.textContent = "";
+            btn.innerHTML = "";
             btn.appendChild(icon);
+
         } else {
             useImageIcons = false;
             showPlayFallback();
@@ -120,35 +170,37 @@
 
 
     /* =============================
-       CLICK HANDLER (FIX: MUSIC PASTI PLAY)
+       CLICK HANDLER (musik pasti nyala)
     ============================== */
 
     btn.addEventListener("click", async () => {
 
         if (!isPlaying) {
+
             try {
-                await audio.play();      // ← musik HARUS nyala setelah klik
+                await audio.play();
                 isPlaying = true;
 
                 if (useImageIcons) {
                     icon.src = config.imgPause;
-                    btn.textContent = "";
+                    btn.innerHTML = "";
                     if (!btn.contains(icon)) btn.appendChild(icon);
                 } else {
                     showPauseFallback();
                 }
 
-            } catch (e) {
-                console.log("Audio nggak bisa play:", e);
+            } catch (err) {
+                console.log("Audio gagal play:", err);
             }
 
         } else {
+
             audio.pause();
             isPlaying = false;
 
             if (useImageIcons) {
                 icon.src = config.imgPlay;
-                btn.textContent = "";
+                btn.innerHTML = "";
                 if (!btn.contains(icon)) btn.appendChild(icon);
             } else {
                 showPlayFallback();
