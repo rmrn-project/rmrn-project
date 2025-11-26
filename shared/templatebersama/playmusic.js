@@ -14,7 +14,7 @@
 
 
     /* =============================
-       DETECT PAGE THEME (for fallback color)
+       DETECT PAGE THEME (black/white border)
     ============================== */
     function detectTheme() {
         const bg = window.getComputedStyle(document.body).backgroundColor;
@@ -24,7 +24,8 @@
     }
 
     const pageTheme = detectTheme();
-    const fallbackColor = pageTheme === "light" ? "#000000" : "#ffffff";
+    const fallbackColor = pageTheme === "light" ? "#000" : "#fff";
+    const fallbackBorder = pageTheme === "light" ? "#000" : "#fff";
 
 
     /* =============================
@@ -41,17 +42,21 @@
 
     const btn = document.createElement("div");
 
-    // Fallback style FIX sesuai request
+    // SOLID fallback style (no blur, no transparan)
     Object.assign(btn.style, {
         position: "fixed",
         width: config.size + "px",
         height: config.size + "px",
-        background: "rgba(255,255,255,0.2)",
-        backdropFilter: "blur(15px)",
+
+        // SOLID jelas
+        background: pageTheme === "light" ? "#ffffff" : "#222222",
+        border: `2px solid ${fallbackBorder}`,
+
         borderRadius: "50%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+
         zIndex: 2147483647,
         cursor: "grab",
         userSelect: "none",
@@ -73,7 +78,7 @@
 
 
     /* =============================
-       ICON ELEMENT
+       ICON ELEMENT (original)
     ============================== */
 
     const icon = new Image();
@@ -86,7 +91,7 @@
 
 
     /* =============================
-       FALLBACK ICONS (centered perfectly)
+       FALLBACK ICONS (centered)
     ============================== */
 
     function showPlayFallback() {
@@ -138,7 +143,7 @@
 
 
     /* =============================
-       IMAGE CHECK
+       IMAGE CHECK (original)
     ============================== */
 
     function checkImage(url) {
@@ -170,7 +175,7 @@
 
 
     /* =============================
-       CLICK HANDLER (musik pasti nyala)
+       CLICK HANDLER (original)
     ============================== */
 
     btn.addEventListener("click", async () => {
