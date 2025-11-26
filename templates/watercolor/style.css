@@ -285,12 +285,36 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); c
 .verse { font-weight:bold; color:#2c5f7e; margin:1.5rem 0; }
 .sign { margin-top:3rem; font-size:1.2rem; }
 
-/* MUSIC BUTTON */
+/* MUSIC BUTTON - updated */
 .music-btn {
-  position:fixed; top:20px; right:20px; z-index:9999;
-  background:rgba(255,255,255,0.95); padding:14px 20px; border-radius:50px;
-  font-size:1.8rem; box-shadow:0 8px 30px rgba(0,0,0,0.2); cursor:pointer;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.6); /* lebih transparan */
+  padding: 10px 16px; /* lebih kecil */
+  border-radius: 50px;
+  font-size: 1.4rem; /* lebih kecil */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
+
+.music-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* RESPONSIVE MOBILE */
+@media screen and (max-width: 768px) {
+  .music-btn {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 1.2rem;
+  }
+}
+
 
 /* ANIMATION */
 @keyframes fadeIn { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
