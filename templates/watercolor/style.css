@@ -86,6 +86,7 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
 
 /* Tombol Buka Undangan */
 .btn-open {
+  position: relative;
   padding: clamp(10px,2vw,18px) clamp(30px,6vw,70px);
   font-size: clamp(1rem, 4vw, 1.6rem); /* responsive */
   font-weight: 600;
