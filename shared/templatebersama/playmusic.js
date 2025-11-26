@@ -52,7 +52,7 @@
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: "9999999",
+        zIndex: 2147483647,
         cursor: "grab",
         userSelect: "none",
         touchAction: "none",
