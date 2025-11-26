@@ -100,15 +100,16 @@ html,body{
 }
 
 
-/* Gambar PNG paling atas di landing page */
-/* Gambar PNG fullscreen di landing page */
+/* LANDING IMAGE OVERLAY */
 #landing::before {
   content: '';
   position: absolute;
-  inset: 0; /* top:0; right:0; bottom:0; left:0 */
-  background: url('/background/cherry.png') center/cover no-repeat;
-  z-index: 1; /* di bawah .landing-content */
-  pointer-events: none; /* biar tombol tetap bisa diklik */
+  inset: 0;
+  background: url('/background/landing-top.png') center/contain no-repeat;
+  opacity: 0.25;            /* 👉 atur transparansi overlay */
+  mix-blend-mode: normal;   /* atau 'multiply' kalau mau lebih menyatu */
+  z-index: 1;               /* tetap di bawah teks */
+  pointer-events: none;
 }
 
 /* Responsive: tablet */
