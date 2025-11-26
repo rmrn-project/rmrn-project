@@ -208,10 +208,61 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); c
 .ampersand { font-family:'Dancing Script',cursive; font-size:clamp(4rem,10vw,8rem); color:#7ab8d4; }
 
 /* COUNTDOWN */
-#timer { display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; }
-#timer div { background:rgba(255,255,255,0.9); padding:1.8rem 2.2rem; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.12); min-width:130px; }
-#timer span { font-size:clamp(3.5rem,8vw,6rem); font-weight:bold; color:#2c5f7e; display:block; }
-#timer div:nth-child(4) { color:#d47a6a; }
+#timer {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap; /* biar bisa turun ke baris baru di HP */
+  align-items: center;
+}
+
+#timer div {
+  background: rgba(255,255,255,0.9);
+  padding: 1.8rem 2.2rem;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  min-width: 120px;
+  text-align: center; /* penting biar konten center */
+  flex: 1 1 120px;   /* responsive: bisa shrink & grow */
+  max-width: 150px;  /* batasi di desktop */
+}
+
+#timer span {
+  font-size: clamp(2rem, 6vw, 4.5rem); /* responsive font */
+  font-weight: bold;
+  color: #2c5f7e;
+  display: block;
+}
+
+#timer div:nth-child(4) {
+  color: #d47a6a;
+}
+
+/* MEDIA QUERY: Tablet & Mobile */
+@media screen and (max-width: 768px) {
+  #timer {
+    gap: 1.5rem;
+  }
+  #timer div {
+    flex: 1 1 45%; /* 2 per row di HP landscape / tablet */
+    max-width: none;
+    padding: 1.5rem;
+  }
+  #timer span {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #timer div {
+    flex: 1 1 100%; /* 1 per row di HP portrait */
+    padding: 1.2rem;
+  }
+  #timer span {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+  }
+}
+
 
 /* EVENT */
 .event-card { background:white; padding:3rem 2rem; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.1); margin:2rem auto; max-width:600px; }
