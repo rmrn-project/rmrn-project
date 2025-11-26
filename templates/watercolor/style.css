@@ -95,7 +95,7 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
   backdrop-filter: blur(10px);
   cursor: pointer;
   transition: 0.4s, transform 0.4s;
-  z-index: 100000;
+  z-index: 100001;
 }
 .btn-open:hover {
   background: white;
