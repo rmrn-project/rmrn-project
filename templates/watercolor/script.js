@@ -4,7 +4,6 @@
 const openBtn = document.getElementById('openBtn');
 const cover = document.getElementById('cover');
 const main = document.getElementById('main-content');
-const bgMusic = document.getElementById('bgMusic');
 
 // ===========================
 // BUKA LANDING PAGE
@@ -14,32 +13,13 @@ openBtn.addEventListener('click', () => {
   // Fade-out animasi
   cover.classList.add('fade-out');
 
-  // Musik play setelah user aksi (aman di mobile)
-  bgMusic.play().catch(() => {});
-
   // Setelah fade-out selesai
   setTimeout(() => {
-    cover.style.display = 'none';     // sembunyikan landing
-    main.classList.remove('hidden');  // pastikan tampil
-    main.classList.add('show');       // animasi muncul
-    window.scrollTo({ top: 0 });
-  }, 1000); // harus sama dengan durasi fade-out CSS
-
-});
-
-
-// ===========================
-// TOGGLE MUSIK
-// ===========================
-document.getElementById('musicToggle').addEventListener('click', function() {
-  const m = document.getElementById('bgMusic');
-  if (m.paused) { 
-    m.play(); 
-    this.textContent = "Musik On"; 
-  } else { 
-    m.pause(); 
-    this.textContent = "Musik Off"; 
-  }
+    cover.style.display = 'none';       // sembunyikan landing
+    main.classList.remove('hidden');    // pastikan tampil
+    main.classList.add('show');         // animasi muncul
+    window.scrollTo({ top: 0 });        // jaga scroll
+  }, 1000); // durasi fade-out CSS
 });
 
 
