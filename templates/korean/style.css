@@ -36,27 +36,53 @@ html,body{
 }
 
 /* LANDING PAGE */
+/* ================================
+   LANDING PAGE + IMAGE OVERLAY
+================================= */
+
+/* Block utama landing page */
+#landing {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fdfbfb;
+  transition: opacity 1s ease;
+  overflow: hidden; /* penting untuk jaga overlay tetap rapi */
+}
+
+/* Gambar PNG dari bawah, full width */
 #landing::before {
   content: '';
   position: absolute;
   inset: 0;
   background: url('/background/cherry.png') bottom center / cover no-repeat;
-  opacity: 0.28;        /* atur transparansi */
-  z-index: 1;           
+  opacity: 0.28;           /* transparansi gambar */
+  z-index: 1;              
   pointer-events: none;
 }
-.overlay{
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at center,rgba(255,255,255,0.3),#fdfbfb 80%);
+
+/* Overlay glow putih di atas gambar */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3), #fdfbfb 80%);
+  z-index: 1;
 }
-.landing-content{
-  position:relative;
-  z-index:2;
-  padding:2rem;
-  max-width:90vw;
+
+/* Konten tetap berada di paling atas */
+.landing-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 90vw;
 }
-.subtitle{
+
+/* Typography */
+.subtitle {
   font-family:'Playfair Display',serif;
   font-size:clamp(1.2rem,3vw,1.6rem);
   letter-spacing:6px;
@@ -64,21 +90,25 @@ html,body{
   margin-bottom:1.5rem;
   font-weight:400;
 }
-.title{
+
+.title {
   font-family:'Playfair Display',serif;
   font-size:clamp(4rem,12vw,9rem);
   line-height:1.1;
   color:#333;
   margin:1rem 0;
 }
-.date{
+
+.date {
   font-size:clamp(1.4rem,4vw,2rem);
   letter-spacing:8px;
   color:#b08d8d;
   margin:2rem 0;
   font-weight:300;
 }
-#openBtn{
+
+/* Button Open */
+#openBtn {
   padding:14px 60px;
   background:transparent;
   border:1.5px solid #d4a5a5;
@@ -91,38 +121,27 @@ html,body{
   font-family:'Noto Sans KR',sans-serif;
   font-weight:300;
 }
-#openBtn:hover{
+
+#openBtn:hover {
   background:#d4a5a5;
   color:#fff;
   transform:scale(1.05);
 }
 
-
-/* LANDING IMAGE OVERLAY */
-#landing::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('/background/landing-top.png') center/contain no-repeat;
-  opacity: 0.25;            /* 👉 atur transparansi overlay */
-  mix-blend-mode: normal;   /* atau 'multiply' kalau mau lebih menyatu */
-  z-index: 1;               /* tetap di bawah teks */
-  pointer-events: none;
-}
-
-/* Responsive: tablet */
-@media screen and (max-width: 1024px) {
+/* ================================
+   RESPONSIVE GAMBAR LANDING
+================================= */
+@media (max-width: 1024px) {
   #landing::before {
-    max-width: 450px;
-    aspect-ratio: 3/1;
+    background-size: cover;
+    opacity: 0.22; /* sedikit lebih soft */
   }
 }
 
-/* Responsive: HP */
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
   #landing::before {
-    max-width: 300px;
-    aspect-ratio: 3/1;
+    background-size: cover;
+    opacity: 0.20;
   }
 }
 
