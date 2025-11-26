@@ -60,7 +60,7 @@ html,body{
   position: absolute;
   inset: 0;
   background: url('/background/cherry.png') bottom center / cover no-repeat;
-  opacity: 0.28;           /* transparansi gambar */
+  opacity: 0.55;           /* transparansi gambar */
   z-index: 1;              
   pointer-events: none;
 }
