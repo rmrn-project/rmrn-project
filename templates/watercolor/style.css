@@ -336,3 +336,40 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.2rem); c
 
 /* ANIMATION */
 @keyframes fadeIn { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+
+
+
+
+
+/* ============================================ */
+/* OVERRIDE POPUP SHARED UNTUK TEMA INI       */
+/* ============================================ */
+
+/* Pastikan popup selalu fullscreen & di tengah */
+#rmrnPopup {
+    position: fixed !important;     /* tetap relatif ke viewport */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 99999 !important;
+    pointer-events: auto !important; /* supaya bisa klik */
+}
+
+/* Konten popup animasi tetap jalan */
+#rmrnPopup .popup-content {
+    transform: translateY(0) !important; /* jangan ikut transform parent */
+    opacity: 1 !important;               /* muncul normal */
+}
+
+/* Override overflow parent yang “mengunci” scroll */
+body, html {
+    overflow: auto !important;
+}
+
+
+
+
