@@ -60,6 +60,12 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
   box-sizing: border-box;
 }
 
+#cover {
+  background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35)), 
+              url('/background/watercolor.png') center/cover no-repeat;
+}
+
+
 /* Subtitle & Title */
 .subtitle {
   font-family: 'Dancing Script', cursive;
