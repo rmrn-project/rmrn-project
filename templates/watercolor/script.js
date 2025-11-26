@@ -7,6 +7,12 @@ const bgMusic = document.getElementById('bgMusic');
 openBtn.addEventListener('click', () => {
   cover.classList.add('fade-out');
 
+  setTimeout(() => {
+    cover.style.display = 'none';     // tutup landing page
+    main.classList.add('show');       // munculin main content
+  }, 1000); // waktu fade-out (harus sama dgn CSS)
+});
+
   // Play music
   bgMusic.play().catch(()=>{});
 
