@@ -1,46 +1,39 @@
-(function() {
+(function () {
 
     /* =============================
-       CONFIGURASI YANG BISA DIUBAH
+       CONFIG
     ============================== */
 
     const config = {
-        position: "bottom-right", 
-        // pilihan: top-left, top-right, bottom-left, bottom-right
-
+        position: "bottom-right",
         imgPlay: "icons/play.png",
         imgPause: "icons/pause.png",
-
         size: 55,
         musicSrc: "music/thousandyears.mp3",
-
-        fallbackColor: "#ffffff",
         fallbackOpacity: 0.85,
-        borderRadius: "50%",
         padding: 14
     };
 
 
     /* =============================
-       DETEKSI KONTRAS WARNA
+       CONTRAST AUTO DETECT
     ============================== */
 
-    function getPageBg() {
+    function getBodyBg() {
         const bg = window.getComputedStyle(document.body).backgroundColor;
-        if (!bg || bg === "rgba(0, 0, 0, 0)") return "#ffffff";
-        return bg;
+        return bg || "rgb(255,255,255)";
     }
 
-    function getContrastedColor(color) {
-        const rgb = color.match(/\d+/g);
-        const r = parseInt(rgb[0]), g = parseInt(rgb[1]), b = parseInt(rgb[2]);
+    function getContrast(color) {
+        const rgb = color.match(/\d+/g).map(Number);
+        const [r, g, b] = rgb;
         const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
         return luminance > 0.5 ? "#000000" : "#ffffff";
     }
 
 
     /* =============================
-       BUAT AUDIO ELEMENT
+       AUDIO ELEMENT (AUTO)
     ============================== */
 
     const audio = new Audio(config.musicSrc);
@@ -48,28 +41,26 @@
 
 
     /* =============================
-       RENDER TOMBOL PLAY
+       BUTTON CONTAINER
     ============================== */
 
     const btn = document.createElement("button");
-    btn.id = "floatingPlayButton";
-
     btn.style.position = "fixed";
     btn.style.width = config.size + "px";
     btn.style.height = config.size + "px";
     btn.style.border = "none";
-    btn.style.borderRadius = config.borderRadius;
-    btn.style.cursor = "pointer";
-    btn.style.zIndex = "999999";
+    btn.style.borderRadius = "50%";
     btn.style.display = "flex";
     btn.style.alignItems = "center";
     btn.style.justifyContent = "center";
     btn.style.background = "transparent";
+    btn.style.cursor = "pointer";
+    btn.style.zIndex = "999999";
     btn.style.padding = "0";
 
     const pad = config.padding + "px";
 
-    switch(config.position) {
+    switch (config.position) {
         case "top-left": btn.style.top = pad; btn.style.left = pad; break;
         case "top-right": btn.style.top = pad; btn.style.right = pad; break;
         case "bottom-left": btn.style.bottom = pad; btn.style.left = pad; break;
@@ -77,57 +68,84 @@
         case "bottom-right": btn.style.bottom = pad; btn.style.right = pad; break;
     }
 
-
-    /* =============================
-       GAMBAR IKON
-    ============================== */
-    let currentState = "pause"; // default: sebelum play = tombol play
-
-    const img = new Image();
-    img.src = config.imgPlay;  
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "contain";
-
-    img.onerror = function() {
-        const bg = getPageBg();
-        const contrast = getContrastedColor(bg);
-
-        btn.style.background = contrast;
-        btn.style.opacity = config.fallbackOpacity;
-        btn.textContent = "▶";
-        btn.style.color = bg;
-    };
-
-    btn.appendChild(img);
     document.body.appendChild(btn);
 
 
     /* =============================
-       FUNGSI GANTI IKON
+       IMAGE ICON
     ============================== */
-    function updateIcon() {
-        if (currentState === "play") {
-            img.src = config.imgPause;
-        } else {
-            img.src = config.imgPlay;
-        }
+
+    const icon = new Image();
+    icon.style.width = "80%";
+    icon.style.height = "80%";
+    icon.style.objectFit = "contain";
+
+    let iconLoaded = false;
+
+    function checkImage(url, callback) {
+        const imgTest = new Image();
+        imgTest.onload = () => callback(true);
+        imgTest.onerror = () => callback(false);
+        imgTest.src = url;
+    }
+
+    function useFallbackStyle() {
+        const bg = getBodyBg();
+        const contrast = getContrast(bg);
+
+        btn.textContent = "▶";      // fallback icon
+        btn.style.background = contrast;
+        btn.style.opacity = config.fallbackOpacity;
+        btn.style.color = bg;
+        iconLoaded = false;
+    }
+
+    function useImagePlay() {
+        icon.src = config.imgPlay;
+        btn.textContent = "";
+        btn.appendChild(icon);
+        iconLoaded = true;
+    }
+
+    function useImagePause() {
+        icon.src = config.imgPause;
     }
 
 
     /* =============================
-       EVENT KLIK (PLAY/PAUSE)
+       INITIAL CHECK (PLAY ICON)
     ============================== */
 
-    btn.addEventListener("click", function() {
-        if (audio.paused) {
+    checkImage(config.imgPlay, (exists) => {
+        if (exists) {
+            useImagePlay();
+        } else {
+            useFallbackStyle();
+        }
+    });
+
+
+    /* =============================
+       CLICK LOGIC
+    ============================== */
+
+    let isPlaying = false;
+
+    btn.addEventListener("click", () => {
+        if (!isPlaying) {
             audio.play();
-            currentState = "play";
+            isPlaying = true;
+
+            if (iconLoaded) useImagePause();
+            else btn.textContent = "⏸";  // fallback pause
+
         } else {
             audio.pause();
-            currentState = "pause";
+            isPlaying = false;
+
+            if (iconLoaded) useImagePlay();
+            else btn.textContent = "▶"; // fallback play
         }
-        updateIcon();
     });
 
 })();
