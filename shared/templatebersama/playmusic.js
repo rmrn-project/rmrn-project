@@ -3,32 +3,31 @@
     /* =============================
        CONFIG
     ============================== */
-
     const config = {
-        position: "bottom-right",   // top-left, top-right, bottom-left, bottom-right
-        imgPlay: "icons/play.png",
-        imgPause: "icons/pause.png",
+        position: "bottom-right",         // top-left, top-right, bottom-left, bottom-right
+        imgPlay: "/icons/play.png",
+        imgPause: "/icons/pause.png",
         size: 60,
         padding: 25,
-        musicSrc: "/music/thousandyears.mp3"
+        musicSrc: "/music/thousandyears.mp3",
     };
 
 
     /* =============================
-       AUDIO ELEMENT
+       AUDIO SETUP
     ============================== */
     const audio = new Audio(config.musicSrc);
     audio.loop = true;
+    audio.preload = "auto";
 
 
     /* =============================
-       CREATE BUTTON
+       CREATE BUTTON CONTAINER
     ============================== */
 
     const btn = document.createElement("div");
-    btn.id = "musicBtn-auto";
 
-    // Default button style (will also be fallback if images fail)
+    // Fallback style FIX 100% sesuai request
     Object.assign(btn.style, {
         position: "fixed",
         width: config.size + "px",
@@ -45,6 +44,8 @@
         touchAction: "none",
         transform: "translateZ(0)",
         willChange: "transform, left, top",
+        fontSize: "28px",
+        color: "#d4af37",   // biar mirip gold wedding
     });
 
     const pad = config.padding + "px";
@@ -60,7 +61,7 @@
 
 
     /* =============================
-       ICON (IMAGE OR FALLBACK)
+       ICON ELEMENT
     ============================== */
 
     const icon = new Image();
@@ -71,32 +72,24 @@
     let useImageIcons = false;
     let isPlaying = false;
 
-    function switchToPlayImg() {
-        icon.src = config.imgPlay;
-        btn.textContent = "";
-        if (!btn.contains(icon)) btn.appendChild(icon);
-    }
 
-    function switchToPauseImg() {
-        icon.src = config.imgPause;
-        if (!btn.contains(icon)) btn.appendChild(icon);
-    }
+    /* =============================
+       FALLBACK ICON
+    ============================== */
 
-    function switchToPlayFallback() {
+    function showPlayFallback() {
         btn.textContent = "▶";
-        btn.style.fontSize = "26px";
         icon.remove();
     }
 
-    function switchToPauseFallback() {
+    function showPauseFallback() {
         btn.textContent = "⏸";
-        btn.style.fontSize = "26px";
         icon.remove();
     }
 
 
     /* =============================
-       CHECK IMAGE EXISTENCE
+       IMAGE CHECK
     ============================== */
 
     function checkImage(url) {
@@ -112,35 +105,56 @@
         checkImage(config.imgPlay),
         checkImage(config.imgPause)
     ]).then(([playOK, pauseOK]) => {
+
         if (playOK && pauseOK) {
             useImageIcons = true;
-            switchToPlayImg();
+            icon.src = config.imgPlay;
+            btn.textContent = "";
+            btn.appendChild(icon);
         } else {
             useImageIcons = false;
-            switchToPlayFallback();
+            showPlayFallback();
         }
+
     });
 
 
     /* =============================
-       CLICK TOGGLE
+       CLICK HANDLER (FIX: MUSIC PASTI PLAY)
     ============================== */
 
-    btn.addEventListener("click", () => {
-        if (!isPlaying) {
-            audio.play();
-            isPlaying = true;
+    btn.addEventListener("click", async () => {
 
-            if (useImageIcons) switchToPauseImg();
-            else switchToPauseFallback();
+        if (!isPlaying) {
+            try {
+                await audio.play();      // ← musik HARUS nyala setelah klik
+                isPlaying = true;
+
+                if (useImageIcons) {
+                    icon.src = config.imgPause;
+                    btn.textContent = "";
+                    if (!btn.contains(icon)) btn.appendChild(icon);
+                } else {
+                    showPauseFallback();
+                }
+
+            } catch (e) {
+                console.log("Audio nggak bisa play:", e);
+            }
 
         } else {
             audio.pause();
             isPlaying = false;
 
-            if (useImageIcons) switchToPlayImg();
-            else switchToPlayFallback();
+            if (useImageIcons) {
+                icon.src = config.imgPlay;
+                btn.textContent = "";
+                if (!btn.contains(icon)) btn.appendChild(icon);
+            } else {
+                showPlayFallback();
+            }
         }
+
     });
 
 })();
