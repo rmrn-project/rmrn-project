@@ -1,38 +1,36 @@
 // Ambil elemen
-const openBtn = document.getElementById('openBtn'); // pastikan id sesuai tombol
+const openBtn = document.getElementById('openBtn'); 
 const cover = document.getElementById('cover');
 const main = document.getElementById('main-content');
 const bgMusic = document.getElementById('bgMusic');
 
 openBtn.addEventListener('click', () => {
-  // Tambahkan class fade-out ke cover
   cover.classList.add('fade-out');
 
-  // Jalankan music
+  // Play music
   bgMusic.play().catch(()=>{});
 
-  // Delay supaya fade-out kelihatan smooth sebelum hidden
+  // Delay fade-out
   setTimeout(() => {
-    cover.classList.add('hidden'); // sembunyikan sepenuhnya
-    main.classList.remove('hidden'); // tampilkan main content
-    main.classList.add('show');      //
- animasi muncul
+    cover.classList.add('hidden');
+    main.classList.remove('hidden');
 
-window.scrollTo({ top: 0, behavior: 'smooth' });
+    // animasi muncul
+    main.classList.add('show');
 
-  }, 1000); // 1 detik sesuai durasi fade-out
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  }, 1000);
 });
 
-
-
-// Toggle musik
+// Toggle Musik
 document.getElementById('musicToggle').addEventListener('click', function() {
   const m = document.getElementById('bgMusic');
   if (m.paused) { m.play(); this.textContent = "Musik On"; }
   else { m.pause(); this.textContent = "Musik Off"; }
 });
 
-// Countdown 14 Maret 2026
+// Countdown
 const weddingDate = new Date("2026-03-14T00:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
@@ -63,11 +61,12 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e) {
   }, 7000);
 });
 
-// Particle Watercolor + Flower
+// Particle Animation
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -94,7 +93,7 @@ class Particle {
   draw() {
     ctx.fillStyle = this.color + '99';
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
     ctx.fill();
   }
 }
