@@ -18,8 +18,13 @@ function loadTemplateScripts() {
   ];
 
   scripts.forEach(src => {
+
+    // Cegah duplikat script
+    if (document.querySelector(`script[src="${src}"]`)) return;
+
     const s = document.createElement("script");
     s.src = src;
+    s.defer = true;               // tambahan aman
     document.body.appendChild(s);
   });
 }
@@ -30,22 +35,21 @@ function loadTemplateScripts() {
 // ===========================
 openBtn.addEventListener('click', () => {
 
-  // Fade-out animasi
+  // Animasi fade-out
   cover.classList.add('fade-out');
 
-  // Setelah fade-out selesai
+  // Setelah animasi selesai
   setTimeout(() => {
-    cover.style.display = 'none';        // sembunyikan landing
-    main.classList.remove('hidden');     // munculkan main content
-    main.classList.add('show');          // animasi masuk
-    window.scrollTo({ top: 0 });         // jaga scroll tetap atas
+    cover.style.display = 'none';      // sembunyikan landing
+    main.classList.remove('hidden');   // tampilkan konten
+    main.classList.add('show');        // animasi masuk
+    window.scrollTo({ top: 0 });       // pastikan di atas
 
-    // 🔥 Load semua script template setelah cover hilang
+    // 🔥 Load script template setelah landing hilang
     loadTemplateScripts();
 
-  }, 1000); // durasi fade-out CSS
+  }, 1000); // waktu fade-out
 });
-
 
 // ===========================
 // COUNTDOWN
