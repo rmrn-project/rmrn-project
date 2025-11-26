@@ -5,6 +5,26 @@ const openBtn = document.getElementById('openBtn');
 const cover = document.getElementById('cover');
 const main = document.getElementById('main-content');
 
+
+// ===========================
+// FUNGSI LOAD SCRIPT TEMPLATE
+// ===========================
+function loadTemplateScripts() {
+  const scripts = [
+    "/shared/templatebersama/popup.js",
+    "/shared/templatebersama/footer.js",
+    "/shared/templatebersama/sharebutton.js",
+    "/shared/templatebersama/playmusic.js"
+  ];
+
+  scripts.forEach(src => {
+    const s = document.createElement("script");
+    s.src = src;
+    document.body.appendChild(s);
+  });
+}
+
+
 // ===========================
 // BUKA LANDING PAGE
 // ===========================
@@ -15,10 +35,14 @@ openBtn.addEventListener('click', () => {
 
   // Setelah fade-out selesai
   setTimeout(() => {
-    cover.style.display = 'none';       // sembunyikan landing
-    main.classList.remove('hidden');    // pastikan tampil
-    main.classList.add('show');         // animasi muncul
-    window.scrollTo({ top: 0 });        // jaga scroll
+    cover.style.display = 'none';        // sembunyikan landing
+    main.classList.remove('hidden');     // munculkan main content
+    main.classList.add('show');          // animasi masuk
+    window.scrollTo({ top: 0 });         // jaga scroll tetap atas
+
+    // 🔥 Load semua script template setelah cover hilang
+    loadTemplateScripts();
+
   }, 1000); // durasi fade-out CSS
 });
 
