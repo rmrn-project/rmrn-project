@@ -1,9 +1,25 @@
-// Buka undangan
-document.getElementById('openBtn').addEventListener('click', () => {
-  document.getElementById('cover').classList.add('hidden');
-  document.getElementById('main-content').classList.remove('hidden');
-  document.getElementById('bgMusic').play().catch(()=>{}); // auto play
+// Ambil elemen
+const openBtn = document.getElementById('openBtn'); // pastikan id sesuai tombol
+const cover = document.getElementById('cover');
+const main = document.getElementById('main-content');
+const bgMusic = document.getElementById('bgMusic');
+
+openBtn.addEventListener('click', () => {
+  // Tambahkan class fade-out ke cover
+  cover.classList.add('fade-out');
+
+  // Jalankan music
+  bgMusic.play().catch(()=>{});
+
+  // Delay supaya fade-out kelihatan smooth sebelum hidden
+  setTimeout(() => {
+    cover.classList.add('hidden'); // sembunyikan sepenuhnya
+    main.classList.remove('hidden'); // tampilkan main content
+    main.classList.add('show');      // animasi muncul
+  }, 1000); // 1 detik sesuai durasi fade-out
 });
+
+
 
 // Toggle musik
 document.getElementById('musicToggle').addEventListener('click', function() {

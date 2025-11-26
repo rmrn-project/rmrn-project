@@ -20,71 +20,167 @@ html, body { height:100%; overflow-x:hidden; font-family: 'Montserrat', sans-ser
 /* PARTICLE CANVAS */
 #particle-canvas { position:fixed; inset:0; z-index:-1; pointer-events:none; }
 
-/* LANDING PAGE */
+/* LANDING PAGE FULLSCREEN RESPONSIVE */
 #cover {
-  position: fixed; inset:0; z-index:1000;
-  display:flex; align-items:center; justify-content:center; text-align:center;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   background: #000; /* full black overlay */
-  overflow:hidden;
+  overflow: hidden;
+  height: min(100dvh, 100vh); /* aman di desktop + mobile */
+  width: 100vw;
+  padding: 2rem;
+  box-sizing: border-box;
 }
+
 .cover-overlay {
-  position:absolute; inset:0;
+  position: absolute;
+  inset: 0;
   background: linear-gradient(135deg, rgba(59,130,166,0.95), rgba(255,182,157,0.95));
-  z-index:1;
+  z-index: 1;
 }
+
 .cover-content {
-  position:relative; z-index:2; padding:2rem;
-  animation:fadeIn 2s ease-out;
-  max-width:90vw; /* responsive */
+  position: relative;
+  z-index: 2;
+  padding: 1rem;
+  max-width: 90vw;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  animation: fadeIn 2s ease-out;
+  box-sizing: border-box;
 }
 
 /* Subtitle & Title */
 .subtitle {
-  font-family:'Dancing Script',cursive;
-  font-size:clamp(1.8rem,4vw,3.5rem);
-  opacity:0.9;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.5rem, 4vw, 3rem); /* sedikit lebih kecil buat mobile */
+  opacity: 0.9;
+  margin:0;
 }
 .title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(4rem,8vw,8rem); /* responsive */
-  margin:1rem 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 6rem); /* responsive untuk mobile */
+  margin: 0.5rem 0;
 }
 .title span { font-size:70%; }
 
 .date {
-  font-size:clamp(1.8rem,4vw,3.5rem);
-  letter-spacing:8px; margin:2rem 0; font-weight:300;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  letter-spacing: 8px;
+  margin: 1.5rem 0;
+  font-weight: 300;
 }
 
 /* Tombol Buka Undangan */
 .btn-open {
-  padding:1rem 3rem;
-  font-size:clamp(1.2rem,2vw,1.6rem); /* responsive */
-  font-weight:600;
-  background:rgba(255,255,255,0.3);
-  border:3px solid white;
-  border-radius:60px;
-  backdrop-filter:blur(10px);
-  cursor:pointer;
-  transition:0.4s;
+  padding: clamp(10px,2vw,18px) clamp(30px,6vw,70px);
+  font-size: clamp(1rem, 4vw, 1.6rem); /* responsive */
+  font-weight: 600;
+  background: rgba(255,255,255,0.3);
+  border: 3px solid white;
+  border-radius: 60px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: 0.4s, transform 0.4s;
 }
 .btn-open:hover {
-  background:white;
-  color:#2c5f7e;
-  transform:scale(1.08);
+  background: white;
+  color: #2c5f7e;
+  transform: scale(1.08);
 }
 
-/* FADE OUT ANIMATION */
-.fade-out { opacity:0; transition: opacity 1.2s ease-out; pointer-events:none; }
-
-/* Animasi masuk */
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(40px); }
-  to { opacity:1; transform:translateY(0); }
+/* Animasi masuk lebih smooth dengan blur */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(8px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-5px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
-/* FADE OUT ANIMATION */
-.fade-out { opacity:0; transition: opacity 1.2s ease-out; pointer-events:none; }
+/* Gunakan animasi pada cover-content */
+.cover-content {
+  animation: fadeSlideIn 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 90vw;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Fade out smooth + blur saat buka undangan */
+.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(6px);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out, filter 1s ease-in-out;
+  pointer-events: none;
+}
+
+/* RESPONSIVE TABLET & MOBILE */
+@media screen and (max-width: 1024px) {
+  .title { font-size: clamp(3.5rem, 10vw, 5.5rem); }
+  .subtitle { font-size: clamp(1.4rem,4vw,2.5rem); }
+  .date { font-size: clamp(1.2rem,4vw,2.5rem); }
+  .btn-open { padding: clamp(8px,2.5vw,16px) clamp(25px,6vw,60px); font-size: clamp(1rem,4vw,1.4rem); }
+}
+
+@media screen and (max-width: 768px) {
+  .title { font-size: clamp(2.5rem, 12vw, 4.5rem); }
+  .subtitle { font-size: clamp(1.2rem,4vw,2rem); }
+  .date { font-size: clamp(1rem,4vw,2rem); }
+  .btn-open { padding: clamp(6px,3vw,14px) clamp(20px,6vw,50px); font-size: clamp(0.9rem,4vw,1.2rem); }
+}
+
+@media screen and (max-height: 600px) {
+  .cover-content { max-height: 85%; justify-content:flex-start; }
+}
+
+/* Overlay landing fade + blur saat buka undangan */
+#cover.fade-out {
+  opacity: 0;
+  transform: scale(1.02); /* zoom-in sedikit */
+  filter: blur(6px);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out, filter 1s ease-in-out;
+}
+
+/* Main content muncul smooth */
+#main {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+#main.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
 
 /* MAIN CONTENT */
 #main-content { position:relative; z-index:2; background:rgba(255,255,255,0.96); min-height:100vh; padding-bottom:6rem; }
