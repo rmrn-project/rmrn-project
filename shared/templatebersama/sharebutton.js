@@ -61,17 +61,16 @@ shareContainer.querySelector('.share-copy').addEventListener('click', () => {
   navigator.clipboard.writeText(window.location.href).then(() => alert('Link berhasil disalin!'));  
 });  
 
-// Tutup popup kalau klik di luar  
-document.addEventListener('click', (e) => {  
-  if (!shareContainer.contains(e.target)) {  
-    shareContainer.classList.remove('show');  
-  }  
-});  
-
 // ==== Fungsi toggle share popup ====  
 window.shareFunction = function() {  
-    // toggle bisa dipanggil berulang dari bar.js  
     shareContainer.classList.toggle('show');  
 };
+
+// ==== Tutup popup kalau klik di luar (tanpa bentrok tombol) ====
+document.addEventListener('click', (e) => {  
+    if (!shareContainer.contains(e.target) && !e.target.closest('#topBar button')) {  
+        shareContainer.classList.remove('show');  
+    }  
+});
 
 })();
