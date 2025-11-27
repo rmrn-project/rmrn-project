@@ -3,7 +3,7 @@
     // ==== Buat tombol auto scroll ====
     const btnAuto = document.createElement('button');
     btnAuto.id = 'btnAutoScroll';
-    btnAuto.innerHTML = `<img src="autosroll.png" alt="Auto Scroll" />`;
+    btnAuto.innerHTML = `<img src="/image/autosroll.png" alt="Auto Scroll" />`;
     document.body.appendChild(btnAuto);
 
     // ==== Tambahkan style ====
