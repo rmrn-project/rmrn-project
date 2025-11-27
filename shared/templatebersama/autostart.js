@@ -36,35 +36,42 @@
     `;
     btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" alt="Auto Scroll" style="width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 0 4px white);">`;
 
-    // ====== Start Auto Scroll ======
+    // =======================================================
+    //                 START AUTO SCROLL (FIX)
+    // =======================================================
     function startAutoScroll() {
         if (isScrolling) return;
 
-        // FIX: hilangkan batas panjang halaman → auto-scroll selalu bisa start
-        // if (!shouldShowButton()) return;
-
         isScrolling = true;
+        userStopped = false;
         btnAuto.style.opacity = "0.4";
         btnAuto.style.transform = "scale(0.9)";
 
         autoScroll = setInterval(() => {
-            const main = document.getElementById("main");
-if (main) main.scrollBy(0, 2);
 
-            // Stop otomatis di bawah halaman
-            if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 50) {
-                stopAutoScroll();
-                if (!userStopped) {
-                    // auto-restart setelah delay 1 detik
-                    setTimeout(() => {
-                        if (!userStopped) startAutoScroll();
-                    }, 1000);
+            // ambil ulang elemen main tiap tick
+            const main = document.getElementById("main");
+
+            if (main) {
+                main.scrollTop += 2; // <<< GERAK UTAMA
+
+                // Stop otomatis jika sudah mentok
+                if (main.scrollTop + main.clientHeight >= main.scrollHeight - 10) {
+                    stopAutoScroll();
+                    if (!userStopped) {
+                        setTimeout(() => {
+                            if (!userStopped) startAutoScroll();
+                        }, 1000);
+                    }
                 }
             }
+
         }, 16);
     }
 
-    // ====== Stop Auto Scroll ======
+    // =======================================================
+    //                     STOP AUTO SCROLL
+    // =======================================================
     function stopAutoScroll() {
         if (!isScrolling) return;
         clearInterval(autoScroll);
@@ -74,20 +81,24 @@ if (main) main.scrollBy(0, 2);
         btnAuto.style.transform = "scale(1)";
     }
 
-    // ====== Toggle tombol ======
+    // =======================================================
+    //                    BUTTON TOGGLE
+    // =======================================================
     btnAuto.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
+
         if (isScrolling) {
             stopAutoScroll();
             userStopped = true;
         } else {
-            userStopped = false;
             startAutoScroll();
         }
     });
 
-    // ====== Stop jika user interaksi ======
+    // =======================================================
+    //                  STOP SAAT USER INTERAKSI
+    // =======================================================
     const stopEvents = ["wheel", "touchstart", "keydown", "mousedown"];
     stopEvents.forEach(ev => {
         document.addEventListener(ev, () => {
@@ -96,24 +107,25 @@ if (main) main.scrollBy(0, 2);
         }, { passive: true });
     });
 
-    // ============================
-    //     TRIGGER DARI openBtn
-    // ============================
+    // =======================================================
+    //                TRIGGER DARI tombol openBtn
+    // =======================================================
     function attachTriggerToOpenBtn() {
         const openBtn = document.getElementById("openBtn");
         if (!openBtn) return;
 
         openBtn.addEventListener("click", () => {
-            // tombol muncul setelah user buka undangan
             setTimeout(() => {
                 if (!document.body.contains(btnAuto)) {
                     document.body.appendChild(btnAuto);
                 }
-            }, 300); // FIX: lebih cepat (dari 2000 → 300ms)
+            }, 300);
         });
     }
 
-    // ====== Jalankan saat DOM siap ======
+    // =======================================================
+    //                 DOM READY CHECK
+    // =======================================================
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", attachTriggerToOpenBtn);
     } else {
