@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ======= Definisi tombol =======
     const buttons = [
-        { src: "/shared/templatebersama/popup.js", label: "", funcName: "showPopup", icon: "/shared/icons/fitur.png" },
-        { src: "/shared/templatebersama/sharebutton.js", label: "", funcName: "shareFunction", icon: "/shared/icons/share.png" },
+        { src: "/shared/templatebersama/popup.js", label: "", funcName: "showPopup", icon: "/image/fitur.png" },
+        { src: "/shared/templatebersama/sharebutton.js", label: "", funcName: "shareFunction", icon: "/image/share.png" },
         // Tambahkan ikon baru di sini nanti cukup tambah object baru
         // { src: "...", label: "...", funcName: "...", icon: "..." }
     ];
