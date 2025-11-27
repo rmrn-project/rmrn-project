@@ -1,81 +1,120 @@
-// ================= AUTOSCROLL FIX 2025 =================
-(function() {
+// ================= AUTOSCROLL MODULAR V3 =================
+(function () {
+    // Cegah load berkali-kali
+    if (window.autoScrollInjected) return;
+    window.autoScrollInjected = true;
+
     let autoScroll = null;
     let isScrolling = false;
-    let btnAuto = null;
+    let userStopped = false; // flag user stop manual
 
-    const scrollEl = () => document.scrollingElement || document.documentElement || document.body;
-
-    function startAutoScroll() {
-        if (isScrolling) return;
-        isScrolling = true;
-        btnAuto.style.opacity = "0.5";
-        btnAuto.style.transform = "scale(0.92)";
-
-        autoScroll = setInterval(() => {
-            window.scrollBy(0, 5); // paling ampuh di semua situs
-
-            const el = scrollEl();
-            if (el.scrollHeight - el.scrollTop - window.innerHeight < 150) {
-                stopAutoScroll();
-            }
-        }, 20);
+    // ====== Cek apakah halaman cukup panjang ======
+    function shouldShowButton() {
+        return document.body.scrollHeight > window.innerHeight * 1.5;
     }
 
+    // ====== Buat tombol ======
+    const btnAuto = document.createElement("button");
+    btnAuto.id = "btnAutoScroll";
+    btnAuto.title = "Auto Scroll (klik untuk start/stop)";
+    btnAuto.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: none;
+        background: rgba(0,0,0,0.6);
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 999999;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        opacity: 0.8;
+    `;
+    btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" alt="Auto Scroll" style="width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 0 4px white);">`;
+
+    // ====== Start Auto Scroll ======
+    function startAutoScroll() {
+        if (isScrolling) return;
+        if (!shouldShowButton()) return;
+
+        isScrolling = true;
+        btnAuto.style.opacity = "0.4";
+        btnAuto.style.transform = "scale(0.9)";
+
+        autoScroll = setInterval(() => {
+            window.scrollBy(0, 2);
+
+            // Stop otomatis di bawah halaman
+            if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 50) {
+                stopAutoScroll();
+                if (!userStopped) {
+                    // auto-restart setelah delay 1 detik
+                    setTimeout(() => {
+                        if (!userStopped) startAutoScroll();
+                    }, 1000);
+                }
+            }
+        }, 16);
+    }
+
+    // ====== Stop Auto Scroll ======
     function stopAutoScroll() {
         if (!isScrolling) return;
         clearInterval(autoScroll);
         autoScroll = null;
         isScrolling = false;
-        if (btnAuto) {
-            btnAuto.style.opacity = "0.9";
-            btnAuto.style.transform = "scale(1)";
+        btnAuto.style.opacity = "0.8";
+        btnAuto.style.transform = "scale(1)";
+    }
+
+    // ====== Toggle tombol ======
+    btnAuto.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isScrolling) {
+            stopAutoScroll();
+            userStopped = true;
+        } else {
+            userStopped = false;
+            startAutoScroll();
         }
-    }
+    });
 
-    function createButton() {
-        if (btnAuto) return;
+    // ====== Stop jika user interaksi ======
+    const stopEvents = ["wheel", "touchstart", "keydown", "mousedown"];
+    stopEvents.forEach(ev => {
+        document.addEventListener(ev, () => {
+            stopAutoScroll();
+            userStopped = true;
+        }, { passive: true });
+    });
 
-        btnAuto = document.createElement("button");
-        btnAuto.id = "btnAutoScroll";
-        btnAuto.title = "Auto Scroll (klik = start/stop)";
-        btnAuto.style.cssText = `
-            position:fixed;bottom:20px;left:20px;width:56px;height:56px;
-            border:none;border-radius:50%;background:rgba(0,0,0,0.7);
-            backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,0.4);
-            z-index:9999999;cursor:pointer;transition:all .3s;opacity:0.9;
-        `;
-        btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" style="width:36px;height:36px;">`;
-        document.body.appendChild(btnAuto);
+    // ============================
+    //     TRIGGER DARI openBtn
+    // ============================
+    function attachTriggerToOpenBtn() {
+        const openBtn = document.getElementById("openBtn");
+        if (!openBtn) return;
 
-        btnAuto.onclick = () => isScrolling ? stopAutoScroll() : startAutoScroll();
-
-        // Stop kalau user gerak
-        const stop = () => stopAutoScroll();
-        ["wheel","touchmove","keydown"].forEach(e => 
-            document.addEventListener(e, stop, {passive:true})
-        );
-    }
-
-    // Tunggu konten muncul setelah openBtn diklik
-    const openBtn = document.getElementById("openBtn");
-    if (openBtn) {
-        openBtn.addEventListener("click, () => {
+        openBtn.addEventListener("click", () => {
+            // tombol muncul setelah user buka undangan
             setTimeout(() => {
-                document.body.style.overflow = '';
-                // Tunggu konten ada
-                const wait = setInterval(() => {
-                    if (document.body.scrollHeight > innerHeight * 2) {
-                        clearInterval(wait);
-                        createButton();
-                    }
-                }, 300);
-
-                setTimeout(() => clearInterval(wait), 12000); // max 12 detik
-            }, 1200);
+                if (!document.body.contains(btnAuto)) {
+                    document.body.appendChild(btnAuto);
+                }
+            }, 2000); // delay boleh diatur
         });
-    } else {
-        // Kalau ga ada openBtn (langsung inject), langsung bikin
-        setTimeout(createButton, 3000);
     }
+
+    // ====== Jalankan saat DOM siap ======
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", attachTriggerToOpenBtn);
+    } else {
+        attachTriggerToOpenBtn();
+    }
+
 })();
