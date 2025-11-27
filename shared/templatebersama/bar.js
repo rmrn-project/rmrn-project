@@ -1,8 +1,11 @@
 // ================= BAR.JS FLOATING NAVBAR =================
 document.addEventListener("DOMContentLoaded", () => {
+    // ======= Definisi tombol =======
     const buttons = [
         { src: "/shared/templatebersama/popup.js", label: "Fitur", funcName: "showPopup" },
-        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction" } 
+        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction" },
+        // Tambahkan ikon baru di sini nanti cukup tambah object baru
+        // { src: "...", label: "...", funcName: "..." }
     ];
 
     // ======= Buat bar =======
@@ -57,14 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
     buttons.forEach(btn => {
         const b = document.createElement("button");
         b.textContent = btn.label;
+
+        // ======= Event click =======
         b.addEventListener("click", async () => {
             try {
                 await loadScript(btn.src); // load modul jika belum
 
-                // === Panggil fungsi modular ===
+                // ==== Panggil fungsi sesuai funcName tanpa ubah logika lain ====
                 if (typeof window[btn.funcName] === "function") {
-                    // langsung toggle tanpa parameter, persis kayak showPopup
-                    window[btn.funcName]();
+                    window[btn.funcName](); // langsung toggle kayak popup.js
                 } else {
                     console.warn(btn.funcName + " belum tersedia.");
                 }
@@ -72,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error(err);
             }
         });
+
         bar.appendChild(b);
     });
 });
