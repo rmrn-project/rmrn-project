@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             align-items: center;
             gap: 10px;
             padding: 0 10px;
-            background: #1e1e1e;
+            background: #0d6efd;
             z-index: 999999;
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
