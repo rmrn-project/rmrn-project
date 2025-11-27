@@ -1,11 +1,10 @@
-// ================= SHAREBUTTON.JS MODULAR =================
+// ================= SHAREBUTTON.JS MODULAR TANPA TOMBOL UTAMA =================
 (function() {
 
-    // ==== Buat container tombol share ====
+    // ==== Buat container share popup tanpa tombol utama ====
     const shareContainer = document.createElement('div');
     shareContainer.className = 'floating-share';
     shareContainer.innerHTML = `
-      <img src="/image/share.png" alt="Share" width="30">
       <div class="share-popup">
         <a href="#" class="share-wa" title="WhatsApp"><img src="/image/wa.png" alt="WA" width="30"></a>
         <a href="#" class="share-fb" title="Facebook"><img src="/image/fb.png" alt="FB" width="30"></a>
@@ -15,7 +14,7 @@
     `;
     document.body.appendChild(shareContainer);
 
-    // ==== Tambahkan CSS ====
+    // ==== CSS ====
     const style = document.createElement('style');
     style.textContent = `
     .floating-share {
@@ -24,26 +23,17 @@
       left: 20px;
       z-index: 999999;
     }
-    .floating-share img {
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .floating-share img:hover { transform: scale(1.2); }
-
     .share-popup {
-      display: none;
+      display: flex;
       flex-direction: row;
       background: var(--popup-bg, #fff);
       padding: 8px 12px;
       border-radius: 12px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.25);
       gap: 8px;
-      margin-left: 10px;
       align-items: center;
       justify-content: center;
-      animation: slideIn 0.3s ease forwards;
     }
-
     .share-popup a, .share-popup button {
       background: transparent;
       border: none;
@@ -53,54 +43,29 @@
       align-items: center;
       justify-content: center;
     }
-
     .share-popup a img, .share-popup button img {
       width: 30px;
       height: 30px;
       transition: transform 0.2s;
     }
-
     .share-popup a img:hover,
     .share-popup button img:hover { transform: scale(1.2); }
-
-    .floating-share.show .share-popup { display: flex; }
-
-    @keyframes slideIn {
-      from {opacity:0; transform: translateX(-10px);}
-      to {opacity:1; transform: translateX(0);}
-    }
     `;
     document.head.appendChild(style);
 
-    // ==== Fungsi utama toggle popup share ====
-    function shareFunction() {
-        shareContainer.classList.toggle('show');
+    const pageUrl = encodeURIComponent(window.location.href);
+
+    // ==== Fungsi share modular ====
+    function shareFunction(type) {
+        if (type === "wa") window.open(`https://wa.me/?text=${pageUrl}`, "_blank");
+        else if (type === "fb") window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, "_blank");
+        else if (type === "tg") window.open(`https://t.me/share/url?url=${pageUrl}&text=Check+this+out`, "_blank");
+        else if (type === "copy") {
+            navigator.clipboard.writeText(window.location.href).then(() => alert('Link berhasil disalin!'));
+        }
     }
 
-    // ==== Event listeners ====
-    shareContainer.querySelector('img').addEventListener('click', shareFunction);
-
-    const pageUrl = encodeURIComponent(window.location.href);
-    shareContainer.querySelector('.share-wa').href = `https://wa.me/?text=${pageUrl}`;
-    shareContainer.querySelector('.share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-    shareContainer.querySelector('.share-fb').target = "_blank";
-    shareContainer.querySelector('.share-fb').title = "Share ke Facebook (pilih sendiri)";
-    shareContainer.querySelector('.share-tg').href = `https://t.me/share/url?url=${pageUrl}&text=Check+this+out`;
-
-    shareContainer.querySelector('.share-copy').addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        alert('Link berhasil disalin!');
-      });
-    });
-
-    // Tutup popup kalau klik di luar
-    document.addEventListener('click', (e) => {
-      if (!shareContainer.contains(e.target)) {
-        shareContainer.classList.remove('show');
-      }
-    });
-
-    // ==== Expose ke window supaya bisa dipanggil bar.js ====
+    // ==== Expose ke window supaya bar.js bisa panggil ====
     window.shareFunction = shareFunction;
 
 })();
