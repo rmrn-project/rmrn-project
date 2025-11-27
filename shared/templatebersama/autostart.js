@@ -1,4 +1,4 @@
-// ================= AUTOSCROLL MODULAR - V3 =================
+// ================= AUTOSCROLL MODULAR - LANDING PAGE READY =================
 (function () {
     if (window.autoScrollInjected) return;
     window.autoScrollInjected = true;
@@ -63,20 +63,20 @@
     });
     window.addEventListener("beforeunload", stopAutoScroll);
 
-    // ====== Tunggu konten utama muncul ======
+    // ===== Tunggu main content muncul =====
     function init() {
-        const main = document.querySelector("#main"); // sesuaikan selector konten utama
+        const main = document.querySelector("#main");
         if (!main) return;
 
-        // Jika konten hidden, tunggu sampai tampil
         const observer = new MutationObserver(() => {
-            if (main.offsetHeight > 0) {
+            // cek kalau main sudah visible
+            if (main.offsetHeight > 0 && main.classList.contains("hidden") === false) {
                 if (!document.body.contains(btnAuto)) document.body.appendChild(btnAuto);
                 setTimeout(startAutoScroll, 800);
                 observer.disconnect();
             }
         });
-        observer.observe(main, { attributes: true, childList: true, subtree: true });
+        observer.observe(main, { attributes: true, attributeFilter: ["class"], subtree: true });
     }
 
     if (document.readyState === "loading") {
