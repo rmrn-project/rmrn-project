@@ -1,11 +1,12 @@
 // ================= BAR.JS FLOATING NAVBAR =================
 document.addEventListener("DOMContentLoaded", () => {
+
     // ======= Definisi tombol =======
     const buttons = [
-        { src: "/shared/templatebersama/popup.js", label: "Fitur", funcName: "showPopup" },
-        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction" },
+        { src: "/shared/templatebersama/popup.js", label: "Fitur", funcName: "showPopup", icon: "/shared/icons/fitur.png" },
+        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction", icon: "/shared/icons/share.png" },
         // Tambahkan ikon baru di sini nanti cukup tambah object baru
-        // { src: "...", label: "...", funcName: "..." }
+        // { src: "...", label: "...", funcName: "...", icon: "..." }
     ];
 
     // ======= Buat bar =======
@@ -31,13 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
         #topBar button {
-            padding: 6px 12px;
+            padding: 6px 10px;
             border: none;
             border-radius: 6px;
             background: #333;
             color: #fff;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             transition: background .3s;
+        }
+        #topBar button img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
         }
         #topBar button:hover { background: #555; }
         body { padding-top: 60px; }
@@ -56,19 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ======= Tambah tombol ke bar =======
+    // ======= Tambah tombol ke bar otomatis =======
     buttons.forEach(btn => {
         const b = document.createElement("button");
-        b.textContent = btn.label;
+        b.innerHTML = btn.icon ? `<img src="${btn.icon}" alt="${btn.label}"> ${btn.label}` : btn.label;
 
-        // ======= Event click =======
         b.addEventListener("click", async () => {
             try {
                 await loadScript(btn.src); // load modul jika belum
 
-                // ==== Panggil fungsi sesuai funcName tanpa ubah logika lain ====
+                // ==== Panggil fungsi sesuai funcName ====
                 if (typeof window[btn.funcName] === "function") {
-                    window[btn.funcName](); // langsung toggle kayak popup.js
+                    window[btn.funcName](); // langsung toggle seperti popup.js
                 } else {
                     console.warn(btn.funcName + " belum tersedia.");
                 }
