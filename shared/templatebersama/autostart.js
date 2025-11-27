@@ -11,23 +11,24 @@
     style.textContent = `
     /* ===== AUTO SCROLL BUTTON ===== */
     #btnAutoScroll {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        padding: 0;
-        border: none;
-        background: transparent;
-        color: white;
-        font-size: 16px;
-        z-index: 999999;
-        cursor: pointer;
-        box-shadow: none;
-    }
+    position: fixed;
+    bottom: 20px;   /* pindah dari top ke bottom */
+    left: 20px;     /* pindah dari right ke left */
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    z-index: 999999;
+    cursor: pointer;
+    box-shadow: none;
+}
+
     #btnAutoScroll img {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
         object-fit: contain;
     }
     `;
