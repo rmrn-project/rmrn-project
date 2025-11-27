@@ -28,7 +28,7 @@
         border-radius: 50%;
         backdrop-filter: blur(10px);
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        z-index: 999999;
+        z-index: 100001;
         cursor: pointer;
         transition: all 0.3s ease;
         opacity: 0.8;
