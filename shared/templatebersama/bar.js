@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = [
         { src: "/shared/templatebersama/popup.js", label: "Fitur", funcName: "showPopup" },
-        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction", type: "share" } 
+        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction"} 
     ];
 
     // ======= Buat bar =======
