@@ -1,4 +1,4 @@
-// =============== POPUP OTOMATIS RMRN DENGAN TOMBOL ==================
+// =============== POPUP OTOMATIS RMRN MODULAR ==================
 (function () {
 
     // --- Buat elemen popup ---
@@ -118,43 +118,36 @@
         #closePopup:hover {
             background: #bbb;
         }
-
-        /* Tombol img 30px */
-        #popupBtn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            z-index: 999999;
-        }
     `;
 
-    // --- Tambah elemen ke dokumen ---
-    document.body.appendChild(popup);
     document.head.appendChild(style);
+    document.body.appendChild(popup);
 
-    // --- Buat tombol img ---
-    const btn = document.createElement("img");
-    btn.id = "popupBtn";
-    btn.src = "/path/to/cherry.png"; // ganti sesuai path gambar
-    btn.alt = "Popup Button";
-    document.body.appendChild(btn);
+    // === LOGIKA POPUP MODULAR ===
+    window.showPopup = function(options = {}) {
+        const container = options.container || document.body;
+        const position = options.position || { bottom: "20px", left: "20px" };
 
-    // === LOGIKA POPUP ===
-    function showPopup() {
+        // pindahkan popup ke container kalau perlu
+        if (popup.parentNode !== container) {
+            container.appendChild(popup);
+        }
+
+        // set posisi
+        Object.keys(position).forEach(k => {
+            popup.style[k] = position[k];
+        });
+
         popup.classList.add("show");
-    }
+    };
 
-    function hidePopup() {
+    window.hidePopup = function() {
         popup.classList.remove("show");
-    }
+    };
 
-    // Tombol close
+    // Tombol close popup
     document.getElementById("closePopup").addEventListener("click", hidePopup);
 
-    // Tombol img untuk buka popup
-    btn.addEventListener("click", showPopup);
-
+    // --- Tombol img bawaan dihapus ---
+    // btn popup tidak lagi otomatis muncul
 })();

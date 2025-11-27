@@ -1,13 +1,16 @@
+// ================= BAR.JS FLOATING NAVBAR =================
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = [
-        { src: "/shared/templatebersama/popup.js", label: "Fitur" },
-        { src: "/shared/templatebersama/sharebutton.js", label: "Share" }
+        { src: "/shared/templatebersama/popup.js", label: "Fitur", funcName: "showPopup" },
+        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction" }
     ];
 
+    // ======= Buat bar =======
     const bar = document.createElement("div");
     bar.id = "topBar";
     document.body.appendChild(bar);
 
+    // ======= Style bar =======
     const style = document.createElement("style");
     style.innerHTML = `
         #topBar {
@@ -17,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
             width: 100%;
             height: 50px;
             display: flex;
-            gap: 10px;
             align-items: center;
+            gap: 10px;
             padding: 0 10px;
             background: #1e1e1e;
             z-index: 999999;
@@ -31,29 +34,46 @@ document.addEventListener("DOMContentLoaded", () => {
             background: #333;
             color: #fff;
             cursor: pointer;
+            transition: background .3s;
         }
         #topBar button:hover { background: #555; }
         body { padding-top: 60px; }
     `;
     document.head.appendChild(style);
 
+    // ======= Fungsi load script modular =======
+    async function loadScript(src) {
+        return new Promise((resolve, reject) => {
+            if (document.querySelector(`script[src="${src}"]`)) return resolve();
+            const s = document.createElement("script");
+            s.src = src;
+            s.onload = resolve;
+            s.onerror = () => reject(src + " gagal di-load");
+            document.body.appendChild(s);
+        });
+    }
+
+    // ======= Tambah tombol ke bar =======
     buttons.forEach(btn => {
         const b = document.createElement("button");
         b.textContent = btn.label;
         b.addEventListener("click", async () => {
-            // Load modul dari src
-            if (!document.querySelector(`script[src="${btn.src}"]`)) {
-                await new Promise((resolve, reject) => {
-                    const s = document.createElement("script");
-                    s.src = btn.src;
-                    s.onload = resolve;
-                    s.onerror = () => reject(btn.src + " gagal di-load");
-                    document.body.appendChild(s);
-                });
+            try {
+                await loadScript(btn.src); // load modul jika belum
+                // Panggil fungsi modul sesuai nama funcName
+                if (typeof window[btn.funcName] === "function") {
+                    // opsi container bisa diatur di sini kalau popup.js sudah modular
+                    if (btn.funcName === "showPopup") {
+                        window.showPopup({ position: { bottom: "70px", right: "20px" } });
+                    } else {
+                        window[btn.funcName]();
+                    }
+                } else {
+                    console.warn(btn.funcName + " belum tersedia.");
+                }
+            } catch (err) {
+                console.error(err);
             }
-            // Panggil fungsi modul (misal showPopup atau shareFunction)
-            if (btn.label === "Fitur" && typeof showPopup === "function") showPopup();
-            if (btn.label === "Share" && typeof shareFunction === "function") shareFunction();
         });
         bar.appendChild(b);
     });
