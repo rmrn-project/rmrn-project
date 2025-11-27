@@ -100,6 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ======= Tambah teks Preview Mode di kanan =======
     const previewText = document.createElement("span");
     previewText.className = "preview-text";
-    previewText.textContent = "Preview Mode";
+    previewText.textContent = "Preview";
     bar.appendChild(previewText);
 });
