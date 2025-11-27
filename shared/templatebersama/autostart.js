@@ -1,4 +1,4 @@
-// ================= AUTOSCROLL MODULAR UNTUK OPENBTN =================
+// ================= AUTOSCROLL MODULAR TRIGGER OPENBTN =================
 (function() {
     let autoScroll = null;
     let isScrolling = false;
@@ -11,7 +11,6 @@
         btnAuto.style.transform = "scale(0.9)";
 
         autoScroll = setInterval(() => {
-            // Pakai document.scrollingElement agar kompatibel
             const el = document.scrollingElement || document.documentElement || document.body;
             el.scrollTop += 2;
 
@@ -33,7 +32,7 @@
     }
 
     function createAutoScrollButton() {
-        if (btnAuto) return;
+        if (btnAuto) return; // jangan bikin kembar
         btnAuto = document.createElement("button");
         btnAuto.id = "btnAutoScroll";
         btnAuto.title = "Auto Scroll (klik untuk start/stop)";
@@ -67,16 +66,20 @@
         });
     }
 
-    // Trigger pas openBtn diklik, setelah landing fade out
     const openBtn = document.getElementById("openBtn");
     if (openBtn) {
         openBtn.addEventListener("click", () => {
+            // Landing fade out logikanya
             setTimeout(() => {
                 // pastikan body overflow normal
                 document.body.style.overflow = '';
-                createAutoScrollButton();
-                startAutoScroll();
-            }, 1100); // delay sedikit lebih dari fade out landing
+
+                // === Delay 4 detik sebelum tombol muncul ===
+                setTimeout(() => {
+                    createAutoScrollButton();
+                    // tombol muncul tapi tidak auto-start, user klik baru jalan
+                }, 4000);
+            }, 1000); // fade out landing 1 detik
         });
     }
 })();
