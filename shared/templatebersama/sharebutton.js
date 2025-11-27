@@ -1,20 +1,18 @@
-// ================= SHAREBUTTON.JS MODULAR TANPA TOMBOL UTAMA =================
+// ================= SHAREBUTTON.JS MODULAR EKSEKUSI =================
 (function() {
 
-    // ==== Buat container share popup tanpa tombol utama ====
+    // Container popup (opsional bisa tampil atau tidak)
     const shareContainer = document.createElement('div');
     shareContainer.className = 'floating-share';
+    shareContainer.style.display = 'none'; // default hidden, optional
     shareContainer.innerHTML = `
       <div class="share-popup">
-        <a href="#" class="share-wa" title="WhatsApp"><img src="/image/wa.png" alt="WA" width="30"></a>
-        <a href="#" class="share-fb" title="Facebook"><img src="/image/fb.png" alt="FB" width="30"></a>
-        <a href="#" class="share-tg" title="Telegram"><img src="/image/tg.png" alt="TG" width="30"></a>
         <button class="share-copy" title="Salin Link"><img src="/image/link.png" alt="Copy" width="30"></button>
       </div>
     `;
     document.body.appendChild(shareContainer);
 
-    // ==== CSS ====
+    // ==== CSS minimal ====
     const style = document.createElement('style');
     style.textContent = `
     .floating-share {
@@ -34,7 +32,7 @@
       align-items: center;
       justify-content: center;
     }
-    .share-popup a, .share-popup button {
+    .share-popup button {
       background: transparent;
       border: none;
       cursor: pointer;
@@ -43,29 +41,38 @@
       align-items: center;
       justify-content: center;
     }
-    .share-popup a img, .share-popup button img {
+    .share-popup button img {
       width: 30px;
       height: 30px;
       transition: transform 0.2s;
     }
-    .share-popup a img:hover,
     .share-popup button img:hover { transform: scale(1.2); }
     `;
     document.head.appendChild(style);
 
     const pageUrl = encodeURIComponent(window.location.href);
 
-    // ==== Fungsi share modular ====
+    // ==== Fungsi share modular dengan eksekusi langsung ====
     function shareFunction(type) {
         if (type === "wa") window.open(`https://wa.me/?text=${pageUrl}`, "_blank");
         else if (type === "fb") window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, "_blank");
         else if (type === "tg") window.open(`https://t.me/share/url?url=${pageUrl}&text=Check+this+out`, "_blank");
         else if (type === "copy") {
-            navigator.clipboard.writeText(window.location.href).then(() => alert('Link berhasil disalin!'));
+            navigator.clipboard.writeText(decodeURIComponent(pageUrl)).then(() => alert('Link berhasil disalin!'));
         }
     }
 
-    // ==== Expose ke window supaya bar.js bisa panggil ====
+    // ==== Tombol copy di popup tetap berfungsi ====
+    shareContainer.querySelector('.share-copy').addEventListener('click', () => shareFunction("copy"));
+
+    // ==== Tutup popup kalau klik di luar ====
+    document.addEventListener('click', (e) => {
+        if (!shareContainer.contains(e.target)) {
+            shareContainer.style.display = 'none';
+        }
+    });
+
+    // ==== Expose ke window agar bisa dipanggil dari bar.js ====
     window.shareFunction = shareFunction;
 
 })();
