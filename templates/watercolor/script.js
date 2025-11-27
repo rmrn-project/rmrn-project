@@ -1,34 +1,57 @@
-// Ambil elemen
-const openBtn = document.getElementById('openBtn'); // pastikan id sesuai tombol
+// ===========================
+// ELEMENT DASAR
+// ===========================
+const openBtn = document.getElementById('openBtn');
 const cover = document.getElementById('cover');
 const main = document.getElementById('main-content');
-const bgMusic = document.getElementById('bgMusic');
 
+// ===========================
+// FUNGSI LOAD SCRIPT TEMPLATE
+// ===========================
+function loadTemplateScripts() {
+  const scripts = [
+    "/shared/templatebersama/footer.js",    
+    "/shared/templatebersama/playmusic.js"
+  ];
+
+  scripts.forEach(src => {
+    if (document.querySelector(`script[src="${src}"]`)) return;
+
+    const s = document.createElement("script");
+    s.src = src;
+    s.defer = true;
+    document.body.appendChild(s);
+  });
+}
+
+// ===========================
+// BUKA LANDING PAGE
+// ===========================
 openBtn.addEventListener('click', () => {
-  // Tambahkan class fade-out ke cover
+
+  // Fade-out animasi
   cover.classList.add('fade-out');
 
-  // Jalankan music
-  bgMusic.play().catch(()=>{});
-
-  // Delay supaya fade-out kelihatan smooth sebelum hidden
+  // Setelah animasi selesai
   setTimeout(() => {
-    cover.classList.add('hidden'); // sembunyikan sepenuhnya
-    main.classList.remove('hidden'); // tampilkan main content
-    main.classList.add('show');      // animasi muncul
-  }, 1000); // 1 detik sesuai durasi fade-out
+    cover.style.display = 'none';      // sembunyikan landing
+    main.classList.remove('hidden');   // tampilkan konten
+    main.classList.add('show');        // animasi masuk
+    window.scrollTo({ top: 0 });       // pastikan di atas
+
+    // 🔥 Load script template setelah landing hilang
+    loadTemplateScripts();
+
+  }, 1000); // durasi fade-out CSS
 });
 
 
 
-// Toggle musik
-document.getElementById('musicToggle').addEventListener('click', function() {
-  const m = document.getElementById('bgMusic');
-  if (m.paused) { m.play(); this.textContent = "Musik On"; }
-  else { m.pause(); this.textContent = "Musik Off"; }
-});
 
-// Countdown 14 Maret 2026
+
+// ===========================
+// COUNTDOWN
+// ===========================
 const weddingDate = new Date("2026-03-14T00:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
@@ -45,11 +68,15 @@ setInterval(() => {
   document.getElementById("seconds").textContent = seconds.toString().padStart(2,"0");
 
   if (distance < 0) {
-    document.getElementById("timer").innerHTML = "<h2 style='color:#d47a6a;'>Hari Ini Hari Bahagia Kami! ♡</h2>";
+    document.getElementById("timer").innerHTML =
+      "<h2 style='color:#d47a6a;'>Hari Ini Hari Bahagia Kami! ♡</h2>";
   }
 }, 1000);
 
-// RSVP
+
+// ===========================
+// RSVP FORM
+// ===========================
 document.getElementById('rsvpForm').addEventListener('submit', function(e) {
   e.preventDefault();
   document.getElementById('thanksMsg').style.display = 'block';
@@ -59,11 +86,15 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e) {
   }, 7000);
 });
 
-// Particle Watercolor + Flower
+
+// ===========================
+// PARTICLE ANIMATION
+// ===========================
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -84,18 +115,21 @@ class Particle {
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
-    if (this.y > canvas.height) { this.y = -20; this.x = Math.random() * canvas.width; }
+    if (this.y > canvas.height) {
+      this.y = -20;
+      this.x = Math.random() * canvas.width;
+    }
     if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
   }
   draw() {
     ctx.fillStyle = this.color + '99';
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
     ctx.fill();
   }
 }
 
-for(let i = 0; i < 90; i++) particles.push(new Particle());
+for (let i = 0; i < 90; i++) particles.push(new Particle());
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);

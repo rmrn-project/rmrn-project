@@ -1,4 +1,4 @@
-// =============== POPUP OTOMATIS RMRN ==================
+// =============== POPUP OTOMATIS RMRN DENGAN TOMBOL ==================
 (function () {
 
     // --- Buat elemen popup ---
@@ -18,7 +18,7 @@
             <p style="margin-top: 15px; font-weight:600;">Mau tambah fitur lain?</p>
 
             <ul>
-<li>fitur autoscroll: <b>+25K</b></li>
+                <li>fitur autoscroll: <b>+25K</b></li>
                 <li>Standar service setting database Google pribadi: <b>+50K</b></li>
                 <li>Standar database RMRN <b>100K / tahun</b></li>
             </ul>
@@ -36,7 +36,8 @@
     style.innerHTML = `
         #rmrnPopup {
             position: fixed;
-            inset: 0;
+            bottom: 20px;
+            left: 20px;
             background: rgba(0,0,0,0.55);
             display: flex;
             justify-content: center;
@@ -117,11 +118,29 @@
         #closePopup:hover {
             background: #bbb;
         }
+
+        /* Tombol img 30px */
+        #popupBtn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 999999;
+        }
     `;
 
-    // Tambah ke dokumen
+    // --- Tambah elemen ke dokumen ---
     document.body.appendChild(popup);
     document.head.appendChild(style);
+
+    // --- Buat tombol img ---
+    const btn = document.createElement("img");
+    btn.id = "popupBtn";
+    btn.src = "/path/to/cherry.png"; // ganti sesuai path gambar
+    btn.alt = "Popup Button";
+    document.body.appendChild(btn);
 
     // === LOGIKA POPUP ===
     function showPopup() {
@@ -130,15 +149,12 @@
 
     function hidePopup() {
         popup.classList.remove("show");
-
-        // Muncul lagi setelah 15 detik
-        setTimeout(showPopup, 15000);
     }
 
     // Tombol close
     document.getElementById("closePopup").addEventListener("click", hidePopup);
 
-    // Muncul pertama kali setelah 10 detik
-    setTimeout(showPopup, 10000);
+    // Tombol img untuk buka popup
+    btn.addEventListener("click", showPopup);
 
 })();

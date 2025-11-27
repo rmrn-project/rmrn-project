@@ -1,4 +1,4 @@
-/* style.css – KOREAN MINIMAL 100% JALAN & CANTIK BANGET */
+/* RESET & BASE */
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{
   height:100%;
@@ -10,7 +10,7 @@ html,body{
   line-height:1.8;
 }
 
-/* Cherry blossom falling – pasti jalan */
+/* Cherry blossom falling */
 .sakura{
   position:fixed;
   inset:0;
@@ -25,8 +25,8 @@ html,body{
   left:0;
   width:100%;
   height:200%;
-  background:url('https://i.ibb.co/9h3hK3B/cherry-blossom-petal.png') repeat;
-  background-size:80px;
+  background:url('/background/korean.png') repeat;
+  background-size:120px;
   animation:fall 20s linear infinite;
   opacity:0.6;
 }
@@ -35,70 +35,122 @@ html,body{
   100%{transform:translateY(100%);}
 }
 
-/* Landing Page */
-#landing{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:#fdfbfb;
-  transition:opacity 1s ease;
+/* LANDING PAGE */
+/* ================================
+   LANDING PAGE + IMAGE OVERLAY
+================================= */
+
+/* Block utama landing page */
+#landing {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fdfbfb;
+  transition: opacity 1s ease;
+  overflow: hidden; /* penting untuk jaga overlay tetap rapi */
 }
-.overlay{
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at center,rgba(255,255,255,0.3),#fdfbfb 80%);
+
+/* Gambar PNG dari bawah, full width */
+#landing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/background/cherry.png') bottom center / cover no-repeat;
+  opacity: 0.55;           /* transparansi gambar */
+  z-index: 1;              
+  pointer-events: none;
 }
-.landing-content{
-  position:relative;
-  z-index:2;
-  padding:2rem;
+
+/* Overlay glow putih di atas gambar */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3), #fdfbfb 80%);
+  z-index: 1;
 }
-.subtitle{
+
+/* Konten tetap berada di paling atas */
+.landing-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 90vw;
+}
+
+/* Typography */
+.subtitle {
   font-family:'Playfair Display',serif;
-  font-size:1.4rem;
-  letter-spacing:10px;
+  font-size:clamp(1.2rem,3vw,1.6rem);
+  letter-spacing:6px;
   color:#d4a5a5;
-  margin-bottom:2rem;
+  margin-bottom:1.5rem;
   font-weight:400;
 }
-.title{
+
+.title {
   font-family:'Playfair Display',serif;
-  font-size:clamp(4.5rem,12vw,9rem);
+  font-size:clamp(4rem,12vw,9rem);
   line-height:1.1;
   color:#333;
   margin:1rem 0;
 }
-.date{
-  font-size:2rem;
-  letter-spacing:12px;
+
+.date {
+  font-size:clamp(1.4rem,4vw,2rem);
+  letter-spacing:8px;
   color:#b08d8d;
-  margin:3rem 0;
+  margin:2rem 0;
   font-weight:300;
 }
-#openBtn{
-  padding:16px 80px;
+
+/* Button Open */
+#openBtn {
+  padding:14px 60px;
   background:transparent;
   border:1.5px solid #d4a5a5;
   color:#d4a5a5;
   border-radius:50px;
-  font-size:1.3rem;
-  letter-spacing:3px;
+  font-size:1.2rem;
+  letter-spacing:2px;
   cursor:pointer;
   transition:all .4s;
   font-family:'Noto Sans KR',sans-serif;
   font-weight:300;
 }
-#openBtn:hover{
+
+#openBtn:hover {
   background:#d4a5a5;
   color:#fff;
   transform:scale(1.05);
 }
 
-/* Main Content */
+/* ================================
+   RESPONSIVE GAMBAR LANDING
+================================= */
+@media (max-width: 1024px) {
+  #landing::before {
+    background-size: cover;
+    opacity: 0.22; /* sedikit lebih soft */
+  }
+}
+
+@media (max-width: 480px) {
+  #landing::before {
+    background-size: cover;
+    opacity: 0.20;
+  }
+}
+
+
+
+
+
+
+/* MAIN CONTENT */
 #main{
   position:relative;
   z-index:10;
@@ -113,7 +165,7 @@ html,body{
 }
 .main-title{
   font-family:'Playfair Display',serif;
-  font-size:clamp(4rem,10vw,7rem);
+  font-size:clamp(3rem,8vw,6rem);
   color:#5d4e4e;
   margin-bottom:1.5rem;
 }
@@ -137,14 +189,15 @@ html,body{
   justify-content:center;
   gap:4rem;
   flex-wrap:wrap;
-  margin:8rem 0;
+  margin:6rem 0;
 }
 .card{
   background:#fff;
   padding:3rem 2.5rem;
   border-radius:20px;
   box-shadow:0 15px 40px rgba(0,0,0,0.05);
-  width:320px;
+  width:100%;
+  max-width:320px;
   border:1px solid #f0e8e2;
 }
 .card h3{
@@ -160,34 +213,36 @@ html,body{
 }
 .ampersand{
   font-family:'Playfair Display',serif;
-  font-size:6rem;
+  font-size:clamp(4rem,10vw,6rem);
   color:#d4a5a5;
 }
 
-/* Countdown */
+/* COUNTDOWN */
 #timer{
   display:flex;
   justify-content:center;
-  gap:2.5rem;
+  gap:1.5rem;
   flex-wrap:wrap;
-  margin:5rem 0;
+  margin:4rem 0;
 }
 #timer > div{
   background:#fff;
-  padding:2rem 2.5rem;
+  padding:1.8rem 2rem;
   border-radius:18px;
-  min-width:120px;
+  min-width:100px;
+  flex:1 1 90px;
   box-shadow:0 10px 30px rgba(0,0,0,0.06);
   border:1px solid #f0e8e2;
+  text-align:center;
 }
 #timer span{
-  font-size:3.8rem;
+  font-size:clamp(2rem,5vw,3.8rem);
   font-weight:300;
   color:#d4a5a5;
   display:block;
 }
 #timer small{
-  font-size:1rem;
+  font-size:0.9rem;
   color:#999;
   letter-spacing:2px;
 }
@@ -229,7 +284,7 @@ html,body{
 .rsvp select,
 .rsvp textarea,
 .rsvp button{
-  padding:18px;
+  padding:16px;
   border-radius:16px;
   border:1px solid #e8ddd5;
   background:#fff;
@@ -290,8 +345,22 @@ html,body{
   color:#fff;
 }
 
-/* Responsive fix */
-@media (max-width:480px){
+/* Responsive */
+@media (max-width:768px){
   .couple{flex-direction:column;gap:3rem}
   .ampersand{font-size:4rem}
+  .landing-content .subtitle{font-size:1rem;letter-spacing:4px}
+  .landing-content .title{font-size:clamp(3rem,10vw,6rem)}
+  .landing-content .date{font-size:1.5rem;letter-spacing:6px}
+  #openBtn{padding:12px 50px;font-size:1rem}
+  #timer > div{min-width:80px;padding:1.5rem 1.8rem}
+  #timer span{font-size:clamp(1.5rem,5vw,2.8rem)}
+  #timer small{font-size:0.8rem}
+}
+
+@media (max-width:480px){
+  .landing-content .subtitle{font-size:0.9rem;letter-spacing:3px}
+  .landing-content .title{font-size:clamp(2.5rem,10vw,4.5rem)}
+  .landing-content .date{font-size:1.2rem;letter-spacing:4px}
+  #openBtn{padding:10px 40px;font-size:0.95rem}
 }
