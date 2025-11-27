@@ -11,8 +11,11 @@
         btnAuto.style.transform = "scale(0.9)";
 
         autoScroll = setInterval(() => {
-            window.scrollBy(0, 2);
-            if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50) {
+            // Pakai document.scrollingElement agar kompatibel
+            const el = document.scrollingElement || document.documentElement || document.body;
+            el.scrollTop += 2;
+
+            if ((window.innerHeight + el.scrollTop) >= el.scrollHeight - 50) {
                 stopAutoScroll();
             }
         }, 16);
@@ -23,8 +26,10 @@
         clearInterval(autoScroll);
         autoScroll = null;
         isScrolling = false;
-        btnAuto.style.opacity = "0.8";
-        btnAuto.style.transform = "scale(1)";
+        if(btnAuto) {
+            btnAuto.style.opacity = "0.8";
+            btnAuto.style.transform = "scale(1)";
+        }
     }
 
     function createAutoScrollButton() {
@@ -62,15 +67,16 @@
         });
     }
 
-    // Trigger pas openBtn diklik, **setelah landing hilang dan overflow di-reset**
+    // Trigger pas openBtn diklik, setelah landing fade out
     const openBtn = document.getElementById("openBtn");
     if (openBtn) {
         openBtn.addEventListener("click", () => {
             setTimeout(() => {
-                // body pasti sudah overflow normal
+                // pastikan body overflow normal
+                document.body.style.overflow = '';
                 createAutoScrollButton();
                 startAutoScroll();
-            }, 1100); // delay sedikit lebih dari fadeOut landing
+            }, 1100); // delay sedikit lebih dari fade out landing
         });
     }
 })();
