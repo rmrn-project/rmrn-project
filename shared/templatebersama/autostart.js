@@ -39,7 +39,9 @@
     // ====== Start Auto Scroll ======
     function startAutoScroll() {
         if (isScrolling) return;
-        if (!shouldShowButton()) return;
+
+        // FIX: hilangkan batas panjang halaman → auto-scroll selalu bisa start
+        // if (!shouldShowButton()) return;
 
         isScrolling = true;
         btnAuto.style.opacity = "0.4";
@@ -106,7 +108,7 @@
                 if (!document.body.contains(btnAuto)) {
                     document.body.appendChild(btnAuto);
                 }
-            }, 2000); // delay boleh diatur
+            }, 300); // FIX: lebih cepat (dari 2000 → 300ms)
         });
     }
 
