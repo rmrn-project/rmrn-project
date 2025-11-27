@@ -1,7 +1,6 @@
 // ================= SHAREBUTTON.JS MODULAR =================
 (function() {
 
-    // ==== Buat container tombol share ====
     const shareContainer = document.createElement('div');
     shareContainer.className = 'floating-share';
     shareContainer.innerHTML = `
@@ -14,7 +13,6 @@
     `;
     document.body.appendChild(shareContainer);
 
-    // ==== Tambahkan CSS ====
     const style = document.createElement('style');
     style.textContent = `
     .floating-share {
@@ -23,12 +21,6 @@
       left: 20px;
       z-index: 999999;
     }
-    .floating-share img {
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .floating-share img:hover { transform: scale(1.2); }
-
     .share-popup {
       display: none;
       flex-direction: row;
@@ -40,9 +32,7 @@
       margin-left: 10px;
       align-items: center;
       justify-content: center;
-      animation: slideIn 0.3s ease forwards;
     }
-
     .share-popup a, .share-popup button {
       background: transparent;
       border: none;
@@ -52,36 +42,23 @@
       align-items: center;
       justify-content: center;
     }
-
     .share-popup a img, .share-popup button img {
       width: 30px;
       height: 30px;
       transition: transform 0.2s;
     }
-
-    .share-popup a img:hover,
-    .share-popup button img:hover { transform: scale(1.2); }
-
+    .share-popup a img:hover, .share-popup button img:hover { transform: scale(1.2); }
     .floating-share.show .share-popup { display: flex; }
-
-    @keyframes slideIn {
-      from {opacity:0; transform: translateX(-10px);}
-      to {opacity:1; transform: translateX(0);}
-    }
     `;
     document.head.appendChild(style);
 
     const pageUrl = encodeURIComponent(window.location.href);
     shareContainer.querySelector('.share-wa').href = `https://wa.me/?text=${pageUrl}`;
-    shareContainer.querySelector('.share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+    shareContainer.querySelector('.share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
     shareContainer.querySelector('.share-fb').target = "_blank";
-    shareContainer.querySelector('.share-fb').title = "Share ke Facebook (pilih sendiri)";
     shareContainer.querySelector('.share-tg').href = `https://t.me/share/url?url=${pageUrl}&text=Check+this+out`;
-
     shareContainer.querySelector('.share-copy').addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        alert('Link berhasil disalin!');
-      });
+      navigator.clipboard.writeText(window.location.href).then(() => alert('Link berhasil disalin!'));
     });
 
     // Tutup popup kalau klik di luar
@@ -92,11 +69,9 @@
     });
 
     // ==== Fungsi toggle share popup ====
-    function shareFunction() {
+    window.shareFunction = function() {
+        // toggle bisa dipanggil berulang dari bar.js
         shareContainer.classList.toggle('show');
-    }
-
-    // ==== Expose ke window supaya bar.js bisa panggil ====
-    window.shareFunction = shareFunction;
+    };
 
 })();
