@@ -1,6 +1,6 @@
 // ================= AUTOSCROLL MODULAR - V2 (Improved) =================
 (function () {
-    // Cek kalau script udah pernah di-load (penting kalau ada yang inject berkali-kali)
+    // Cek kalau script udah pernah di-load
     if (window.autoScrollInjected) return;
     window.autoScrollInjected = true;
 
@@ -33,8 +33,7 @@
         transition: all 0.3s ease;
         opacity: 0.8;
     `;
-    btnAuto.innerHTML = `<img src="https://i.ibb.co.com/0jW1m7B/autosroll.png" alt="Auto Scroll" style="width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 0 4px white);">`;
-    // Ganti URL di atas kalau lu punya hosting sendiri, atau pakai data URI
+    btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" alt="Auto Scroll" style="width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 0 4px white);">`;
 
     // ====== Fungsi start ======
     function startAutoScroll() {
@@ -44,13 +43,12 @@
         btnAuto.style.transform = "scale(0.9)";
 
         autoScroll = setInterval(() => {
-            window.scrollBy(0, 2); // sedikit lebih cepat dari 1px
+            window.scrollBy(0, 2);
 
-            // Stop otomatis kalau udah sampe bawah
             if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 50) {
                 stopAutoScroll();
             }
-        }, 16); // ~60fps, lebih smooth dari 20ms
+        }, 16);
     }
 
     // ====== Fungsi stop ======
@@ -77,20 +75,16 @@
         document.addEventListener(ev, stopAutoScroll, { passive: true });
     });
 
-    // ====== Cleanup kalau halaman di-unload (biar nggak memory leak) ======
+    // ====== Cleanup sebelum halaman unload ======
     window.addEventListener("beforeunload", stopAutoScroll);
 
-    // ====== Tunggu DOM + gambar selesai load baru munculin tombol ======
+    // ====== Init tombol ======
     function init() {
-        if (!shouldShowButton()) return; // nggak muncul kalau konten pendek
-
+        if (!shouldShowButton()) return;
         document.body.appendChild(btnAuto);
-
-        // Auto-start setelah 1 detik (bisa lu matiin kalau nggak mau)
         setTimeout(startAutoScroll, 1200);
     }
 
-    // Jalanin setelah semuanya ready
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () => setTimeout(init, 500));
     } else {
