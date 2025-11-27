@@ -48,7 +48,8 @@
         btnAuto.style.transform = "scale(0.9)";
 
         autoScroll = setInterval(() => {
-            window.scrollBy(0, 2);
+            const main = document.getElementById("main");
+if (main) main.scrollBy(0, 2);
 
             // Stop otomatis di bawah halaman
             if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 50) {
