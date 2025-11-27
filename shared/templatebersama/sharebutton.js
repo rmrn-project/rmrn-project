@@ -71,14 +71,6 @@
     `;
     document.head.appendChild(style);
 
-    // ==== Fungsi utama toggle popup share ====
-    function shareFunction() {
-        shareContainer.classList.toggle('show');
-    }
-
-    // ==== Event listeners ====
-    shareContainer.querySelector('img').addEventListener('click', shareFunction);
-
     const pageUrl = encodeURIComponent(window.location.href);
     shareContainer.querySelector('.share-wa').href = `https://wa.me/?text=${pageUrl}`;
     shareContainer.querySelector('.share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
@@ -99,7 +91,12 @@
       }
     });
 
-    // ==== Expose ke window supaya bisa dipanggil bar.js ====
+    // ==== Fungsi toggle share popup ====
+    function shareFunction() {
+        shareContainer.classList.toggle('show');
+    }
+
+    // ==== Expose ke window supaya bar.js bisa panggil ====
     window.shareFunction = shareFunction;
 
 })();
