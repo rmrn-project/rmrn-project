@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = [
         { src: "/shared/templatebersama/popup.js", label: "Fitur", funcName: "showPopup" },
-        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction" }
+        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction", type: "wa" } // default type WA
     ];
 
     // ======= Buat bar =======
@@ -60,11 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
         b.addEventListener("click", async () => {
             try {
                 await loadScript(btn.src); // load modul jika belum
-                // Panggil fungsi modul sesuai nama funcName
                 if (typeof window[btn.funcName] === "function") {
-                    // opsi container bisa diatur di sini kalau popup.js sudah modular
                     if (btn.funcName === "showPopup") {
                         window.showPopup({ position: { bottom: "70px", right: "20px" } });
+                    } else if (btn.funcName === "shareFunction") {
+                        // panggil shareFunction di share.js dengan type
+                        window.shareFunction(btn.type || "wa");
                     } else {
                         window[btn.funcName]();
                     }
