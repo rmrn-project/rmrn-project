@@ -1,18 +1,18 @@
 // ================= AUTOSTART MODULAR =================
 (function() {
-
-    // ==== Buat tombol auto scroll otomatis ====
+    // ===== Buat tombol auto scroll =====
     const btnAuto = document.createElement("button");
     btnAuto.id = "btnAutoScroll";
-    btnAuto.innerHTML = `<img src="/image/autosroll.png" alt="Auto Scroll" />`;
+    btnAuto.innerHTML = `<img src="autosroll.png" alt="Auto Scroll" />`;
+    document.body.appendChild(btnAuto);
 
-    // ==== Style tombol ====
+    // ===== Style tombol =====
     const style = document.createElement("style");
     style.textContent = `
     #btnAutoScroll {
         position: fixed;
-        bottom: 20px;  /* default pojok kiri bawah */
-        left: 20px;    /* default pojok kiri bawah */
+        bottom: 20px; /* Ubah sesuai posisi */
+        left: 20px;   /* Ubah sesuai posisi */
         width: 40px;
         height: 40px;
         padding: 0;
@@ -20,7 +20,6 @@
         background: transparent;
         cursor: pointer;
         z-index: 999999;
-        box-shadow: none;
     }
     #btnAutoScroll img {
         width: 40px;
@@ -29,9 +28,8 @@
     }
     `;
     document.head.appendChild(style);
-    document.body.appendChild(btnAuto);
 
-    // ==== Auto scroll logika ====
+    // ===== Auto scroll logic =====
     let autoScroll = null;
 
     const startAutoScroll = () => {
@@ -51,13 +49,12 @@
         btnAuto.style.display = "block";
     };
 
-    // ==== Event tombol ====
+    // ===== Event listener tombol =====
     btnAuto.addEventListener("click", startAutoScroll);
 
-    // ==== Sentuh layar stop scroll ====
+    // ===== Stop saat layar disentuh =====
     document.addEventListener("touchstart", stopAutoScroll);
 
-    // ==== Auto start setelah 3 detik ====
+    // ===== Auto start setelah 3 detik =====
     setTimeout(startAutoScroll, 3000);
-
 })();
