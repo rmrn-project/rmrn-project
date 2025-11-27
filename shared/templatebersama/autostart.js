@@ -1,40 +1,37 @@
-// ================= AUTOSTART.JS MODULAR =================
+// ================= AUTOSTART MODULAR =================
 (function() {
-    // ==== Buat tombol auto scroll ====
-    const btnAuto = document.createElement('button');
-    btnAuto.id = 'btnAutoScroll';
-    btnAuto.innerHTML = `<img src="/image/autosroll.png" alt="Auto Scroll" />`;
-    document.body.appendChild(btnAuto);
 
-    // ==== Tambahkan style ====
-    const style = document.createElement('style');
+    // ==== Buat tombol auto scroll otomatis ====
+    const btnAuto = document.createElement("button");
+    btnAuto.id = "btnAutoScroll";
+    btnAuto.innerHTML = `<img src="autosroll.png" alt="Auto Scroll" />`;
+
+    // ==== Style tombol ====
+    const style = document.createElement("style");
     style.textContent = `
-    /* ===== AUTO SCROLL BUTTON ===== */
     #btnAutoScroll {
-    position: fixed;
-    bottom: 20px;   /* pindah dari top ke bottom */
-    left: 20px;     /* pindah dari right ke left */
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: white;
-    font-size: 16px;
-    z-index: 999999;
-    cursor: pointer;
-    box-shadow: none;
-}
-
+        position: fixed;
+        bottom: 20px;  /* default pojok kiri bawah */
+        left: 20px;    /* default pojok kiri bawah */
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        z-index: 999999;
+        box-shadow: none;
+    }
     #btnAutoScroll img {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         object-fit: contain;
     }
     `;
     document.head.appendChild(style);
+    document.body.appendChild(btnAuto);
 
-    // ==== Logic Auto Scroll ====
+    // ==== Auto scroll logika ====
     let autoScroll = null;
 
     const startAutoScroll = () => {
@@ -45,21 +42,22 @@
                 stopAutoScroll();
             }
         }, 20);
-        btnAuto.style.display = 'none';
+        btnAuto.style.display = "none";
     };
 
     const stopAutoScroll = () => {
         clearInterval(autoScroll);
         autoScroll = null;
-        btnAuto.style.display = 'block';
+        btnAuto.style.display = "block";
     };
 
-    // ==== Event tombol klik ====
-    btnAuto.addEventListener('click', startAutoScroll);
+    // ==== Event tombol ====
+    btnAuto.addEventListener("click", startAutoScroll);
 
-    // ==== Sentuh layar stop auto scroll ====
-    document.addEventListener('touchstart', stopAutoScroll);
+    // ==== Sentuh layar stop scroll ====
+    document.addEventListener("touchstart", stopAutoScroll);
 
     // ==== Auto start setelah 3 detik ====
     setTimeout(startAutoScroll, 3000);
+
 })();
