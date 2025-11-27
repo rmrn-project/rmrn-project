@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = [
         { src: "/shared/templatebersama/popup.js", label: "Fitur", funcName: "showPopup" },
-        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction" }
+        { src: "/shared/templatebersama/sharebutton.js", label: "Share", funcName: "shareFunction" } 
     ];
 
     // ======= Buat bar =======
@@ -61,14 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 await loadScript(btn.src); // load modul jika belum
 
-                // Panggil fungsi sesuai funcName tanpa nentuin type
+                // === Panggil fungsi modular ===
                 if (typeof window[btn.funcName] === "function") {
-                    if (btn.funcName === "showPopup") {
-                        window.showPopup({ position: { bottom: "70px", right: "20px" } });
-                    } else {
-                        // shareFunction langsung dieksekusi sesuai logika di share.js
-                        window[btn.funcName]();
-                    }
+                    // langsung toggle tanpa parameter, persis kayak showPopup
+                    window[btn.funcName]();
                 } else {
                     console.warn(btn.funcName + " belum tersedia.");
                 }
