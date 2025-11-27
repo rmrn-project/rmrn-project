@@ -1,13 +1,12 @@
-// ================= AUTOSCROLL MODULAR V4 =================
+// ================= AUTOSCROLL MODULAR V5 =================
 (function () {
-    // Cegah load ganda
     if (window.autoScrollInjected) return;
     window.autoScrollInjected = true;
 
     let autoScroll = null;
     let isScrolling = false;
-    const SCROLL_SPEED = 2; // pixel per tick
-    const INTERVAL_MS = 16; // ~60fps
+    const SCROLL_SPEED = 2;
+    const INTERVAL_MS = 16;
 
     // ====== Buat tombol ======
     const btnAuto = document.createElement("button");
@@ -40,7 +39,6 @@
         btnAuto.style.transform = "scale(0.9)";
         autoScroll = setInterval(() => {
             window.scrollBy(0, SCROLL_SPEED);
-            // stop otomatis jika sudah hampir di bawah
             if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 50) {
                 stopAutoScroll();
             }
@@ -65,42 +63,30 @@
     });
 
     // ====== Stop jika user interaksi ======
-    const stopEvents = ["wheel", "touchstart", "keydown", "mousedown"];
-    stopEvents.forEach(ev => document.addEventListener(ev, stopAutoScroll, { passive: true }));
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(ev =>
+        document.addEventListener(ev, stopAutoScroll, { passive: true })
+    );
 
-    // ====== Observer #main untuk deteksi visibilitas ======
-    function initAutoScroll() {
-        const main = document.querySelector("#main");
-        if (!main) return;
-
-        // jika main sudah visible
-        if (!main.classList.contains("hidden")) {
-            document.body.appendChild(btnAuto);
-            setTimeout(startAutoScroll, 1000); // auto-start setelah main ready
-            return;
-        }
-
-        // pakai MutationObserver untuk detect ketika class hidden hilang
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach(m => {
-                if (m.target === main && !main.classList.contains("hidden")) {
-                    if (!btnAuto.parentNode) document.body.appendChild(btnAuto);
-                    setTimeout(startAutoScroll, 1000);
-                    observer.disconnect();
-                }
-            });
+    // ====== Observasi DOM untuk #main ======
+    function observeMain() {
+        const observer = new MutationObserver(() => {
+            const main = document.querySelector("#main");
+            if (main && !main.classList.contains("hidden")) {
+                if (!btnAuto.parentNode) document.body.appendChild(btnAuto);
+                setTimeout(startAutoScroll, 1000);
+                observer.disconnect(); // selesai observe
+            }
         });
 
-        observer.observe(main, { attributes: true, attributeFilter: ["class"] });
+        observer.observe(document.body, { childList: true, subtree: true, attributes: true });
     }
 
-    // ====== Jalankan setelah DOM ready ======
+    // ====== Tunggu DOM siap ======
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initAutoScroll);
+        document.addEventListener("DOMContentLoaded", observeMain);
     } else {
-        initAutoScroll();
+        observeMain();
     }
 
-    // ====== Cleanup ======
     window.addEventListener("beforeunload", stopAutoScroll);
 })();
