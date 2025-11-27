@@ -78,7 +78,7 @@
                 setTimeout(() => {
                     createAutoScrollButton();
                     // tombol muncul tapi tidak auto-start, user klik baru jalan
-                }, 4000);
+                }, 6000);
             }, 1000); // fade out landing 1 detik
         });
     }
