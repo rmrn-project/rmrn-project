@@ -1,18 +1,17 @@
-// ================= AUTOSCROLL MODULAR BERULANG =================
+// ================= AUTOSCROLL MODULAR UNTUK OPENBTN =================
 (function() {
     let autoScroll = null;
     let isScrolling = false;
     let btnAuto = null;
 
     function startAutoScroll() {
-        if (isScrolling) return; // sudah jalan
+        if (isScrolling) return;
         isScrolling = true;
         btnAuto.style.opacity = "0.4";
         btnAuto.style.transform = "scale(0.9)";
 
         autoScroll = setInterval(() => {
             window.scrollBy(0, 2);
-            // stop otomatis kalau sudah di bawah
             if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50) {
                 stopAutoScroll();
             }
@@ -58,20 +57,20 @@
             else startAutoScroll();
         });
 
-        // stop otomatis kalau user interaksi
         ["wheel","touchstart","keydown","mousedown"].forEach(ev => {
             document.addEventListener(ev, stopAutoScroll, { passive:true });
         });
     }
 
-    // Trigger pas user klik openBtn
+    // Trigger pas openBtn diklik, **setelah landing hilang dan overflow di-reset**
     const openBtn = document.getElementById("openBtn");
     if (openBtn) {
         openBtn.addEventListener("click", () => {
             setTimeout(() => {
-                createAutoScrollButton(); // buat tombol setelah main muncul
-                startAutoScroll();        // auto start
-            }, 1000); // sesuai fade-out landing
+                // body pasti sudah overflow normal
+                createAutoScrollButton();
+                startAutoScroll();
+            }, 1100); // delay sedikit lebih dari fadeOut landing
         });
     }
 })();
