@@ -1,12 +1,10 @@
 // ================= BAR.JS FLOATING NAVBAR =================
 document.addEventListener("DOMContentLoaded", () => {
-
     // ======= Definisi tombol =======
     const buttons = [
         { src: "/shared/templatebersama/popup.js", label: "", funcName: "showPopup", icon: "/image/fitur.png" },
         { src: "/shared/templatebersama/sharebutton.js", label: "", funcName: "shareFunction", icon: "/image/share.png" },
-        // Tambahkan ikon baru di sini nanti cukup tambah object baru
-        // { src: "...", label: "...", funcName: "...", icon: "..." }
+        // Tambahkan ikon baru di sini cukup tambah object baru
     ];
 
     // ======= Buat bar =======
@@ -49,6 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
             object-fit: contain;
         }
         #topBar button:hover { background: #555; }
+
+        #topBar .spacer { flex: 1; } /* spacer supaya teks selalu di kanan */
+        #topBar .preview-text {
+            color: #fff;
+            font-weight: 600;
+        }
+
         body { padding-top: 60px; }
     `;
     document.head.appendChild(style);
@@ -74,9 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 await loadScript(btn.src); // load modul jika belum
 
-                // ==== Panggil fungsi sesuai funcName ====
                 if (typeof window[btn.funcName] === "function") {
-                    window[btn.funcName](); // langsung toggle seperti popup.js
+                    window[btn.funcName](); // langsung toggle
                 } else {
                     console.warn(btn.funcName + " belum tersedia.");
                 }
@@ -87,4 +91,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         bar.appendChild(b);
     });
+
+    // ======= Spacer supaya teks di kanan =======
+    const spacer = document.createElement("div");
+    spacer.className = "spacer";
+    bar.appendChild(spacer);
+
+    // ======= Tambah teks Preview Mode di kanan =======
+    const previewText = document.createElement("span");
+    previewText.className = "preview-text";
+    previewText.textContent = "Preview Mode";
+    bar.appendChild(previewText);
 });
