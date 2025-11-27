@@ -9,6 +9,7 @@
         <a href="#" class="share-fb" title="Facebook"><img src="/image/fb.png" alt="FB" width="30"></a>
         <a href="#" class="share-tg" title="Telegram"><img src="/image/tg.png" alt="TG" width="30"></a>
         <button class="share-copy" title="Salin Link"><img src="/image/link.png" alt="Copy" width="30"></button>
+        <button class="share-close" title="Tutup">&times;</button>
       </div>
     `;
     document.body.appendChild(shareContainer);
@@ -22,6 +23,7 @@
       z-index: 999999;
     }
     .share-popup {
+      position: relative;
       display: none;
       flex-direction: row;
       background: var(--popup-bg, #fff);
@@ -48,6 +50,14 @@
       transition: transform 0.2s;
     }
     .share-popup a img:hover, .share-popup button img:hover { transform: scale(1.2); }
+    .share-close {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      font-size: 18px;
+      line-height: 18px;
+      cursor: pointer;
+    }
     .floating-share.show .share-popup { display: flex; }
     `;
     document.head.appendChild(style);
@@ -61,6 +71,11 @@
       navigator.clipboard.writeText(window.location.href).then(() => alert('Link berhasil disalin!'));
     });
 
+    // ==== Tombol close manual ====
+    shareContainer.querySelector('.share-close').addEventListener('click', () => {
+        shareContainer.classList.remove('show');
+    });
+
     // Tutup popup kalau klik di luar
     document.addEventListener('click', (e) => {
       if (!shareContainer.contains(e.target)) {
@@ -70,7 +85,6 @@
 
     // ==== Fungsi toggle share popup ====
     window.shareFunction = function() {
-        // toggle bisa dipanggil berulang dari bar.js
         shareContainer.classList.toggle('show');
     };
 
