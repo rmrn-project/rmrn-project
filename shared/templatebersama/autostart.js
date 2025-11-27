@@ -1,9 +1,9 @@
-// ================= AUTOSCROLL MODULAR + TOGGLE BUTTON =================
+// ================= AUTOSCROLL AFTER OPEN =================
 (function() {
     let autoScroll = null;
     let isScrolling = false;
+    let btnAuto = null;
 
-    // ===== Fungsi start/stop scroll =====
     function startAutoScroll() {
         if(isScrolling) return;
         isScrolling = true;
@@ -27,49 +27,52 @@
         btnAuto.style.transform = "scale(1)";
     }
 
-    // ===== Buat tombol =====
-    const btnAuto = document.createElement("button");
-    btnAuto.id = "btnAutoScroll";
-    btnAuto.title = "Auto Scroll";
-    btnAuto.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 48px;
-        height: 48px;
-        border: none;
-        background: rgba(0,0,0,0.6);
-        border-radius: 50%;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        z-index: 999999;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        opacity: 0.8;
-    `;
-    btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" style="width:32px;height:32px;object-fit:contain;">`;
-    document.body.appendChild(btnAuto);
+    function createAutoScrollButton() {
+        if(btnAuto) return; // sudah ada
+        btnAuto = document.createElement("button");
+        btnAuto.id = "btnAutoScroll";
+        btnAuto.title = "Auto Scroll";
+        btnAuto.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 48px;
+            height: 48px;
+            border: none;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 999999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        `;
+        btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" style="width:32px;height:32px;object-fit:contain;">`;
+        document.body.appendChild(btnAuto);
 
-    // Toggle manual lewat tombol
-    btnAuto.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if(isScrolling) stopAutoScroll();
-        else startAutoScroll();
-    });
+        // toggle manual
+        btnAuto.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if(isScrolling) stopAutoScroll();
+            else startAutoScroll();
+        });
 
-    // Stop otomatis kalau user interaksi
-    ["wheel","touchstart","keydown","mousedown"].forEach(ev => {
-        document.addEventListener(ev, stopAutoScroll, { passive:true });
-    });
+        // stop otomatis kalau user interaksi
+        ["wheel","touchstart","keydown","mousedown"].forEach(ev => {
+            document.addEventListener(ev, stopAutoScroll, { passive:true });
+        });
+    }
 
-    // ===== Pas user klik tombol landing =====
+    // Trigger pas user klik openBtn
     const openBtn = document.getElementById("openBtn");
     if(openBtn){
         openBtn.addEventListener("click", () => {
-            // Tunggu landing fade-out selesai
+            // tunggu landing fade-out selesai
             setTimeout(() => {
-                startAutoScroll();
-            }, 1000); // sesuaikan delay CSS fade-out
+                createAutoScrollButton(); // buat tombol setelah main muncul
+                startAutoScroll();        // auto start scroll
+            }, 1000); // delay sesuai CSS fade-out landing
         });
     }
 })();
