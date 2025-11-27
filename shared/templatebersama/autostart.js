@@ -1,92 +1,88 @@
-// ================= AUTOSCROLL MODULAR V5 =================
-(function () {
-    if (window.autoScrollInjected) return;
+// ================= AUTOSCROLL MODULAR - LANDING DETECTION =================
+(function(){
+    if(window.autoScrollInjected) return;
     window.autoScrollInjected = true;
 
     let autoScroll = null;
     let isScrolling = false;
-    const SCROLL_SPEED = 2;
-    const INTERVAL_MS = 16;
 
-    // ====== Buat tombol ======
+    // Tombol
     const btnAuto = document.createElement("button");
     btnAuto.id = "btnAutoScroll";
-    btnAuto.title = "Auto Scroll (klik untuk start/stop)";
+    btnAuto.title = "Auto Scroll";
     btnAuto.style.cssText = `
         position: fixed;
         bottom: 20px;
         left: 20px;
         width: 48px;
         height: 48px;
-        padding: 0;
         border: none;
         background: rgba(0,0,0,0.6);
         border-radius: 50%;
         backdrop-filter: blur(10px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         z-index: 999999;
         cursor: pointer;
-        transition: all 0.3s ease;
         opacity: 0.8;
     `;
-    btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" alt="Auto Scroll" style="width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 0 4px white);">`;
+    btnAuto.innerHTML = `<img src="autosroll.png" alt="Auto Scroll" style="width:32px;height:32px;object-fit:contain;">`;
 
-    // ====== Fungsi start/stop ======
-    function startAutoScroll() {
-        if (isScrolling) return;
+    // Fungsi start
+    function startAutoScroll(){
+        if(isScrolling) return;
         isScrolling = true;
         btnAuto.style.opacity = "0.4";
-        btnAuto.style.transform = "scale(0.9)";
-        autoScroll = setInterval(() => {
-            window.scrollBy(0, SCROLL_SPEED);
-            if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 50) {
+
+        autoScroll = setInterval(()=>{
+            window.scrollBy(0,2);
+            if((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 50){
                 stopAutoScroll();
             }
-        }, INTERVAL_MS);
+        },16);
     }
 
-    function stopAutoScroll() {
-        if (!isScrolling) return;
+    function stopAutoScroll(){
+        if(!isScrolling) return;
         clearInterval(autoScroll);
         autoScroll = null;
         isScrolling = false;
         btnAuto.style.opacity = "0.8";
-        btnAuto.style.transform = "scale(1)";
     }
 
-    // ====== Toggle tombol ======
-    btnAuto.addEventListener("click", (e) => {
-        e.preventDefault();
+    btnAuto.addEventListener("click", (e)=>{
         e.stopPropagation();
-        if (isScrolling) stopAutoScroll();
+        if(isScrolling) stopAutoScroll();
         else startAutoScroll();
     });
 
-    // ====== Stop jika user interaksi ======
-    ["wheel", "touchstart", "keydown", "mousedown"].forEach(ev =>
-        document.addEventListener(ev, stopAutoScroll, { passive: true })
-    );
+    ["wheel","touchstart","keydown","mousedown"].forEach(ev=>{
+        document.addEventListener(ev, stopAutoScroll, {passive:true});
+    });
 
-    // ====== Observasi DOM untuk #main ======
-    function observeMain() {
-        const observer = new MutationObserver(() => {
-            const main = document.querySelector("#main");
-            if (main && !main.classList.contains("hidden")) {
-                if (!btnAuto.parentNode) document.body.appendChild(btnAuto);
-                setTimeout(startAutoScroll, 1000);
-                observer.disconnect(); // selesai observe
+    // --- Init tombol hanya setelah #landing hilang ---
+    function init(){
+        const main = document.getElementById("main");
+        const landing = document.getElementById("landing");
+
+        // Tunggu landing dihapus / opacity 0 + main muncul
+        const observer = new MutationObserver(()=>{
+            if(!landing && main && window.getComputedStyle(main).display !== "none"){
+                document.body.appendChild(btnAuto);
+                startAutoScroll(); // auto-start
+                observer.disconnect();
             }
         });
 
-        observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+        observer.observe(document.body, {childList:true, subtree:true});
+
+        // fallback: kalau #landing sudah hilang
+        if(!landing && main && window.getComputedStyle(main).display !== "none"){
+            document.body.appendChild(btnAuto);
+            startAutoScroll();
+        }
     }
 
-    // ====== Tunggu DOM siap ======
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", observeMain);
-    } else {
-        observeMain();
-    }
+    if(document.readyState === "loading"){
+        document.addEventListener("DOMContentLoaded", init);
+    } else init();
 
-    window.addEventListener("beforeunload", stopAutoScroll);
 })();
