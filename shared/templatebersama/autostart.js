@@ -1,23 +1,25 @@
-// ================= AUTOSCROLL MODULAR TRIGGER OPENBTN =================
+// ================= AUTOSCROLL FIX 2025 =================
 (function() {
     let autoScroll = null;
     let isScrolling = false;
     let btnAuto = null;
 
+    const scrollEl = () => document.scrollingElement || document.documentElement || document.body;
+
     function startAutoScroll() {
         if (isScrolling) return;
         isScrolling = true;
-        btnAuto.style.opacity = "0.4";
-        btnAuto.style.transform = "scale(0.9)";
+        btnAuto.style.opacity = "0.5";
+        btnAuto.style.transform = "scale(0.92)";
 
         autoScroll = setInterval(() => {
-            const el = document.scrollingElement || document.documentElement || document.body;
-            el.scrollTop += 2;
+            window.scrollBy(0, 5); // paling ampuh di semua situs
 
-            if ((window.innerHeight + el.scrollTop) >= el.scrollHeight - 50) {
+            const el = scrollEl();
+            if (el.scrollHeight - el.scrollTop - window.innerHeight < 150) {
                 stopAutoScroll();
             }
-        }, 16);
+        }, 20);
     }
 
     function stopAutoScroll() {
@@ -25,61 +27,55 @@
         clearInterval(autoScroll);
         autoScroll = null;
         isScrolling = false;
-        if(btnAuto) {
-            btnAuto.style.opacity = "0.8";
+        if (btnAuto) {
+            btnAuto.style.opacity = "0.9";
             btnAuto.style.transform = "scale(1)";
         }
     }
 
-    function createAutoScrollButton() {
-        if (btnAuto) return; // jangan bikin kembar
+    function createButton() {
+        if (btnAuto) return;
+
         btnAuto = document.createElement("button");
         btnAuto.id = "btnAutoScroll";
-        btnAuto.title = "Auto Scroll (klik untuk start/stop)";
+        btnAuto.title = "Auto Scroll (klik = start/stop)";
         btnAuto.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 48px;
-            height: 48px;
-            border: none;
-            background: rgba(0,0,0,0.6);
-            border-radius: 50%;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 999999;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0.8;
+            position:fixed;bottom:20px;left:20px;width:56px;height:56px;
+            border:none;border-radius:50%;background:rgba(0,0,0,0.7);
+            backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,0.4);
+            z-index:9999999;cursor:pointer;transition:all .3s;opacity:0.9;
         `;
-        btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" style="width:32px;height:32px;object-fit:contain;">`;
+        btnAuto.innerHTML = `<img src="https://i.ibb.co/0jW1m7B/autosroll.png" style="width:36px;height:36px;">`;
         document.body.appendChild(btnAuto);
 
-        btnAuto.addEventListener("click", (e) => {
-            e.stopPropagation();
-            if (isScrolling) stopAutoScroll();
-            else startAutoScroll();
-        });
+        btnAuto.onclick = () => isScrolling ? stopAutoScroll() : startAutoScroll();
 
-        ["wheel","touchstart","keydown","mousedown"].forEach(ev => {
-            document.addEventListener(ev, stopAutoScroll, { passive:true });
-        });
+        // Stop kalau user gerak
+        const stop = () => stopAutoScroll();
+        ["wheel","touchmove","keydown"].forEach(e => 
+            document.addEventListener(e, stop, {passive:true})
+        );
     }
 
+    // Tunggu konten muncul setelah openBtn diklik
     const openBtn = document.getElementById("openBtn");
     if (openBtn) {
-        openBtn.addEventListener("click", () => {
-            // Landing fade out logikanya
+        openBtn.addEventListener("click, () => {
             setTimeout(() => {
-                // pastikan body overflow normal
                 document.body.style.overflow = '';
+                // Tunggu konten ada
+                const wait = setInterval(() => {
+                    if (document.body.scrollHeight > innerHeight * 2) {
+                        clearInterval(wait);
+                        createButton();
+                    }
+                }, 300);
 
-                // === Delay 4 detik sebelum tombol muncul ===
-                setTimeout(() => {
-                    createAutoScrollButton();
-                    // tombol muncul tapi tidak auto-start, user klik baru jalan
-                }, 6000);
-            }, 1000); // fade out landing 1 detik
+                setTimeout(() => clearInterval(wait), 12000); // max 12 detik
+            }, 1200);
         });
+    } else {
+        // Kalau ga ada openBtn (langsung inject), langsung bikin
+        setTimeout(createButton, 3000);
     }
 })();
