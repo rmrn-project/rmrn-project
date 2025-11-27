@@ -65,7 +65,7 @@
     }
 
     // Trigger pas user klik openBtn
-    const openBtn = document.getElementById("btnOpen");
+    const openBtn = document.getElementById("openBtn");
     if (openBtn) {
         openBtn.addEventListener("click", () => {
             setTimeout(() => {
